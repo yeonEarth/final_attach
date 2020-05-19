@@ -23,17 +23,14 @@
             android:id="@+id/page2_1_logo"
             android:layout_width="105dp"
             android:layout_height="40dp"
-            android:background="#AAAAAA"
-            android:text="logo"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
+            android:background="@drawable/ic_logo_0519"
             android:layout_alignParentLeft="true" />
 
         // 메뉴
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/page2_1_menu"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/ic_top_menu"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"/>
