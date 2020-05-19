@@ -49,6 +49,7 @@
         <activity android:name="Page3_1_1.Page3_1_1_Main"/>
         <activity android:name="Page3_1_1_1.Page3_1_1_1_Main"/>
         <activity android:name="Page1_schedule.Page1_Main"/>
+        <activity android:name="Page1_schedule.Page1_full_Schedule"/>
     </application>
 
 </manifest>

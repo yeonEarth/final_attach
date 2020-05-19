@@ -263,7 +263,7 @@ public class Page2_X_Main extends AppCompatActivity implements OnItemClick, View
                         pastVisiblesItems = gridLayoutManager.findFirstVisibleItemPosition();
 
                         //받아온 api 개수가 20개가 안되면 다음 페이지가 없다고 판단. false로 바꿔줌
-                        if(name_1.length < 20){
+                        if(name_1.length < 5){
                             isLoadData = false;
                         }
 
@@ -733,7 +733,7 @@ public class Page2_X_Main extends AppCompatActivity implements OnItemClick, View
                 url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                         "&pageNo=" + page +
-                        "&numOfRows=20&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
+                        "&numOfRows=5&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
                         "&contentTypeId=" + contentTypeId +
                         "&sigunguCode=" +
                         "&areaCode=" + areaCode +
@@ -745,7 +745,7 @@ public class Page2_X_Main extends AppCompatActivity implements OnItemClick, View
                 url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                         "&pageNo=" + page +
-                        "&numOfRows=20&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
+                        "&numOfRows=5&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
                         "&contentTypeId=" + contentTypeId +
                         "&sigunguCode=" + sigunguCode +
                         "&areaCode=" + areaCode +
