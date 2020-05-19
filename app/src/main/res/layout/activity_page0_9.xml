@@ -10,13 +10,14 @@
     android:backgroundTint="#80FFFFFF"
     android:backgroundTintMode="src_over">
     <TextView
+        android:id="@+id/trip_type_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="당신의 여행 유형은"
         android:textSize="24dp"
+        android:layout_marginTop="119dp"
         android:fontFamily="@font/notosans_bold"
         android:textStyle="bold"
-        android:layout_above="@id/page0_9_char"
         android:layout_marginBottom="40dp"
         android:textColor="#000000"/>
 
@@ -25,6 +26,8 @@
         android:id="@+id/page0_9_char"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_below="@+id/trip_type_text"
+        android:layout_marginTop="41dp"
         android:background="@drawable/round_white"
         android:layout_centerInParent="true"
         android:elevation="5dp"/>
@@ -42,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/notosans_regular"
             android:gravity="center"
             android:text="금강산도 식후경~! 전국 맛집 찾아다니는"
             android:textColor="#000000"
@@ -53,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="평화로운 나무늘보 입니다"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/notosans_bold"
             android:textSize="24dp"
             android:textColor="#000000"
             android:textStyle="bold"

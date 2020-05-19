@@ -93,7 +93,7 @@
             android:fontFamily="@font/notosans_bold" />
 
         //출발 날짜 입력받는 흰 박스
-        <EditText
+        <LinearLayout
             android:id="@+id/page3_date"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -103,12 +103,51 @@
             android:layout_marginRight="16dp"
             android:layout_centerHorizontal="true"
             android:clickable="true"
-            android:focusable="false"
-            android:textColor="#000000"
-            android:textSize="18dp"
-            android:fontFamily="@font/notosans_semibold"
             android:background="@drawable/datebox"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/page3_setYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="1995년"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:fontFamily="@font/notosans_semibold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/page3_setMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="04월"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:fontFamily="@font/notosans_semibold">
+            </TextView>
+
+            <TextView
+                android:id="@+id/page3_setDay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="05일"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:fontFamily="@font/notosans_semibold">
+            </TextView>
+
+
+        </LinearLayout>
 
 
         //이용권 텍스트

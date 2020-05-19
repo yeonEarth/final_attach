@@ -22,9 +22,10 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +46,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
 
 import Page3_1.Page3_1_Main;
 
@@ -77,9 +77,11 @@ public class Page3_Main extends AppCompatActivity {
 
     // 날짜 관련 변수들
     Calendar myCalendar = Calendar.getInstance();
-    EditText editDate;
+    LinearLayout editDate;
     SimpleDateFormat sdf;
-    String time;
+    String t_year, t_month, t_day;
+    TextView set_year, set_month, set_day;
+    String date;
 
     //txt 관련 변수
     int i = 0;
@@ -126,7 +128,7 @@ public class Page3_Main extends AppCompatActivity {
         dayPass_3 = (Button) findViewById(R.id.dayPass_3);
         dayPass_5 = (Button) findViewById(R.id.dayPass_5);
         dayPass_7 = (Button) findViewById(R.id.dayPass_7);
-        editDate = (EditText) findViewById(R.id.page3_date);
+        editDate = (LinearLayout) findViewById(R.id.page3_date);
 
 
         //이용권 버튼 클릭시 테두리와 글자색 바꾸기
@@ -166,12 +168,27 @@ public class Page3_Main extends AppCompatActivity {
         dayPass_5.setOnClickListener(onClickListener);
         dayPass_7.setOnClickListener(onClickListener);
 
+        set_year = (TextView) findViewById(R.id.page3_setYear);
+        set_month = (TextView) findViewById(R.id.page3_setMonth);
+        set_day = (TextView) findViewById(R.id.page3_setDay);
+
 
         // 현재 날짜 출력
-        String myFormat = String.format("%13s%20s%22s", "yyyy년", " MM월", "dd일");
+        String myFormat = String.format("yyyy년");
         sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
-        time = sdf.format(myCalendar.getTime());
-        editDate.setText(time);
+        t_year = sdf.format(myCalendar.getTime());
+        set_year.setText(t_year);
+
+        String myFormat2 = String.format("MM월");
+        sdf = new SimpleDateFormat(myFormat2, Locale.KOREA);
+        t_month = sdf.format(myCalendar.getTime());
+        set_month.setText(t_month);
+
+        String myFormat3 = String.format("dd일");
+        sdf = new SimpleDateFormat(myFormat3, Locale.KOREA);
+        t_day = sdf.format(myCalendar.getTime());
+        set_day.setText(t_day);
+
 
 
         // 출발 날짜 클릭 시 DatePicker 보여주기
@@ -516,7 +533,9 @@ public class Page3_Main extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), Page3_1_Main.class);
                     intent.putExtra("list", (Serializable) send_list);           //추가된 역
-                    intent.putExtra("date", editDate.getText().toString());  //날짜
+                    intent.putExtra("year", t_year);
+                    intent.putExtra("month", t_month);
+                    intent.putExtra("day", t_day);
                     intent.putExtra("dayPass", dayPass);                     //일권
                     intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
@@ -535,13 +554,24 @@ public class Page3_Main extends AppCompatActivity {
     }
 
 
-    //선택된 날짜를 edittext에 적용
+    //선택된 날짜를 적용
     private void updateLabel() {
-        String myFormat = String.format("%13s%20s%22s", "yyyy년", "MM월 ", "dd일");
+
+        String myFormat = String.format("yyyy년");
         sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
-        EditText editDate = (EditText) findViewById(R.id.page3_date);
-        time = sdf.format(myCalendar.getTime());
-        editDate.setText(time);
+        t_year = sdf.format(myCalendar.getTime());
+        set_year.setText(t_year);
+
+        String myFormat2 = String.format("MM월");
+        sdf = new SimpleDateFormat(myFormat2, Locale.KOREA);
+        t_month = sdf.format(myCalendar.getTime());
+        set_month.setText(t_month);
+
+        String myFormat3 = String.format("dd일");
+        sdf = new SimpleDateFormat(myFormat3, Locale.KOREA);
+        t_day = sdf.format(myCalendar.getTime());
+        set_day.setText(t_day);
+
     }
 
 

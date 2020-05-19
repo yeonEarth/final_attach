@@ -2,11 +2,11 @@ package com.example.hansol.spot_200510_hs;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Page0_7 extends AppCompatActivity implements View.OnClickListener {
     TextView a1_activity, a2_noAc;
@@ -67,13 +67,13 @@ public class Page0_7 extends AppCompatActivity implements View.OnClickListener {
         if (view.getId() == R.id.page0_7_a1){
             score[5] = 0;
             intent.putExtra("Page7",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1] + "," + score[2]
-                    + "," + score[3] + "," + score[4] + "," + score[5], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1] + "," + score[2]
+                    //+ "," + score[3] + "," + score[4] + "," + score[5], Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.page0_7_a2) {
             score[5] = 1;
             intent.putExtra("Page7",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1] + "," + score[2]
-                    + "," + score[3] + "," + score[4] + "," + score[5], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1] + "," + score[2]
+                    //+ "," + score[3] + "," + score[4] + "," + score[5], Toast.LENGTH_SHORT).show();
         }
 
         startActivity(intent);

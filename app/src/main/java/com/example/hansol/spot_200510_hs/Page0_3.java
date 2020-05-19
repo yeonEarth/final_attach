@@ -2,12 +2,12 @@ package com.example.hansol.spot_200510_hs;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Page0_3 extends AppCompatActivity implements View.OnClickListener {
     TextView a1_city;
@@ -79,23 +79,23 @@ public class Page0_3 extends AppCompatActivity implements View.OnClickListener {
         if (view.getId() == R.id.page0_3_a1){
             score[1] = 0;
             intent.putExtra("Page3",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.page0_3_a2) {
             score[1] = 1;
             intent.putExtra("Page3",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.page0_3_a3) {
             score[1] = 2;
             intent.putExtra("Page3",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.page0_3_a4) {
             score[1] = 3;
             intent.putExtra("Page3", score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
         }else if (view.getId() == R.id.page0_3_a5) {
             score[1] = 4;
             intent.putExtra("Page3", score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0] + "," + score[1], Toast.LENGTH_SHORT).show();
         }
 
         startActivity(intent);

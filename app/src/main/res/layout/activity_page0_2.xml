@@ -13,7 +13,7 @@
         android:id="@+id/page0_3_back"
         android:layout_width="43dp"
         android:layout_height="43dp"
-        android:background="@drawable/round_white"
+        android:background="@drawable/ic_icon_back_page0"
         android:elevation="5dp"
         android:clickable="true"
         android:layout_marginTop="8dp"/>
@@ -117,12 +117,16 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/page0_3_later"
         android:layout_marginBottom="24dp"
+        android:clipToPadding="false"
+        android:padding="4dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:clipToPadding="false"
+            android:padding="4dp"
             android:layout_marginBottom="4dp">
             // 도시/문화체험
             <TextView
@@ -134,9 +138,10 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_extralight"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_weight="1"
                 android:layout_marginRight="2dp"
+                android:elevation="3dp"
                 android:clickable="true"/>
 
             // 자연 속 힐링
@@ -149,9 +154,10 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_extralight"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:elevation="3dp"
                 android:layout_marginLeft="2dp"/>
         </LinearLayout>
         <LinearLayout
@@ -159,6 +165,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="4dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
             android:layout_marginBottom="4dp">
             // 맛집 탐방
             <TextView
@@ -170,8 +178,9 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_extralight"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_weight="1"
+                android:elevation="3dp"
                 android:layout_marginRight="2dp"
                 android:clickable="true" />
 
@@ -185,9 +194,10 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_extralight"
+                android:fontFamily="@font/notosans_regular"
                 android:layout_weight="1"
                 android:clickable="true"
+                android:elevation="3dp"
                 android:layout_marginLeft="2dp"/>
         </LinearLayout>
         // 뭐든 여행이면 다 좋아
@@ -200,9 +210,10 @@
             android:gravity="center"
             android:textSize="16dp"
             android:textColor="#000000"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/notosans_regular"
             android:layout_weight="1"
             android:clickable="true"
+            android:elevation="3dp"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 

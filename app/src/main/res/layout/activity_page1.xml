@@ -4,12 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="Page1.Page1"
-    android:background="@drawable/ic_bg_photospot">
+    android:background="@drawable/ic_bg_photospot"
+    android:scrollbars="none">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp">
+
 
         // 로고
         <TextView
@@ -52,8 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/main_title"
             android:layout_marginTop="32dp"
-            android:orientation="horizontal"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
             // 스케쥴짜기 버튼
             <ImageButton
                 android:id="@+id/main_schedule"
@@ -61,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/ic_main1"
-                android:layout_marginRight="16dp" />
+                android:elevation="3dp" />
 
             // 일정등록 버튼
             <ImageButton
@@ -69,9 +73,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+
                 android:background="@drawable/ic_main2"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"/>
+                android:elevation="3dp" />
 
             // 찜한 관광지 버튼
             <ImageButton
@@ -80,7 +86,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/ic_main3"
-                android:layout_marginLeft="16dp"/>
+                android:elevation="3dp" />
         </LinearLayout>
 
         // 안내 멘트
@@ -104,12 +110,17 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/main_subtitle"
             android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/course_layout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:clipToPadding="false"
+                android:padding="4dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
 
@@ -120,6 +131,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
+                android:clipToPadding="false"
+                android:padding="4dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
             </LinearLayout>
@@ -158,8 +171,7 @@
                     android:id="@+id/search_spot"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/round_white"
-                    android:text="검색"
+                    android:background="@drawable/ic_icon_search_page1"
                     android:gravity="center|bottom"
                     android:textSize="11dp"
                     android:textColor="#000000"
@@ -187,13 +199,16 @@
             android:layout_marginTop="32dp">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:padding="4dp">
                 <RelativeLayout
                     android:id="@+id/info1"
                     android:layout_width="264dp"
                     android:layout_height="192dp"
                     android:background="@drawable/box_white_rad20"
-                    android:padding="16dp">
+                    android:padding="16dp"
+                    android:elevation="3dp">
 
                     <TextView
                         android:id="@+id/info_title"
@@ -265,6 +280,8 @@
                     android:background="@drawable/box_white_rad20"
                     android:layout_toRightOf="@+id/info1"
                     android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:elevation="3dp"
                     android:padding="16dp">
 
                     // 내일로 이용 가격
