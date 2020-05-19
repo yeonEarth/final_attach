@@ -109,6 +109,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     ArrayList<RecycleItem> Day_items = new ArrayList<RecycleItem>();
 
     //데이터베이스 관련
+    private String db_key;
     private Train_DbOpenHelper mDbOpenHelper;
     private static ArrayList<Database_Item> db_data = new ArrayList<Database_Item>();
     private String startDate;
@@ -150,6 +151,10 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         child3_data = new ArrayList<>();
         pagerAdapter = new Page1_pagerAdapter(this, this, arrayLocal);
 
+        //page3_1_1_1_1 에서 일정저장하기 누를때 받아옴
+        Intent get = getIntent();
+        db_key = get.getStringExtra("key");
+
 
         // 현재 날짜 출력
         String myFormat = String.format("%s%s%s%s", "yyyy년 ", "MM월 ", "dd일 ", "EE요일");
@@ -179,7 +184,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         mDbOpenHelper.create();
 
         //데이터베이스에 있는 값을 리스트에 추가
-        getDatabase();
+        getDatabase(db_key);
 
 
 
@@ -368,9 +373,9 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     }
 
 
-    //데이터베이스 받기
-    private void getDatabase(){
-        Cursor iCursor = mDbOpenHelper.selectColumns();
+    //데이터베이스 받기(앞에서 저장한 값만 바로 보여줌)
+    private void getDatabase(String db_key){
+        Cursor iCursor = mDbOpenHelper.selecteNumber(db_key);
         db_data.clear();
 
         while(iCursor.moveToNext()){

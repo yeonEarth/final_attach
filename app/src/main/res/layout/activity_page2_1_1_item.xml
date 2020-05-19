@@ -88,7 +88,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/viewpager_backgound">
+        android:id="@+id/viewpager_backgound"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/page2_1_viewpager"

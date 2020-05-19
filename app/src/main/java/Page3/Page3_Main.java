@@ -217,10 +217,11 @@ public class Page3_Main extends AppCompatActivity {
         autoCompleteTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.i("눌렀는디", "왜 아무런,");
                 scrollView.post(new Runnable() {
                     @Override
                     public void run() {
+
+                        //키보드 올라와 있으면 작동 안함
                         scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                     }
                 });

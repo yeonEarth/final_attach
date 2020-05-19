@@ -3,6 +3,7 @@ package Page3_1_1_1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -94,7 +95,7 @@ public  class Page3_1_1_1_Main extends AppCompatActivity implements Page3_1_1_1_
             getitem.add(new Page3_1_1_1_dargData(split_1[0], split_1[1]));
         }
 
-//리사이클러뷰 리스트에 추가
+        //리사이클러뷰 리스트에 추가
         list.add(new RecycleItem(Page3_1_1_1_trainAdapter.HEADER, "", "1일차", day1_date, "", "", ""));
 
         //환승인지 아닌지 걸러내는 작업
@@ -183,19 +184,28 @@ public  class Page3_1_1_1_Main extends AppCompatActivity implements Page3_1_1_1_
             }
         });
 
+
+        //일정 저장 버튼 누르면 ( 현재날짜+시간을 key로 데베에 저장)
         save_btn = (Button)findViewById(R.id.page3_save_btn);
         save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbOpenHelper.open();
 
+                //현재시간얻기(데이터베이스의 기본키가 됨)
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMddHHmmss");
+                String formatDate = simpleDateFormat.format(date);
+
+                dbOpenHelper.open();
                 for(int i=0; i < list.size(); i++){
-                    dbOpenHelper.insertColumn(String.valueOf(number), list.get(i).date, list.get(i).text, list.get(i).text_shadow,
+                    dbOpenHelper.insertColumn(formatDate, list.get(i).date, list.get(i).text, list.get(i).text_shadow,
                             list.get(i).train_time, list.get(i).contentId);
                 }
-
+                dbOpenHelper.close();
 
                 Intent intent = new Intent(getApplicationContext(), Page1_Main.class);
+                intent.putExtra("key", formatDate);
                 intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);

@@ -112,8 +112,9 @@ public class Train_DbOpenHelper {
 
 
     // sort by column
-    public Cursor sortColumn(String sort){
-        Cursor c = mDB.rawQuery( "SELECT * FROM usertable ORDER BY " + sort + ";", null);
+    public Cursor selecteNumber(String sort){
+        Cursor c = mDB.rawQuery( "SELECT* FROM usertable  where number=" + "'" + sort + "'", null);
         return c;
     }
 }
+

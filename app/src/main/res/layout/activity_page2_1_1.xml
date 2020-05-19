@@ -14,14 +14,14 @@
         android:layout_width="9dp"
         android:layout_height="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_back_btn"/>
 
     //뒤로가기버튼 버튼 영역을 넓게 주기 위해서 빈 이미지 생성
     <ImageView
         android:id="@+id/page2_1_back_btn"
         android:layout_width="70dp"
-        android:layout_height="70dp" />
+        android:layout_height="40dp" />
 
     //여행 코스 추천 타이틀
     <TextView

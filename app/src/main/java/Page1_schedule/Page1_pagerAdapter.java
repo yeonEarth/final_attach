@@ -21,6 +21,7 @@ import java.util.List;
 public class Page1_pagerAdapter extends PagerAdapter {
 
     private Context mContext;
+    private String stationName;
     private List<String> localArray;
     private HashMap<String, String> benefit = new HashMap<String, String>();
 
@@ -64,9 +65,10 @@ public class Page1_pagerAdapter extends PagerAdapter {
 
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.page1_viewpager, container, false);
+            stationName = localArray.get(position).trim();
 
             final TextView textView =  view.findViewById(R.id.page1_stnName) ;
-            textView.setText(localArray.get(position)+"역") ;
+            textView.setText(stationName+"역") ;
             final TextView pre_station = view.findViewById(R.id.page1_previousStation);
             final TextView next_station = view.findViewById(R.id.page1_nextStation);
             final TextView now_station = view.findViewById(R.id.page1_nowStation);
@@ -129,7 +131,7 @@ public class Page1_pagerAdapter extends PagerAdapter {
                 @Override
                 public void onClick (View view){
                     float d = mContext.getResources().getDisplayMetrics().density;
-                    String stationName = localArray.get(position).trim();
+
                     if(!isExpand){
                         if(benefit.get(stationName)  != null){
                             benefit_text.setText(benefit.get(stationName));
