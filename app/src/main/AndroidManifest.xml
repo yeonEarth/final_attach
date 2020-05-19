@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/CustomBottom">
+        android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="2fe6d0a7f5064728003967619a2ecbe8" />
