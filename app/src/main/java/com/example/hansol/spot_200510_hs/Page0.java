@@ -20,6 +20,7 @@ import Page1.Page1;
 
 public class Page0 extends AppCompatActivity {
 
+    // 주석 확인용~!
     TextView btn_later;
     TextView btn_start;
 
