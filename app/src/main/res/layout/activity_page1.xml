@@ -156,7 +156,7 @@
                     android:id="@+id/search_spot"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/round_white"
+                    android:background="@drawable/ic_icon_search_page1"
                     android:text="검색"
                     android:gravity="center|bottom"
                     android:textSize="11dp"

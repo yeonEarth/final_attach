@@ -55,7 +55,7 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         //리사이클러뷰 넣는 부분
         holder.recyclerView.setLayoutManager( new LinearLayoutManager(context));
         adapter = new Page1_1_1_SecondAdapter(items , this);
@@ -70,11 +70,13 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
                 if (selectedItems.get(position)) {
                     // 펼쳐진 Item을 클릭 시
                     selectedItems.delete(position);
+                    holder.togle.setBackgroundResource(R.drawable.ic_up_btn);
                 } else {
                     // 직전의 클릭됐던 Item의 클릭상태를 지움
                     selectedItems.delete(prePosition);
                     // 클릭한 Item의 position을 저장
                     selectedItems.put(position, true);
+                    holder.togle.setBackgroundResource(R.drawable.ic_down_btn);
                 }
                 // 해당 포지션의 변화를 알림
                 if (prePosition != -1) notifyItemChanged(prePosition);
@@ -170,7 +172,7 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
         private RecyclerView recyclerView;
         private int position;
         private TextView cityCount;
-        private TextView toggle;
+        private TextView togle;
 
 
         public ViewHolder(View itemView) {
@@ -178,6 +180,7 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
             textView1 = itemView.findViewById(R.id.page1_1_1_city);
             recyclerView = itemView.findViewById(R.id.page1_1_1_fragment_recyclerview);
             cityCount = itemView.findViewById(R.id.page1_1_1_city_number);
+            togle = itemView.findViewById(R.id.page1_1_1_togle);
         }
 
 
