@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    //바텀시트 위에 두 줄 이미지
+    <RelativeLayout
+        android:id="@+id/page3_1_mapDown_btn"
+        android:layout_width="match_parent"
+        android:layout_height="467dp">
+        <View
+            android:layout_width="40dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:background="#40000000"/>
+        <View
+            android:layout_width="40dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="#40000000"/>
+    </RelativeLayout>
+
+    // 텍스트
+    <TextView
+        android:id="@+id/recyclerView_line"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="36dp"
+        android:text="관광지 검색"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:letterSpacing="-0.03"
+        android:gravity="center"/>
+
+    //선
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="84dp"
+        android:background="#EAEAEA"/>
+
+    //입력 창
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="102dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <ImageView
+            android:id="@+id/page3_1_1_1_searchwindow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_enter_city"/>
+
+        <ImageView
+            android:layout_width="19dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_search"/>
+
+        <EditText
+            android:id="@+id/page3_1_1_1_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_centerVertical="true"
+            android:background="@null" />
+
+    </RelativeLayout>
+
+    //리스트뷰
+    <ListView
+        android:id="@+id/api_list_city"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="165dp"
+        android:divider="#EAEAEA"
+        android:dividerHeight="1dp"
+        android:paddingBottom="20dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_bg_photospot"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:id="@+id/page1_1_1_logo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        // 로고 버튼
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/page1_1_1_logo"
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:background="#AAAAAA"
+            android:text="logo"
+            android:layout_centerVertical="true"/>
+
+        // 마이페이지 버튼
+        <ImageButton
+            android:id="@+id/page1_1_1_myPage"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_top_menu" />
+    </RelativeLayout>
+
+    // 타이틀
+    <TextView
+        android:id="@+id/page1_1_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="찜한 여행지"
+        android:fontFamily="@font/notosans"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:textColor="#000000"
+        android:letterSpacing="-0.03"
+        android:layout_below="@+id/page1_1_1_logo_layout"
+        android:layout_marginTop="6dp"/>
+
+    // 관광지 들어갈 레이아웃
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/page1_1_1_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/page1_1_title"
+        android:layout_marginTop="14dp">
+    </androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

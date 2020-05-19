@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    //page3 이용권 글자색 변경
+    <item android:state_selected="true" android:color="#AD73DC"/>
+    <item android:color="#000000"/>;
+
+</selector>

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Page1.Page1"
+    android:background="@drawable/ic_bg_photospot">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        // 로고
+        <TextView
+            android:id="@+id/main_logo"
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:background="#AAAAAA"
+            android:text="logo"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
+
+        // 프로필 버튼
+        <ImageButton
+            android:id="@+id/main_profile"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_top_menu"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="8dp"/>
+
+        // 메인 타이틀
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나만의 여행을\n계획해보세요"
+            android:fontFamily="@font/notosans_semibold"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="24dp"
+            android:layout_below="@+id/main_logo"
+            android:layout_marginTop="32dp"/>
+
+        <LinearLayout
+            android:id="@+id/page1_button_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_title"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true">
+            // 스케쥴짜기 버튼
+            <ImageButton
+                android:id="@+id/main_schedule"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_main1"
+                android:layout_marginRight="16dp" />
+
+            // 일정등록 버튼
+            <ImageButton
+                android:id="@+id/main_register"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_main2"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"/>
+
+            // 찜한 관광지 버튼
+            <ImageButton
+                android:id="@+id/main_spot"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/ic_main3"
+                android:layout_marginLeft="16dp"/>
+        </LinearLayout>
+
+        // 안내 멘트
+        <TextView
+            android:id="@+id/main_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="당신을 위한 여행 코스를 확인해보세요"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:fontFamily="@font/notosans_extralight"
+            android:letterSpacing="-0.03"
+            android:layout_below="@+id/page1_button_layout"
+            android:layout_marginTop="32dp"
+            android:textStyle="bold"/>
+
+        // 코스 레이아웃
+        <LinearLayout
+            android:id="@+id/course_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_subtitle"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/course_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/course_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+            </LinearLayout>
+        </LinearLayout>
+
+        // 안내 멘트2
+        <TextView
+            android:id="@+id/main_subtitle2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이런 곳은 어떠신가요?"
+            android:fontFamily="@font/notosans_extralight"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:letterSpacing="-0.03"
+            android:layout_below="@+id/course_layout"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"/>
+
+        // 관광지 스크롤 뷰
+        <HorizontalScrollView
+            android:id="@+id/spot_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_subtitle2"
+            android:layout_marginTop="16dp">
+
+            // 검색 버튼
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:padding="15dp"
+                    android:id="@+id/search_spot"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:background="@drawable/round_white"
+                    android:text="검색"
+                    android:gravity="center|bottom"
+                    android:textSize="11dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_extralight"
+                    android:clickable="true"
+                    android:layout_marginRight="16dp"/>
+
+                // 뷰 동적 생성
+                <LinearLayout
+                    android:id="@+id/main_city_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="16dp">
+
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        // 내일로 안내 스크롤뷰
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spot_layout"
+            android:layout_marginTop="32dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/info1"
+                    android:layout_width="264dp"
+                    android:layout_height="192dp"
+                    android:background="@drawable/box_white_rad20"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/info_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[내일로 이용 시간]"
+                        android:fontFamily="@font/notosans"
+                        android:textStyle="bold"
+                        android:textColor="#4F4F4F"
+                        android:textSize="16dp"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/info_sub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-운영기간: 2019.12.12(목)~2020.2.29(토)"
+                        android:fontFamily="@font/notosans_extralight"
+                        android:textStyle="bold"
+                        android:textSize="13dp"
+                        android:textColor="#000000"
+                        android:layout_below="@+id/info_title"
+                        android:letterSpacing="-0.04"
+                        android:layout_marginTop="6dp"/>
+
+                    <TextView
+                        android:id="@+id/info_sub2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-사용 시작일 기준 3일 전부터 구매가능"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/notosans_extralight"
+                        android:textSize="13dp"
+                        android:textColor="#000000"
+                        android:layout_below="@+id/info_sub"
+                        android:letterSpacing="-0.04"
+                        android:layout_marginTop="4dp"/>
+
+                    <TextView
+                        android:id="@+id/info_title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[내일로 이용 대상]"
+                        android:fontFamily="@font/notosans"
+                        android:textStyle="bold"
+                        android:textColor="#4F4F4F"
+                        android:textSize="16dp"
+                        android:layout_above="@+id/info_sub3"
+                        android:layout_marginBottom="6dp"/>
+
+                    <TextView
+                        android:id="@+id/info_sub3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-만32세 이하 내외국민"
+                        android:fontFamily="@font/notosans_extralight"
+                        android:textStyle="bold"
+                        android:textSize="13dp"
+                        android:textColor="#000000"
+                        android:letterSpacing="-0.04"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="8dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/info2"
+                    android:layout_width="264dp"
+                    android:layout_height="192dp"
+                    android:background="@drawable/box_white_rad20"
+                    android:layout_toRightOf="@+id/info1"
+                    android:layout_marginLeft="30dp"
+                    android:padding="16dp">
+
+                    // 내일로 이용 가격
+                    <TextView
+                        android:id="@+id/info_title3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[내일로 이용 가격]"
+                        android:fontFamily="@font/notosans"
+                        android:textStyle="bold"
+                        android:textColor="#4F4F4F"
+                        android:textSize="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="6dp"/>
+
+                    // 가격표
+                    <TableLayout
+                        android:id="@+id/table_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/info_title3"
+                        android:stretchColumns="*"
+                        android:background="#AAAAAA">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"/>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:letterSpacing="-0.04"
+                                android:padding="3dp"
+                                android:text="0인"
+                                android:textColor="#FFFFFF"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF"
+                                android:layout_marginBottom="1dp"
+                                android:layout_marginLeft="1dp"
+                                android:gravity="center"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:padding="3dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="3일권"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="5일권"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:padding="3dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="7일권"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:padding="3dp"/>
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="1인"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="5만원"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="6만원"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="7만원"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+                        </TableRow>
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="2인"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="9만원"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="11만원"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:fontFamily="@font/notosans_extralight"
+                                android:padding="3dp"
+                                android:gravity="center"
+                                android:letterSpacing="-0.04"
+                                android:text="13만원"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:textSize="11dp"
+                                android:background="#FFFFFF" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="*자세한 사항은 내일로 홈페이지를 참고하세요"
+                        android:textColor="#000000"
+                        android:letterSpacing="-0.04"
+                        android:fontFamily="@font/notosans_extralight"
+                        android:layout_below="@+id/table_layout"
+                        android:textSize="11dp"
+                        android:layout_marginTop="6dp"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+</ScrollView>

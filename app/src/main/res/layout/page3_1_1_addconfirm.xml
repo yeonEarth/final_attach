@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/box_round_purple">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp">
+
+        //추가되는 역 이름
+        <TextView
+            android:id="@+id/page3_1_1_addStation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대전역"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/notosans"/>
+
+        //"이 추가되었습니다." 텍스트
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/page3_1_1_addStation"
+            android:text="이 추가되었습니다."
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/notosans_extralight"/>
+
+
+        //"최단 경로를 새로 탐색해보세요" 텍스트
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/page3_1_1_addStation"
+            android:text="최단 경로를 새로 탐색해보세요."
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/notosans"/>
+
+
+        //새로운 경로 추천 확인 버튼
+        <RelativeLayout
+            android:id="@+id/page3_1_1_newroute_btn"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_below="@id/text"
+            android:layout_marginTop="34dp"
+            android:background="@drawable/box_onclick_white"
+            android:clickable="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:gravity="center">
+
+                //동글뱅이 이미지
+                <ImageView
+                    android:id="@+id/new_btn_img"
+                    android:layout_width="19dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/new_btn"/>
+
+                //텍스트
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="11dp"
+                    android:text="새로운 추천 경로 확인하기"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

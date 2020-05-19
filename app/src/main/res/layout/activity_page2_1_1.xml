@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Page2_1_1.Page2_1_1"
+    android:background="@drawable/ic_bg_photospot"
+    android:padding="16dp">
+
+    //뒤로가기 버튼
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/empty_btn"
+        android:layout_width="9dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/ic_back_btn"/>
+
+    //뒤로가기버튼 버튼 영역을 넓게 주기 위해서 빈 이미지 생성
+    <ImageView
+        android:id="@+id/page2_1_back_btn"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+
+    //여행 코스 추천 타이틀
+    <TextView
+        android:id="@+id/some_id"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_below="@id/empty_btn"
+        android:layout_marginTop="32dp"
+        android:text="여행 코스 추천"
+        android:textAppearance="@style/some_id"
+        android:gravity="top" />
+
+    /리사이클러뷰
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/page2_1_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/some_id"
+        android:layout_marginTop="12dp" />
+</RelativeLayout>

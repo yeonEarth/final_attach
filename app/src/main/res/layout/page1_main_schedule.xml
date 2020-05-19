@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/page1_scrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
+
+    <RelativeLayout
+        android:id="@+id/layout_page1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        //왼쪽 위 목록 버튼
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_background"/>
+
+        //가운데 로고 이미지
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:background="#AAAAAA"
+            android:gravity="center"
+            android:text="logo" />
+
+        //오른쪽 위 마이페이지 버튼
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_background"/>
+
+        //page1 - 날짜 텍스트
+        <EditText
+            android:id="@+id/page1_date"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="78dp"
+            android:layout_marginLeft="16dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:background="@null"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:letterSpacing="-0.04"
+            android:fontFamily="@font/notosans_semibold" />
+
+        //page1 - 슈니는 여행중 텍스트
+        <TextView
+            android:id="@+id/page1_userName"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="102dp"
+            android:layout_marginLeft="16dp"
+            android:text="슈니는 여행중!"
+            android:textSize="32sp"
+            android:textColor="#000000"
+            android:letterSpacing="-0.04"
+            android:fontFamily="@font/notosans_semibold" />
+
+        // page1 역 페이져
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/page1_pager"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="174dp"
+            android:layout_centerHorizontal="true">
+
+        </androidx.viewpager.widget.ViewPager>
+
+
+
+        // page1 페이저 아래 인디케이터
+        <com.rd.PageIndicatorView
+            android:id="@+id/pageIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/page1_pager"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_centerHorizontal="true"
+            app:piv_animationType="none"
+            app:piv_dynamicCount="true"
+            app:piv_interactiveAnimation="true"
+            app:piv_selectedColor="#AD73DC"
+            app:piv_unselectedColor="#1A000000"
+            app:piv_padding="8dp"
+            app:piv_radius="4dp"
+            app:piv_viewPager="@id/page1_pager" />
+
+        //page1 - 열차시간표 텍스트
+        <TextView
+            android:id="@+id/page1_timeTable_txt"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@+id/pageIndicatorView"
+            android:text="열차 시간표"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:letterSpacing="-0.04"
+            android:fontFamily="@font/notosans_semibold" />
+
+
+        // 열차시간표 흰 박스
+        <RelativeLayout
+            android:id="@+id/page1_timeTable"
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:layout_below="@+id/page1_timeTable_txt"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/time_table"
+            android:elevation="4dp">
+
+            //마지막 역일 때 보여줄 이미지
+            <ImageView
+                android:id="@+id/page1_timeTable_lastimg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="invisible"
+                android:background="@drawable/img_last"/>
+
+            <LinearLayout
+                android:id="@+id/table_title"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+
+                //기차시간표-출발역
+                <TextView
+                    android:id="@+id/page1_startTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="여수엑스포"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_semibold" />
+
+                //기차시간표-화살
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/ic_arrow"/>
+
+                </RelativeLayout>
+
+                //기차시간표-도착역
+                <TextView
+                    android:id="@+id/page1_endTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/page1_startTxt"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="도착"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_semibold"
+                    android:layout_centerVertical="true" />
+
+                //기차시간표-환승정보
+                <TextView
+                    android:id="@+id/page1_transferTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/page1_endTxt"
+                    android:gravity="center"
+                    android:text="열차정보"
+                    android:textSize="18sp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_semibold" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/table_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/table_title"
+                android:background="@drawable/line_53"/>
+
+            //기차 시간표-리스트뷰
+            <ListView
+                android:id="@+id/list_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/table_line"
+                android:dividerHeight="1px"
+                android:divider="#9C9C9C" />
+
+        </RelativeLayout>
+
+
+
+
+        //page1 - 나의 여행 스케쥴 텍스트
+        <TextView
+            android:id="@+id/page1_schedule_txt"
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:layout_below="@+id/page1_timeTable"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="나의 여행 스케쥴"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:letterSpacing="-0.04"
+            android:fontFamily="@font/notosans_semibold" />
+
+        //전체스케줄 버튼
+        <Button
+            android:id="@+id/page1_schedule_btn"
+            android:layout_width="97dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/page1_timeTable"
+            android:text="전체 스케쥴"
+            android:textSize="11sp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/notosans_semibold"
+            android:background="@drawable/rectangle_purple"/>
+
+        //전체스케줄
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="33dp"
+            android:layout_below="@+id/page1_schedule_txt"
+            android:background="@drawable/time_table"
+            android:orientation="vertical"
+            android:elevation="4dp">
+
+            //스케줄 리사이클러뷰
+            <LinearLayout
+                android:id="@+id/page1_schedule_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</ScrollView>

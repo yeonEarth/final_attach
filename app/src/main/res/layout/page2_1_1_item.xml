@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/box_round"
+    android:layout_marginBottom="16dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        //넘버
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_number_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/circle_mint"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="5dp"
+                android:text="01"
+                android:textAppearance="@style/recyclerview_number" />
+        </LinearLayout>
+
+        // 탭레이아웃
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:layout_marginTop="5dp"
+            app:tabIndicatorColor="@color/indlcator_color"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="@color/unselected_color"
+            app:tabSelectedTextColor="@color/selected_color" />
+
+        //스케출 추가 버튼
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_schedulePlus_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_icon_addroute" />
+        </LinearLayout>
+
+        //리사이클러뷰 업/다운 버튼
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/updown_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="9dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/ic_up_btn" />
+
+            //업/다운 버튼의 터치 영역을 넓히기 위한 빈 버튼
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_updown_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:background="#00FFFFFF"/>
+        </RelativeLayout>
+    </LinearLayout>
+    //뷰페이져(프래그먼트)
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewpager_backgound">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/page2_1_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true"/>
+    </RelativeLayout>
+</LinearLayout>

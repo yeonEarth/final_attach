@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="33dp">
+
+            // 왼쪽 위 목록버튼
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"/>
+
+            //가운데 로고 이미지
+            <TextView
+                android:layout_width="105dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="logo"
+                android:background="#AAAAAA"/>
+
+            //오른쪽 위 마이페이지 버튼
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_alignParentRight="true" />
+
+            // 여행일정입력 타이틀
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="여행 일정 입력"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:letterSpacing="-0.03" />
+
+            // 세부 내용 텍스트
+            <TextView
+                android:id="@+id/page3.1_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginTop="110dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:text="기차 시간과 여행 일정을 쉽고 편리하게 관리하세요!"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:letterSpacing="-0.03"/>
+
+            //흰 박스
+            <RelativeLayout
+                android:id="@+id/add_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_below="@+id/page3.1_subtitle"
+                android:background="@drawable/box_round"
+                android:elevation="4dp">
+
+                //여기에 리사이클러뷰 들어갈 거임
+                <LinearLayout
+                    android:id="@+id/page3.1.1_box_round"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="63dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/box_round" />
+
+                //도시추가 레이아웃
+                <include layout="@layout/page3_1_1_1_add"
+                    android:id="@+id/add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/page3.1.1_box_round"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_layout"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
+
+                //초기화 버튼
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page3_1_1_1_1_reset_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="초기화하기"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/notosans_semibold"
+                    android:background="@drawable/box_init"
+                    android:elevation="8dp" />
+
+                //저장하기 버튼
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page3_save_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="19dp"
+                    android:text="저장하기"
+                    android:textSize="16dp"
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/notosans_semibold"
+                    android:background="@drawable/box_round3"
+                    android:elevation="8dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

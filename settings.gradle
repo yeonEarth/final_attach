@@ -1,0 +1,3 @@
+include ':app', ':pageindicatorview'
+include ':app:androidtagview'
+include ':androidtagview'

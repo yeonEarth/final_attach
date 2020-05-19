@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/item_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:id="@+id/page1_depTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:text="출발"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/notosans_semibold"
+            android:letterSpacing="0.02" />
+
+        <TextView
+            android:id="@+id/page1_arrTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="center_horizontal"
+            android:text="도착"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/notosans_semibold"
+            android:letterSpacing="0.02" />
+
+        <TextView
+            android:id="@+id/page1_transfer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="center_horizontal"
+            android:text="열차정보"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:fontFamily="@font/notosans"
+            android:letterSpacing="0.02" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_selected="false">
+        //page1 체크인 버튼
+        <shape >
+
+            <solid android:color="#B2E2D1"/>
+            <corners android:radius="12dp"/>
+
+            <stroke
+            android:strokeWidth="2"
+            android:strokeColor="#1ABB8DE0"/>
+
+        </shape>
+    </item>
+
+
+    <item android:state_selected="true">
+        <shape >
+            <solid android:color="#B2E2D1"/>
+            <corners android:radius="12dp"/>
+            <stroke
+                android:width="0.6dp"
+                android:color="#FFFFFF" /> //선색
+        </shape>
+    </item>
+</selector>

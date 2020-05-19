@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:foreground="?selectableItemBackground"
+    android:layout_width="wrap_content"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_height="63dp">
+
+    //원과 순서 텍스트
+    <RelativeLayout
+        android:id="@+id/circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:id="@+id/first_circle"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/circle" />
+        <TextView
+            android:id="@+id/page3_1_1_number"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:gravity="center"
+            android:text="01"
+            android:textSize="11sp"
+            android:fontFamily="@font/notosans_medium"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
+
+    //역 이름
+    <TextView
+        android:id="@+id/page3_1_1_name"
+        android:layout_width="105dp"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@+id/circle"
+        android:layout_marginLeft="13dp"
+        android:text="용       산"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:fontFamily="@font/notosans_medium"
+        android:layout_marginTop="5dp"/>
+
+
+    //선+소요시간
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/page3_1_1_name"
+        android:layout_marginLeft="14dp">
+        <View
+            android:id="@+id/line_1"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+        <View
+            android:id="@+id/line_2"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+        <View
+            android:id="@+id/line_3"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+        <View
+            android:id="@+id/line_4"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+        <View
+            android:id="@+id/line_5"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true">
+            <View
+                android:id="@+id/circle2"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/small_circle" />
+            <TextView
+                android:id="@+id/recyclerview_time"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/circle2"
+                android:layout_marginLeft="12dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_medium"
+                android:textSize="11sp"
+                android:text="약 3시간 11분"/>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line_6"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+        <View
+            android:id="@+id/line_7"
+            android:layout_width="4dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/line_16"
+            android:layout_marginLeft="3dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

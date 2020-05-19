@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    // 제목 레이아웃
+    <RelativeLayout
+        android:id="@+id/page0_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:layout_centerInParent="true">
+
+        // 타이틀 당신의 여행~
+        <TextView
+            android:id="@+id/page0_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="당신의 여행 유형을\n 알아볼까요?"
+            android:gravity="end"
+            android:fontFamily="@font/notosans_bold"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:textColor="#534040" />
+
+        // 세부내용 각 질문~
+        <TextView
+            android:id="@+id/detail"
+            android:layout_below="@+id/page0_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="각 질문에 당신과 가장 잘 맞는 대답을 해주세요!"
+            android:fontFamily="@font/notosans"
+            android:textSize="13dp"
+            android:textColor="#000000"
+            android:letterSpacing="-0.03"
+            android:layout_alignRight="@+id/page0_title"/>
+    </RelativeLayout>
+
+    // 버튼 레이아웃
+    <LinearLayout
+        android:id="@+id/page0_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        // 나중에 하기 버튼
+        <TextView
+            android:id="@+id/page0_later_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="나중에 하기"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:background="@drawable/box_round2"
+            android:fontFamily="@font/notosans_bold"
+            android:textStyle="bold"
+            android:elevation="10dp"
+            android:clickable="true"
+            android:layout_marginRight="9dp"/>
+
+        // 시작하기 버튼
+        <TextView
+            android:id="@+id/page0_start_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="시작하기"
+            android:textSize="16dp"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:background="@drawable/box_round3"
+            android:fontFamily="@font/notosans_bold"
+            android:textStyle="bold"
+            android:layout_marginLeft="9dp"
+            android:elevation="10dp"
+            android:clickable="true"/>
+    </LinearLayout>
+
+</RelativeLayout>

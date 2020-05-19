@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Page2.Page2_1"
+    android:background="@drawable/ic_bg_photospot"
+    android:paddingTop="8dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp">
+
+    // 로고 레이아웃
+    <RelativeLayout
+        android:id="@+id/page2_1_logolayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        // 로고
+        <TextView
+            android:id="@+id/page2_1_logo"
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:background="#AAAAAA"
+            android:text="logo"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentLeft="true" />
+
+        // 메뉴
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/page2_1_menu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_top_menu"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    // 타이틀
+    <TextView
+        android:id="@+id/page2_1_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="카테고리를\n선택해주세요"
+        android:textColor="#000000"
+        android:fontFamily="@font/notosans"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/page2_1_logolayout"
+        android:layout_marginTop="32dp"/>
+
+    // 카테고리 레이아웃
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/page2_1_title"
+        android:layout_marginTop="25dp">
+
+        // 가로 두 개씩 묶기
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="#자연"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginRight="5dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#역사"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#휴양"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginRight="5dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#체험"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#산업"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginRight="5dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#건축/조형"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:clipToPadding="false"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#문화"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginRight="5dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page2_1_subject_8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="#레포츠"
+                android:background="@drawable/box_white_rad10"
+                android:textAppearance="@style/subtitle_text"
+                android:gravity="left|top"
+                android:paddingTop="2dp"
+                android:paddingLeft="8dp"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

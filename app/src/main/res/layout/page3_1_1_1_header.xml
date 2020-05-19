@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="24dp"
+    android:background="#F8EFE0"
+    android:id="@+id/list_header"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:orientation="horizontal">
+
+    // N일차
+    // 헤더 타이틀부분
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8"
+        android:layout_marginLeft="17dp"
+        android:gravity="center_vertical"
+        android:text="ddd"
+        android:textSize="17sp"
+        android:textColor="#563B12"
+        android:fontFamily="@font/notosans_regular"/>
+
+    // 위아래로 이동할 수 있는 버튼
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/move_btn_img"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="7dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_icon_move"/>
+        <TextView
+            android:id="@+id/move_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:clickable="true" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,138 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:alertDialogTheme">@style/AlertDialogStyle</item>
+    </style>
+
+    /*바텀시트 모서리를 둥글게 하기위한 스타일*/
+    <style name="CustomBottom" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="colorPrimary">#DADADA</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+    </style>
+
+    <style name="CustomBottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+    </style>
+
+    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
+    </style>
+
+    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    //카테고리 텍스트
+    <style name="categoty_1">
+        <item name="android:textSize">
+            18sp
+        </item>
+        <item name="android:textColor">
+            #000000
+        </item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="recyclerview_number">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">-0.03</item>
+        <item name="android:fontFamily">@font/notosans_semibold</item>
+    </style>
+
+    <style name="course_text">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">-0.03</item>
+        <item name="android:fontFamily">@font/notosans_extralight</item>
+    </style>
+
+    <style name="courseMore_text">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">-0.03</item>
+        <item name="android:fontFamily">@font/notosans_extralight</item>
+    </style>
+
+    <style name="cardview_subjectText">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/notosans_extralight</item>
+    </style>
+
+    <style name="cardview_titleText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/notosans</item>
+    </style>
+
+    <style name="cardview_subjectText2">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:fontFamily">@font/notosans_extralight</item>
+    </style>
+
+    <style name="cardview_titleText2">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:fontFamily">@font/notosans</item>
+    </style>
+
+    <style name="subtitle_text">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#AAAAAA</item>
+        <item name="android:fontFamily">@font/notosans</item>
+    </style>
+
+    <style name="some_id">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">-0.03</item>
+        <item name="android:fontFamily">@font/notosans</item>
+    </style>
+
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">11sp</item>
+        <item name="android:fontFamily">@font/notosans_semibold</item>
+    </style>
+
+    <style name="page2_tip">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#275871</item>
+        <item name="android:fontFamily">@font/notosans_semibold</item>
+    </style>
+
+    <style name="page2_tip_text">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#275871</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
+    </style>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+</resources>

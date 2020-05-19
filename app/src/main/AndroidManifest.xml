@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.hansol.spot_200510_hs">
+
+    <!-- 안드로이드 앱에서 인터넷에 접속할 수 있도록 허용 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/CustomBottom">
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="2fe6d0a7f5064728003967619a2ecbe8" />
+
+        <activity android:name=".Page0">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Page0_3" />
+        <activity android:name=".Page0_2" />
+        <activity android:name=".Page0_4" />
+        <activity android:name=".Page0_5" />
+        <activity android:name=".Page0_6" />
+        <activity android:name=".Page0_7" />
+        <activity android:name=".Page0_8" />
+        <activity android:name=".Page0_9" />
+        <activity android:name="Page1.Page1" />
+        <activity android:name="Page1.Page1_1_0" />
+        <activity android:name="Page1.Page1_1_1" />
+        <activity android:name="Page2.Page2" />
+        <activity android:name="Page2.Page2_1" />
+        <activity android:name="Page2_1_1.Page2_1_1" />
+        <activity android:name="Page2_1_X.Page2_1_X" />
+        <activity android:name="Page2_X.Page2_X" />
+        <activity android:name="Page2_X.Page2_X_Main"/>
+        <activity android:name="DB.Heart_page"/>
+        <activity android:name="Page3.Page3_Main"/>
+        <activity android:name="Page3_1.Page3_1_Main"/>
+        <activity android:name="Page3_1_1.Page3_1_1_Main"/>
+        <activity android:name="Page3_1_1_1.Page3_1_1_1_Main"/>
+        <activity android:name="Page1_schedule.Page1_Main"/>
+    </application>
+
+</manifest>

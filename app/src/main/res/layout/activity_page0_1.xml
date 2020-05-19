@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page0_3"
+    android:orientation="vertical"
+    android:background="@drawable/ic_bg_01luggage"
+    android:padding="16dp">
+
+    // Step 부분
+    <RelativeLayout
+        android:id="@+id/page0_2_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="86dp">
+        // Step1
+        <TextView
+            android:id="@+id/page0_2_step1"
+            android:layout_width="78dp"
+            android:layout_height="22dp"
+            android:background="@drawable/round_purple"
+            android:text="STEP 1"
+            android:fontFamily="@font/notosans_semibold"
+            android:textColor="#FFFFFF"
+            android:gravity="center" />
+
+        // 동그라미들
+        <ImageView
+            android:id="@+id/round1"
+            android:layout_toRightOf="@+id/page0_2_step1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"/>
+
+        <ImageView
+            android:id="@+id/round2"
+            android:layout_toRightOf="@+id/round1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"/>
+        <ImageView
+            android:id="@+id/round3"
+            android:layout_toRightOf="@+id/round2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"/>
+
+        <ImageView
+            android:id="@+id/round4"
+            android:layout_toRightOf="@+id/round3"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"/>
+
+        <ImageView
+            android:id="@+id/round5"
+            android:layout_toRightOf="@+id/round4"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"/>
+
+        <ImageView
+            android:id="@+id/round6"
+            android:layout_toRightOf="@+id/round5"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/round_gray"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="6dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/page0_2_question"
+        android:layout_marginTop="10dp">
+        // Q1
+        <TextView
+            android:id="@+id/page0_2_q"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여행을 떠나게 된 당신, 누구와\n함께 갈까요?"
+            android:fontFamily="@font/notosans_semibold"
+            android:textColor="#000000"
+            android:textSize="24dp"
+            android:gravity="left"/>
+    </RelativeLayout>
+
+    // 대답 버튼 레이아웃
+    <LinearLayout
+        android:id="@+id/page0_2_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/page0_2_later"
+        android:layout_marginBottom="24dp"
+        android:orientation="vertical">
+
+        // 혼자 하는 여행
+        <TextView
+            android:id="@+id/page0_2_a1"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/box_round"
+            android:text="혼자하는 여행이 최고"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/notosans_extralight"
+            android:clickable="true" />
+
+        // 가족이랑 하는 여행
+        <TextView
+            android:id="@+id/page0_2_a2"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/box_round"
+            android:text="소중한 가족이랑 함께"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/notosans_extralight"
+            android:layout_below="@+id/page0_2_a1"
+            android:layout_marginTop="8dp" />
+
+        // 친구랑 하는 여행
+        <TextView
+            android:id="@+id/page0_2_a3"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/box_round"
+            android:text="마음 맞는 친구와 즐겁게"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="#000000"
+            android:fontFamily="@font/notosans_extralight"
+            android:layout_below="@+id/page0_2_a2"
+            android:layout_marginTop="8dp"
+            android:clickable="true" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/page0_2_later"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="11dp"
+        android:text="나중에 다시 하기"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:fontFamily="@font/notosans_extralight"
+        android:textColor="#CC000000"
+        android:letterSpacing="-0.03"
+        android:clickable="true"/>
+</RelativeLayout>

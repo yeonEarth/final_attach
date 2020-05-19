@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_background"/>
+
+        //가운데 로고 이미지
+        <TextView
+            android:layout_width="105dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:background="#AAAAAA"
+            android:gravity="center"
+            android:text="logo" />
+
+        //오른쪽 위 마이페이지 버튼
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_background"/>
+
+        //여행 스케줄 텍스트
+        <EditText
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginLeft="16dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:background="@null"
+            android:text="전체 여행 스케쥴"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/notosans_semibold" />
+
+        //날짜 텍스트
+        <TextView
+            android:id="@+id/page1_full_schedule_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/text3"
+            android:text="2020년 1월 13일 ~ 1월 20일"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/notosans_semibold" />
+
+        //리사이클러뷰
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/page1_full_schedule_recyclerview1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@+id/page1_full_schedule_date"/>
+
+    </RelativeLayout>
+
+</ScrollView>

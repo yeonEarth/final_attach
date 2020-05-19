@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    //바텀시트 위에 두 줄 이미지
+    <RelativeLayout
+        android:id="@+id/page3_1_mapDown_btn"
+        android:layout_width="match_parent"
+        android:layout_height="467dp">
+        <View
+            android:layout_width="40dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:background="#40000000"/>
+        <View
+            android:layout_width="40dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:background="#40000000"/>
+    </RelativeLayout>
+
+    // 관광지 검색 타이틀
+    <TextView
+        android:id="@+id/recyclerView_line"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="관광지 검색"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:letterSpacing="-0.03" />
+
+    //선
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="84dp"
+        android:background="#EAEAEA"/>
+
+    //리스트뷰
+    <ListView
+        android:id="@+id/api_list_city"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/recyclerView_line"/>
+
+</RelativeLayout>

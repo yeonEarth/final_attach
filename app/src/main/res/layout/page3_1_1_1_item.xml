@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/item_touch"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginRight="8dp">
+
+        //'T' 모양 아이콘
+        <TextView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/circle3"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="T"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/notosans"/>
+
+    </RelativeLayout>
+
+
+    //기차검색창 부분
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="5"
+        android:layout_marginRight="8dp"
+        android:gravity="center_vertical">
+
+        //돋보기 이미지
+        <ImageView
+            android:id="@+id/search_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="11dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_search"/>
+
+        <TextView
+            android:id="@+id/searchTime_Page3_1_1_shadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:clickable="false"
+            android:background="#f888"
+            android:visibility="invisible"
+            android:textSize="10dp"/>
+
+        //기차시간검색 텍스트
+        <TextView
+            android:id="@+id/searchTime_Page3_1_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="    기차 시간 검색"
+            android:textAlignment="center"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"/>
+
+        //기차시간검색 이미지
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/box_stroke"/>
+
+    </RelativeLayout>
+
+
+    //역1-역2 텍스트
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/course_Page3_1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="용산-군산"
+            android:textSize="16sp"
+            android:textColor="#000000"/>
+
+    </LinearLayout>
+
+</LinearLayout>

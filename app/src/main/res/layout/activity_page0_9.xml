@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page0_9"
+    android:background="@drawable/ic_background"
+    android:padding="16dp"
+    android:backgroundTint="#80FFFFFF"
+    android:backgroundTintMode="src_over">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="당신의 여행 유형은"
+        android:textSize="24dp"
+        android:fontFamily="@font/notosans_bold"
+        android:textStyle="bold"
+        android:layout_above="@id/page0_9_char"
+        android:layout_marginBottom="40dp"
+        android:textColor="#000000"/>
+
+    // 캐릭터 들어갈 자리
+    <ImageView
+        android:id="@+id/page0_9_char"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:background="@drawable/round_white"
+        android:layout_centerInParent="true"
+        android:elevation="5dp"/>
+
+    // 결과값 레이아웃
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/page0_9_char"
+        android:layout_marginTop="48dp">
+
+        // 타입
+        <TextView
+            android:id="@+id/page0_9_type1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/notosans_extralight"
+            android:gravity="center"
+            android:text="금강산도 식후경~! 전국 맛집 찾아다니는"
+            android:textColor="#000000"
+            android:textSize="16dp" />
+        // 결과
+        <TextView
+            android:id="@+id/page0_9_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="평화로운 나무늘보 입니다"
+            android:fontFamily="@font/notosans_extralight"
+            android:textSize="24dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_below="@id/page0_9_type1"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    // 버튼 레이아웃
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        // 프로필 편집
+        <TextView
+            android:id="@+id/page0_9_edit_profile"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="프로필 편집"
+            android:background="@drawable/box_round2"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_marginRight="9dp"
+            android:clickable="true"/>
+
+        // 여행지 탐색
+        <TextView
+            android:id="@+id/page0_9_course"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/box_round3"
+            android:fontFamily="@font/notosans_bold"
+            android:gravity="center"
+            android:text="여행지 탐색"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:layout_marginLeft="9dp"/>
+    </LinearLayout>
+</RelativeLayout>

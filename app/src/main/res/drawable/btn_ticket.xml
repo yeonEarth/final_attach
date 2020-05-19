@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:state_selected="true">
+//이용권 버튼
+        <shape >
+            <solid android:color="#ffffff"/>
+            <corners android:radius="8dp"/>
+            <stroke
+                android:width="4dp"
+                android:color="#AD73DC" /> //선색
+
+        </shape>
+    </item>
+
+
+    <item android:state_selected="false">
+        <shape >
+            <solid android:color="#ffffff"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+</selector>

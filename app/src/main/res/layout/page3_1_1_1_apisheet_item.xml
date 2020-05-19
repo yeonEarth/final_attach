@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        //출발도시 텍스트
+        <TextView
+            android:id="@+id/api_startCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="출발도시"
+            android:textSize="18sp"
+            android:textColor="#FE800D"
+            android:fontFamily="@font/notosans"/>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            //출발 시간 텍스트
+            <TextView
+                android:id="@+id/api_dep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="출발"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_medium" />
+
+            //'~' 텍스트
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|center_vertical"
+                android:text="~"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_medium" />
+
+            //도착시간 텍스트
+            <TextView
+                android:id="@+id/api_arr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="도착"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_medium" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            //선
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#A7A7A7"/>
+
+            //열차 종류 텍스트
+            <TextView
+                android:id="@+id/api_trainNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="열차종류"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_medium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    //아래 경계 선
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="19dp"
+        android:background="#EAEAEA"/>
+
+</LinearLayout>
