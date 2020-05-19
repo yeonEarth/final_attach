@@ -9,29 +9,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
         // 로고
         <TextView
             android:id="@+id/main_logo"
             android:layout_width="105dp"
             android:layout_height="40dp"
-            android:background="#AAAAAA"
-            android:text="logo"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
+            android:background="@drawable/ic_logo_0519"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"/>
 
         // 프로필 버튼
         <ImageButton
             android:id="@+id/main_profile"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/ic_top_menu"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="8dp"/>
+            android:layout_alignParentTop="true" />
 
         // 메인 타이틀
         <TextView

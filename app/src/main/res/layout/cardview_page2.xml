@@ -77,7 +77,7 @@
                 android:gravity="center"
                 android:layout_margin="5dp">
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/cardview_heart"
                     android:layout_width="23dp"
                     android:layout_height="23dp"

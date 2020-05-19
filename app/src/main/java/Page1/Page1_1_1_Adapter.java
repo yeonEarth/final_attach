@@ -170,6 +170,7 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
         private RecyclerView recyclerView;
         private int position;
         private TextView cityCount;
+        private TextView toggle;
 
 
         public ViewHolder(View itemView) {
