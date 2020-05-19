@@ -171,7 +171,7 @@ public class Page3_Main extends AppCompatActivity {
         String myFormat = String.format("%13s%20s%22s", "yyyy년", " MM월", "dd일");
         sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
         time = sdf.format(myCalendar.getTime());
-        editDate.setText(time);
+        //editDate.setText(time);
 
 
         // 출발 날짜 클릭 시 DatePicker 보여주기
