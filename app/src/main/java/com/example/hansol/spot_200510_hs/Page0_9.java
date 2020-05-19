@@ -1,11 +1,17 @@
 package com.example.hansol.spot_200510_hs;
 
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import Page1.Page1;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class Page0_9 extends AppCompatActivity {
     TextView result_name, result_sub_name;
@@ -31,14 +37,16 @@ public class Page0_9 extends AppCompatActivity {
             }
         });
 
-        // 여행지 입력 버튼 눌렀을 때
+        // 여행지 탐색 버튼 눌렀을 때
         course.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "여행지 입력 버튼 눌림", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getApplicationContext(), page1.class);
-//                intent.putExtra("Page9",score);
-//                startActivity(intent);
+                //Toast.makeText(getApplicationContext(), "여행지 입력 버튼 눌림", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), Page1.class);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("Page9",score);
+                startActivity(intent);
             }
         });
 
@@ -52,8 +60,8 @@ public class Page0_9 extends AppCompatActivity {
     // 뒤로가기 버튼 막기
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.hold, R.anim.anim_slide);
+//        super.onBackPressed();
+//        overridePendingTransition(R.anim.hold, R.anim.anim_slide);
     }
 
     // 경우의수대로 분류하기

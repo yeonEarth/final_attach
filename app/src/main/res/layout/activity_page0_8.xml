@@ -12,7 +12,7 @@
         android:id="@+id/page0_8_back"
         android:layout_width="43dp"
         android:layout_height="43dp"
-        android:background="@drawable/round_white"
+        android:background="@drawable/ic_icon_back_page0"
         android:elevation="5dp"
         android:clickable="true"
         android:layout_marginTop="8dp"/>
@@ -120,6 +120,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/page0_8_later"
+        android:clipToPadding="false"
+        android:padding="4dp"
         android:layout_marginBottom="24dp">
         // 사진 촬영
         <TextView
@@ -131,7 +133,8 @@
             android:gravity="center"
             android:textSize="16dp"
             android:textColor="#000000"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/notosans_regular"
+            android:elevation="3dp"
             android:clickable="true"/>
 
         // 촬영X
@@ -144,9 +147,10 @@
             android:gravity="center"
             android:textSize="16dp"
             android:textColor="#000000"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/notosans_regular"
             android:layout_below="@+id/page0_8_a1"
             android:layout_marginTop="8dp"
+            android:elevation="3dp"
             android:clickable="true"/>
     </RelativeLayout>
 
@@ -161,5 +165,6 @@
         android:gravity="center"
         android:fontFamily="@font/notosans_semibold"
         android:textColor="#CC000000"
+        android:elevation="3dp"
         android:clickable="true"/>
 </RelativeLayout>

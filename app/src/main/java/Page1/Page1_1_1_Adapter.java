@@ -2,9 +2,6 @@ package Page1;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.SparseBooleanArray;
@@ -14,14 +11,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.hansol.spot_200510_hs.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import DB.DbOpenHelper;
-import DB.Heart_page;
-import Page2.Page2;
 import Page2_1_1.OnItemClick;
 import Page2_X.Page2_X_CategoryBottom;
 

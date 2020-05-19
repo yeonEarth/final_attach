@@ -2,11 +2,11 @@ package com.example.hansol.spot_200510_hs;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Page0_2 extends AppCompatActivity implements View.OnClickListener {
 
@@ -52,15 +52,15 @@ public class Page0_2 extends AppCompatActivity implements View.OnClickListener {
         if (view.getId() == R.id.page0_2_a1){   // 첫번째 대답 골랐을 때
             score[0] = 0;   // 값 저장
             intent.putExtra("Page2",score); // 다음 페이지로 넘기기
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0], Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.page0_2_a2) {
             score[0] = 1;
             intent.putExtra("Page2",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0], Toast.LENGTH_SHORT).show();
         } else if (view.getId() == R.id.page0_2_a3) {
             score[0] = 2;
             intent.putExtra("Page2",score);
-            Toast.makeText(getApplicationContext(), "받은 배열:" + score[0], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "받은 배열:" + score[0], Toast.LENGTH_SHORT).show();
         }
 
         startActivity(intent);

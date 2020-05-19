@@ -37,10 +37,11 @@ public class Page3_1_Main extends AppCompatActivity {
     ArrayList<send_data> list = new ArrayList<send_data>();
 
     //이전 액티비티에서 받은 값 관련
-    String date, dayPass;
+    String year, month, day, dayPass;
     String isRevise_done = "false";
     String[] text = new String[10];
     int number = 0;
+    String date;
 
     //알고리즘
     SubwayController controller;
@@ -70,8 +71,12 @@ public class Page3_1_Main extends AppCompatActivity {
         Intent get = getIntent();
         list = (ArrayList<send_data>)get.getSerializableExtra("list");
         number = list.size();
-        date = get.getExtras().getString("date");
+        year = get.getExtras().getString("year");
+        month = get.getExtras().getString("month");
+        day = get.getExtras().getString("day");
+        date = year+month+day;
         dayPass = get.getExtras().getString("dayPass");
+
 
 
         //수정완료 페이지에서 값을 받아오면. (2)
