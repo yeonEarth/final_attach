@@ -534,9 +534,7 @@ public class Page3_Main extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), Page3_1_Main.class);
                     intent.putExtra("list", (Serializable) send_list);           //추가된 역
-                    intent.putExtra("year", t_year);
-                    intent.putExtra("month", t_month);
-                    intent.putExtra("day", t_day);
+                    intent.putExtra("date", t_year+t_month+t_day);
                     intent.putExtra("dayPass", dayPass);                     //일권
                     intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);

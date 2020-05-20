@@ -3,6 +3,7 @@ package com.example.hansol.spot_200510_hs;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 public class Page0_9 extends AppCompatActivity {
     TextView result_name, result_sub_name;
     TextView edit_profile, course;
+    ImageView char_img;
 
     int[] score = new int[8];
 
@@ -28,6 +30,7 @@ public class Page0_9 extends AppCompatActivity {
         result_sub_name = (TextView)findViewById(R.id.page0_9_type1) ;
         edit_profile = (TextView)findViewById(R.id.page0_9_edit_profile);
         course = (TextView)findViewById(R.id.page0_9_course);
+        char_img = (ImageView)findViewById(R.id.page0_9_char);
 
         // 프로필편집 버튼 눌렀을 때
         edit_profile.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +83,7 @@ public class Page0_9 extends AppCompatActivity {
         if (score[2] != score[3]) {
             if (score[6] == 0) {
                 result_name.setText("포토그래퍼 수달 입니다.");
+                char_img.setBackgroundResource(R.drawable.ic_otter_line);
             } else if (score[2] == 1) {
                 if (score[2] == 1) {
                     result_name.setText("자유로운 영혼 입니다.");

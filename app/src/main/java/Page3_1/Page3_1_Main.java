@@ -71,10 +71,7 @@ public class Page3_1_Main extends AppCompatActivity {
         Intent get = getIntent();
         list = (ArrayList<send_data>)get.getSerializableExtra("list");
         number = list.size();
-        year = get.getExtras().getString("year");
-        month = get.getExtras().getString("month");
-        day = get.getExtras().getString("day");
-        date = year+month+day;
+        date = get.getExtras().getString("date");
         dayPass = get.getExtras().getString("dayPass");
 
 
