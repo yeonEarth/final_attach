@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,11 @@ import com.example.hansol.spot_200510_hs.R;
 //import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+
+import Page3.Page3_Main;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class Page2_1_1_ViewPagerAdapter extends RecyclerView.Adapter<Page2_1_1_ViewPagerAdapter.ViewHolder> implements Page2_1_1.Recyclerview_Rearrange {
 
@@ -128,6 +135,8 @@ public class Page2_1_1_ViewPagerAdapter extends RecyclerView.Adapter<Page2_1_1_V
                 prePosition = position;
             }
         });
+
+
     }
 
     @Override
@@ -146,7 +155,7 @@ public class Page2_1_1_ViewPagerAdapter extends RecyclerView.Adapter<Page2_1_1_V
         TabLayout tabLayout;
         private  int position;
         RelativeLayout vp_bg;
-        Button btn, number_btn, updown_img;
+        Button btn, number_btn, updown_img, schedule_btn;
         TextView tab_customText;
 
         public ViewHolder(View itemView) {

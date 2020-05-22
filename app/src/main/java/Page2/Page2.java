@@ -8,15 +8,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hansol.spot_200510_hs.R;
+
+import net.daum.mf.map.api.MapPOIItem;
+import net.daum.mf.map.api.MapPoint;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -43,6 +48,8 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
 
     //리사이클러뷰에 연결할 데이터
     List<Recycler_item> cardview_items = new ArrayList<>();
+    Page2_CardView_adapter adapter;
+    private DbOpenHelper mDbOpenHelper;
 
     Page2 mainActivity;
     private String  subject, station;
@@ -78,7 +85,8 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
     String[] st4;
 
     ScrollView scrollView;
-    private DbOpenHelper mDbOpenHelper;
+    boolean isLoadData = true;
+    int page = 1;     //api 페이지 수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,8 +180,11 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
         getData();
 
         //리사이클러뷰 구현 부분
-        RecyclerView recyclerView = findViewById(R.id.page2_fragment_recyclerview);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        RecyclerView recyclerView = findViewById(R.id.page2_recyclerview);
+        recyclerView.setHasFixedSize(true);
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setAdapter(adapter);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -237,6 +248,135 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
                 startActivity(intent);
             }
         });
+
+        //more loading
+        final NestedScrollView nestedScrollView = (NestedScrollView)findViewById(R.id.nestScrollView2);
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            int  visibleItemCount,  totalItemCount, pastVisiblesItems;
+
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+
+                if(v.getChildAt(v.getChildCount() -1) != null) {
+                    if( (scrollY >= (v.getChildAt(v.getChildCount() -1).getMeasuredHeight() -  v.getMeasuredHeight() )) && scrollY > oldScrollY) {
+
+                        visibleItemCount = gridLayoutManager.getChildCount();
+                        totalItemCount = gridLayoutManager.getItemCount() ;
+                        pastVisiblesItems = gridLayoutManager.findFirstVisibleItemPosition();
+
+                        //받아온 api 개수가 20개가 안되면 다음 페이지가 없다고 판단. false로 바꿔줌
+                        if(name_1.length < 5){
+                            isLoadData = false;
+                        }
+
+                        //isLoadData가 true이면
+                        if(isLoadData) {
+                            if( (visibleItemCount + pastVisiblesItems) >= totalItemCount ){
+
+                                page++;
+
+                                //관광 api 연결 부분
+                                settingAPI_Data();
+
+                                //메시지 갱신 위치
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+
+                        //데이터가 더 없을 때
+                        else {
+                            noData_Dialog();
+                        }
+                    }
+                }
+            }
+        });
+
+
+
+    }
+
+    private void settingAPI_Data() {
+        SearchTask task = new SearchTask();
+        try {
+            String RESULT = task.execute().get();
+            Log.i("전달 받은 값", RESULT);
+
+            if(RESULT.length() != 0){
+
+
+                //사진링크, 타이틀(관광명), 분야뭔지 분리
+                name_1 = RESULT.split("\n");
+                int length = name_1.length;
+                //xml 파싱한 값을 분류해서 쪼개 넣음
+                String name[] = new String[length];        //관광지 이름
+                String img_Url[] = new String[length];     //이미지 URL
+                String contentid[] = new String[length];   //관광지ID
+                String mapx[] = new String[length];        //X좌표
+                String mapy[] = new String[length];        //Y좌표
+                String cat1[] = new String[length];
+                String cat2[] = new String[length];
+                String contenttypeid[] = new String[length];
+
+                for (int i = 0; i < length; i++) {
+                    name_2 = name_1[i].split("  ");
+
+                    //img_Url이 없는 경우도 있기 때문에, 길이=8=있음/ 길이=7=없음 / 길이=5=imag,x,y좌표없음
+                    if (name_2.length == 8) {
+                        cat1[i] = name_2[0];
+                        cat2[i] = name_2[1];
+                        contentid[i] = name_2[2];
+                        contenttypeid[i] = name_2[3];
+                        img_Url[i] = name_2[4];
+                        mapx[i] = name_2[5];
+                        mapy[i] = name_2[6];
+                        name[i] = name_2[7];
+                    } else if (name_2.length == 7) {
+                        cat1[i] = name_2[0];
+                        cat2[i] = name_2[1];
+                        contentid[i] = name_2[2];
+                        contenttypeid[i] = name_2[3];
+                        img_Url[i] = null;
+                        mapx[i] = name_2[4];
+                        mapy[i] = name_2[5];
+                        name[i] = name_2[6];
+                    } else if (name_2.length == 5) {
+                        cat1[i] = name_2[0];
+                        cat2[i] = name_2[1];
+                        contentid[i] = name_2[2];
+                        contenttypeid[i] = name_2[3];
+                        img_Url[i] = null;
+                        mapx[i] = null;
+                        mapy[i] = null;
+                        name[i] = name_2[4];
+                    }
+                }
+
+//                Page2_X_Main.Recycler_item[] item = new Page2_X_Main.Recycler_item[length];
+//                for (int i = 0; i < length; i++) {
+//                    item[i] = new Page2_X_Main.Recycler_item(Url_front + img_Url[i], name[i], contentid[i], mapx[i], mapy[i] ,cat1[i], cat2[i], contenttypeid[i]);
+//
+//                    if(mapx[i] != null){
+//                        //마커 많이 만들기
+//                        double X = Double.parseDouble(mapx[i]);
+//                        double Y = Double.parseDouble(mapy[i]);
+//                        marker.setTag(1);
+//                        marker.setItemName(name[i]);
+//                        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(Y, X));
+//                        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+//                        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+//                        mapView.addPOIItem(marker);
+//                    }
+//                }
+//                for (int i = 0; i < length; i++) {
+//                    items.add(item[i]);
+//                }
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        } catch (ExecutionException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void getData () {
@@ -428,6 +568,18 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
         builder.show();
     }
 
+    //로딩할 데이터가 더이상 없을 때
+    public void noData_Dialog() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setMessage("마지막 데이터 입니다.");
+        builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        builder.show();
+    }
+
 
     //관광api 연결
     class SearchTask extends AsyncTask<String, Void, String>
@@ -444,7 +596,8 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
 
             url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                     "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
-                    "&pageNo=1&numOfRows=5&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
+                    "&pageNo=" + page+
+                    "&numOfRows=5&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
                     "&contentTypeId=" + contentTypeId +
                     "&sigunguCode=" +
                     "&areaCode="+

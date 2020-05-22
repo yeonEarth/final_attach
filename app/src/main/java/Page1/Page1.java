@@ -12,10 +12,16 @@ import DB.Heart_page;
 import Page2_X.Page2_X;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -23,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hansol.spot_200510_hs.R;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
 
@@ -39,6 +46,11 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout container;
     private LinearLayout container2;
     private LinearLayout city_container;
+
+    //툴바 관련
+    private AppBarLayout appBarLayout;
+    private NestedScrollView scrollView;
+    boolean isExpand = false;
 
     String cat_text = null;   // 카테고리 이름
     String cat_text2 = null;
@@ -69,7 +81,30 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_page1);
+        setContentView(R.layout.activity_page1_scrolling);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        scrollView = (NestedScrollView) findViewById(R.id.nestScrollView_page1);
+        setSupportActionBar(toolbar);
+
+        //위아래로 드래그 했을 때 변화를 감지하는 부분
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            int oldY = 0;
+            @Override
+            public void onScrollChanged() {
+                int scrollY = scrollView.getScrollY(); // For ScrollView
+                Log.i("X-Y", "-" + scrollY);
+                if(scrollY > oldY){
+                    Log.i("아래로 드래그", "^^");
+                    oldY = scrollY;
+                } else {
+                    Log.i("위로 드래그", "^^");
+                    oldY = scrollY;
+                }
+                // DO SOMETHING WITH THE SCROLL COORDINATES
+            }
+        });
 
         // DB열기
         mDbOpenHelper = new DbOpenHelper(this);
@@ -460,6 +495,28 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener {
             city_container.addView(cityName);
         }
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
 
     @Override
     public void onClick(View view) {

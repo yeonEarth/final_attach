@@ -10,6 +10,8 @@
     android:scrollbars="none"
     android:id="@+id/page2_scroll">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,7 +60,7 @@
                 android:letterSpacing="-0.03"
                 android:textColor="#000000"/>
 
-            //전체 카테고리 *가려서 안보임 수정필*
+            //전체 카테고리 버튼
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/page2_cat_btn"
                 android:layout_width="97dp"
@@ -326,6 +328,8 @@
             android:textColor="#000000"
             android:fontFamily="@font/notosans_extralight"/>
 
+
+
         //관광지 api 레이아웃
         <LinearLayout
             android:id="@+id/page2_api_layout"
@@ -335,10 +339,13 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/box_white_rad8">    //page2 관광지 사진 리싸이클러뷰
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/page2_fragment_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            //관광지 api가 들어갈 리사이클러뷰
+            <include layout="@layout/page2_content" />
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/page2_fragment_recyclerview"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

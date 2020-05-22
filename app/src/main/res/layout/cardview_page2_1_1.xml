@@ -11,7 +11,8 @@
         android:id="@+id/page2_1_cardview"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         app:cardCornerRadius="5dp">
 
         //가로로 정렬

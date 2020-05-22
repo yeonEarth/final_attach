@@ -6,12 +6,18 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.hansol.spot_200510_hs.R;
 
 import java.util.ArrayList;
+
+import Page3.Page3_Main;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
 public class Page2_1_1 extends AppCompatActivity {
     Page2_1_1_ViewPagerAdapter viewpager_adapter;
@@ -24,6 +30,9 @@ public class Page2_1_1 extends AppCompatActivity {
     String[] st2;
     String[] st3;
     String[] st4;
+
+    //코스 전체 추가 버튼
+    Button schedule_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,25 @@ public class Page2_1_1 extends AppCompatActivity {
         //뷰페이저 어댑터를 연결해주면서 프래그먼트 연결
         viewpager_adapter = new Page2_1_1_ViewPagerAdapter(getSupportFragmentManager(), items, recyclerview_rearrange);
         recyclerView.setAdapter(viewpager_adapter);
+
+        schedule_btn = (Button) findViewById(R.id.page2_1_schedulePlus_btn);
+
+//        schedule_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ArrayList <String> course = new ArrayList<>();
+//                course.add(t1.getText().toString());
+//                course.add(t2.getText().toString());
+//                course.add(t3.getText().toString());
+//                course.add(t4.getText().toString());
+//                Intent intent = new Intent(getApplicationContext(), Page3_Main.class);
+//                intent.putExtra("course", course);
+//                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+//                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+//                startActivity(intent);
+//            }
+//        });
+
 
         //뒤로가기 버튼 구현
         ImageView back_btn = (ImageView) findViewById(R.id.page2_1_back_btn);
