@@ -2,8 +2,10 @@ package Page2_X;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
@@ -27,6 +30,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import Page3.Page3_Main;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
@@ -50,8 +55,6 @@ public class Page2_X extends AppCompatActivity {
     String[] name = new String[237];
     String next_text[] = new String[10];  //다음 페이지에 넘길 값 배열
 
-    // page2 검색 팁 텍스트
-    TextView page2_tip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +106,19 @@ public class Page2_X extends AppCompatActivity {
         page2_svg.setWebViewClient(new WebViewClient());
         page2_svg.loadUrl("file:///android_asset/index_page2.html");
 
-        //팁&히스토리 관련
-        page2_tip = (TextView)findViewById(R.id.page2_tip);
-//        scrollView = (HorizontalScrollView)findViewById(R.id.history_scrollView);
-//        history_btn = (LinearLayout)findViewById(R.id.history_btn);
+        //관광지 제공하지 않는역 클릭 시
+        page2_svg.setWebChromeClient(new WebChromeClient(){
+            public boolean onJsAlert(WebView view,String url, String message, final android.webkit.JsResult result) {
+                Toast.makeText(getApplicationContext(), "해당역은 관광지를 제공하지 않습니다.", Toast.LENGTH_LONG).show();
+                result.confirm();
+                return true;
+            }
+        });
+
+
+        출처: https://osankkk.tistory.com/entry/WebView-컨트롤 [준영아빠]
+
+
 
         //자바스크립트에서 메시지 보내면, 그 값을 다음 액티비티로 전달
         page2_svg.addJavascriptInterface(new Object(){
@@ -138,15 +150,14 @@ public class Page2_X extends AppCompatActivity {
                             }
                         }, 500); // 0.5초후
 
-                        page2_tip.setText("HISTORY");
 
                     }});
             }
         }, "android");
 
 
-        //웹뷰 화면 비율 맞추기
-        page2_svg.setInitialScale(230);
+        //웹뷰 화면 비율
+        //page2_svg.setInitialScale(230);
     }
 
     //리스트에 검색될 단어를 추가한다. txt파일을 for문으로 쪼개서 넣음
@@ -167,6 +178,7 @@ public class Page2_X extends AppCompatActivity {
         }
         String[] arr = readStr.split("\n");  //한 줄씩 자른다.
 
+
         //code,name으로 되어있는 line을 ','를 기준으로 다시 자른다.
         for (int i = 0; i < arr.length; i++) {
             code_name = arr[i].split(",");
@@ -175,8 +187,12 @@ public class Page2_X extends AppCompatActivity {
             name[i] = code_name[1];
 
             list.add(name[i]);
+
+
         }
     }
+
+
 
     @Override
     public void onBackPressed() {

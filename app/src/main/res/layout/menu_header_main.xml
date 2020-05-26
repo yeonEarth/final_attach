@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="50dp"
+    android:paddingBottom="16dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/menu_box">
+
+        //사용자 이미지
+        <ImageView
+            android:id="@+id/menu_userImage"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="24dp"
+            android:elevation="4dp"
+            android:background="@drawable/ic_otter_line"/>
+
+        //캐릭터 설명1
+        <TextView
+            android:id="@+id/menu_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@id/menu_userImage"
+            android:text="자연 속에서 힐링하기 좋아하는"
+            android:textSize="11sp"/>
+
+        //캐릭터 설명2
+        <TextView
+            android:id="@+id/menu_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/menu_text1"
+            android:layout_toRightOf="@id/menu_userImage"
+            android:text="평화로운 나무늘보"
+            android:textSize="15sp"/>
+
+        //프로필 편집
+        <ImageButton
+            android:id="@+id/menu_edit_btn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_icon_edit"/>
+
+    </RelativeLayout>
+
+    //리사이클러뷰
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/menu_recyclerview1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    //앱 설정 부분
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp">
+
+        //앱 설정 아이콘
+        <ImageView
+            android:id="@+id/menu_settingIcon"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:background="@drawable/ic_icon_setting"/>
+
+        //텍스트
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/menu_settingIcon"
+            android:text="앱 설정"
+            android:textSize="18sp"/>
+
+        //위치서비스 텍스트
+        <TextView
+            android:id="@+id/menu_postionSerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/menu_settingIcon"
+            android:layout_toRightOf="@id/menu_settingIcon"
+            android:text="위치서비스"
+            android:textSize="12sp"/>
+
+        //위치 토글 버튼
+        <Switch
+            android:id="@+id/menu_postion_btn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/menu_settingIcon"
+            android:layout_alignParentRight="true"
+            android:showText="true"
+            android:textOn="ON"
+            android:textOff="OFF"
+            android:switchMinWidth="50dp"
+            android:switchTextAppearance="@style/SwitchTextAppearance"/>
+
+        //알람 텍스트
+        <TextView
+            android:id="@+id/menu_alramText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/menu_postionSerview"
+            android:layout_toRightOf="@id/menu_settingIcon"
+            android:text="알람"
+            android:textSize="12sp"/>
+
+        //알람 버튼
+        <Switch
+            android:id="@+id/menu_alram_btn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/menu_postion_btn"
+            android:layout_alignParentRight="true"
+            android:showText="true"
+            android:textOn="ON"
+            android:textOff="OFF"
+            android:switchMinWidth="50dp"
+            android:switchTextAppearance="@style/SwitchTextAppearance"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

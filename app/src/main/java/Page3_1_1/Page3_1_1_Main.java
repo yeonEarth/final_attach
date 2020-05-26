@@ -1,13 +1,22 @@
 package Page3_1_1;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +34,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import Page1.EndDrawerToggle;
+import Page1.Main_RecyclerviewAdapter;
 import Page3_1.Page3_1_Main;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
@@ -38,6 +49,23 @@ public class Page3_1_1_Main extends AppCompatActivity implements Page3_1_1_addBo
 
     //앞에서 전달한 값
     String result, date, dayPass;
+
+    //메뉴 관련
+    private Context context;
+    private ImageButton menu_edit;
+    private ImageView userImg;
+    private TextView userText1;
+    private TextView userText2;
+    private RecyclerView recyclerView1;
+    private Switch positionBtn;
+    private Switch alramBtn;
+    Main_RecyclerviewAdapter adapter2;
+    ArrayList<String> name2 = new ArrayList<>();
+    private Toolbar toolbar2;
+    private DrawerLayout drawer;
+    private EndDrawerToggle mDrawerToggle;
+    ImageButton logo;
+
 
     //도시추가시 도시가 들어갈 순서를 받기 위한 변수
     int number = 0;
@@ -75,6 +103,63 @@ public class Page3_1_1_Main extends AppCompatActivity implements Page3_1_1_addBo
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(page3_1_1_main));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        //객체 연결
+        context = getApplicationContext();
+        toolbar2 = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        userImg = (ImageView)findViewById(R.id.menu_userImage);
+        userText1 = (TextView)findViewById(R.id.menu_text1);
+        userText2 = (TextView)findViewById(R.id.menu_text2);
+        positionBtn = (Switch) findViewById(R.id.menu_postion_btn);
+        recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
+
+        mDrawerToggle = new EndDrawerToggle(this,drawer,toolbar2,R.string.open_drawer,R.string.close_drawer){
+            @Override //드로어가 열렸을때
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+            @Override //드로어가 닫혔을때
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+
+        setSupportActionBar(toolbar2);
+        drawer.addDrawerListener(mDrawerToggle);
+
+        //메뉴 안 내용 구성
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        adapter2 = new Main_RecyclerviewAdapter(name2, context);
+        recyclerView1.setAdapter(adapter2);
+
+        //리사이클러뷰 헤더
+        name2.add("0");
+        name2.add("1");
+        name2.add("2");
+
+        //툴바 타이틀 없애기
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //메인로고
+        logo = (ImageButton) findViewById(R.id.main_logo_page3_1_1);
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Page1.Page1.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                //overridePendingTransition(0,0);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+
 
 
         //드래그 기능
@@ -117,7 +202,7 @@ public class Page3_1_1_Main extends AppCompatActivity implements Page3_1_1_addBo
             @Override
             public void onChanged() {
                 super.onChanged();
-                Page3_1_1_addConformDialog conformDialog = Page3_1_1_addConformDialog.getInstance(list.get(list.size()-1).getName(), date, dayPass);
+                Page3_1_1_addConformDialog conformDialog = Page3_1_1_addConformDialog.getInstance(list.get(list.size()-2).getName(), date, dayPass);
                 conformDialog.show(getSupportFragmentManager(), "confirm");
             }
         });
@@ -202,7 +287,7 @@ public class Page3_1_1_Main extends AppCompatActivity implements Page3_1_1_addBo
     @Override
     public void onsetlist(String text) {
         if(list.size() < 10){
-            list.add(new Page3_1_1_dargData(text , number));
+            list.add(list.size()-1, new Page3_1_1_dargData(text , number));
             adapter.notifyDataSetChanged();
         } else {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
@@ -226,7 +311,6 @@ public class Page3_1_1_Main extends AppCompatActivity implements Page3_1_1_addBo
 
         //값을 전달할 리스트(send_list)와 도착역과 추가역의 순서를 바꿔줄 리스트(send_list_change)
         ArrayList<send_data> send_list = new ArrayList<send_data>();
-        ArrayList<send_data> send_list_change = new ArrayList<send_data>();
 
         //선택된 역 이름을 번호와 함께 넘겨준다.
         for(int i=0; i<list.size(); i++){
@@ -237,15 +321,6 @@ public class Page3_1_1_Main extends AppCompatActivity implements Page3_1_1_addBo
             }
         }
 
-        //마지막 역은 추가된 역이므로 마지막전역(진짜 도착역)과 순서를 바꿔야 한다.
-        send_list_change.add(new send_data(send_list.get(send_list.size()-1).getCode(), list.get(list.size()-1).getName()));
-        send_list_change.add(new send_data(send_list.get(send_list.size()-2).getCode(), list.get(list.size()-2).getName()));
-
-        send_list.remove(send_list.size()-1);
-        send_list.remove(send_list.size()-1);
-
-        send_list.add(send_list_change.get(0));
-        send_list.add(send_list_change.get(1));
 
 
         Intent intent = new Intent(this, Page3_1_Main.class);

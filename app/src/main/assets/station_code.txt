@@ -121,6 +121,7 @@
 하양 35 1 35.909445 128.818133 혜택없음
 영천 35 15 35.959505 128.939069 http://www.rail-ro.com/kor/benefit/menu_01.html?a=1&pmode=view&station01=5&station02=67&page=1
 건천 35 2 35.854000 129.097059 혜택없음
+안강 35 2 35.989447 129.230966 혜택없음
 서경주 35 2 35.868823 129.201185 http://www.rail-ro.com/kor/benefit/menu_01.html?a=1&pmode=view&station01=5&station02=64&page=1
 경주 35 2 35.844464 129.217927 http://www.rail-ro.com/kor/benefit/menu_01.html?a=1&pmode=view&station01=5&station02=64&page=1
 불국사 35 2 35.776536 129.296803 혜택없음
@@ -133,7 +134,6 @@
 신해운대 6 16 35.181758 129.176938 혜택없음
 센텀 6 16 35.179563 129.124468 혜택없음
 부전 6 7 35.164948 129.060024 http://www.rail-ro.com/kor/benefit/menu_01.html?a=1&pmode=view&station01=5&station02=62&page=1
-안강 35 2 35.989447 129.230966 혜택없음
 포항 35 23 36.071869 129.341938 http://www.rail-ro.com/kor/benefit/menu_01.html?a=1&pmode=view&station01=5&station02=72&page=1
 월포 35 23 36.204101 129.366711 혜택없음
 장사 35 12 36.284261 129.369195 혜택없음

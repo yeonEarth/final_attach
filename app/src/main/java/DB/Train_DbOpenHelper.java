@@ -62,8 +62,9 @@ public class Train_DbOpenHelper {
 
 
     // Insert DB
-    public long insertColumn(String number, String date, String daypass, String station, String time, String contentid){
+    public long insertColumn(String temporary, String number, String date, String daypass, String station, String time, String contentid){
         ContentValues values = new ContentValues();
+        values.put(Train_DataBases.CreateDB.TEMPORARY, temporary);
         values.put(Train_DataBases.CreateDB.NUMBER, number);
         values.put(Train_DataBases.CreateDB.DATE, date);
         values.put(Train_DataBases.CreateDB.DAYPASS, daypass);
@@ -75,15 +76,16 @@ public class Train_DbOpenHelper {
 
 
     // Update DB
-    public boolean updateColumn(long id, String number, String date, String daypass, String station, String time, String contentid){
+    public boolean updateColumn(String temporary, String number, String date, String daypass, String station, String time, String contentid){
         ContentValues values = new ContentValues();
+        values.put(Train_DataBases.CreateDB.TEMPORARY, temporary);
         values.put(Train_DataBases.CreateDB.NUMBER, number);
         values.put(Train_DataBases.CreateDB.DATE, date);
         values.put(Train_DataBases.CreateDB.DAYPASS, daypass);
         values.put(Train_DataBases.CreateDB.STATION, station);
         values.put(Train_DataBases.CreateDB.TIME, time);
         values.put(Train_DataBases.CreateDB.CONTENTID, contentid);
-        return mDB.update(Train_DataBases.CreateDB._TABLENAME0, values, "_id=" + id, null) > 0;
+        return mDB.update(Train_DataBases.CreateDB._TABLENAME0, values, "number=" + number, null) > 0;
     }
 
 
@@ -100,10 +102,9 @@ public class Train_DbOpenHelper {
 
 
     // Delete DB
-    public boolean deleteColumnByNumber(String number){
+    public boolean deleteColumnByKey(String number){
         return mDB.delete(Train_DataBases.CreateDB._TABLENAME0, "number="+number, null) > 0;
     }
-
 
     // Select DB
     public Cursor selectColumns(){
@@ -114,6 +115,12 @@ public class Train_DbOpenHelper {
     // sort by column
     public Cursor selecteNumber(String sort){
         Cursor c = mDB.rawQuery( "SELECT* FROM usertable  where number=" + "'" + sort + "'", null);
+        return c;
+    }
+
+    // sort by column
+    public Cursor seleckTemporary(String sort){
+        Cursor c = mDB.rawQuery( "SELECT* FROM usertable  where temporary=" + "'" + sort + "'", null);
         return c;
     }
 }

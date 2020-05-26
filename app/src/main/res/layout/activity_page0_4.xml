@@ -4,162 +4,179 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Page0_4"
-    android:background="@drawable/ic_bg_03diary_01"
-    android:padding="16dp">
-    // 뒤로가기 버튼
-    <TextView
-        android:id="@+id/page0_4_back"
-        android:layout_width="43dp"
-        android:layout_height="43dp"
-        android:background="@drawable/ic_icon_back_page0"
-        android:elevation="5dp"
-        android:clickable="true"
-        android:layout_marginTop="8dp"/>
+    tools:context=".Page0_4">
 
-    // Step 부분
-    <RelativeLayout
-        android:id="@+id/page0_4_step_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/page0_4_back"
-        android:layout_marginTop="35dp"
-        android:gravity="center_vertical">
-        // Step3
-        <TextView
-            android:id="@+id/step3"
-            android:layout_width="78dp"
-            android:layout_height="22dp"
-            android:background="@drawable/round_purple"
-            android:layout_toRightOf="@+id/round2"
-            android:text="STEP 3"
-            android:fontFamily="@font/notosans_semibold"
-            android:textColor="#FFFFFF"
-            android:gravity="center" />
-
-        // 동그라미들
-        <ImageView
-            android:id="@+id/round1"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_marginRight="6dp"
-            android:layout_centerVertical="true"/>
-
-        <ImageView
-            android:id="@+id/round2"
-            android:layout_toRightOf="@+id/round1"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"/>
-        <ImageView
-            android:id="@+id/round3"
-            android:layout_toRightOf="@+id/step3"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-
-        <ImageView
-            android:id="@+id/round4"
-            android:layout_toRightOf="@+id/round3"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-
-        <ImageView
-            android:id="@+id/round5"
-            android:layout_toRightOf="@+id/round4"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-
-        <ImageView
-            android:id="@+id/round6"
-            android:layout_toRightOf="@+id/round5"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/page3_question"
+    //애니메이션
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/page0_4_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/page0_4_step_layout">
-        // Q3
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="bg03.json"
+        app:lottie_loop="true"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+
+        // 뒤로가기 버튼
         <TextView
-            android:id="@+id/page0_4_q"
+            android:id="@+id/page0_4_back"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:background="@drawable/ic_icon_back_page0"
+            android:elevation="5dp"
+            android:clickable="true"
+            android:layout_marginTop="8dp"/>
+
+        // Step 부분
+        <RelativeLayout
+            android:id="@+id/page0_4_step_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="그러면 이제 계획을 세워 봐요.\n당신은 어떻게 하나요?"
+            android:layout_below="@+id/page0_4_back"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+            // Step3
+            <TextView
+                android:id="@+id/step3"
+                android:layout_width="78dp"
+                android:layout_height="22dp"
+                android:background="@drawable/round_purple"
+                android:layout_toRightOf="@+id/round2"
+                android:text="STEP 3"
+                android:fontFamily="@font/notosans_semibold"
+                android:textColor="#FFFFFF"
+                android:gravity="center" />
+
+            // 동그라미들
+            <ImageView
+                android:id="@+id/round1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_marginRight="6dp"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:id="@+id/round2"
+                android:layout_toRightOf="@+id/round1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"/>
+            <ImageView
+                android:id="@+id/round3"
+                android:layout_toRightOf="@+id/step3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+
+            <ImageView
+                android:id="@+id/round4"
+                android:layout_toRightOf="@+id/round3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+
+            <ImageView
+                android:id="@+id/round5"
+                android:layout_toRightOf="@+id/round4"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+
+            <ImageView
+                android:id="@+id/round6"
+                android:layout_toRightOf="@+id/round5"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/page3_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/page0_4_step_layout">
+            // Q3
+            <TextView
+                android:id="@+id/page0_4_q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="그러면 이제 계획을 세워 봐요.\n당신은 어떻게 하나요?"
+                android:fontFamily="@font/notosans_semibold"
+                android:textColor="#000000"
+                android:textSize="24dp"
+                android:gravity="left"/>
+        </RelativeLayout>
+
+        // 대답 버튼 레이아웃
+        <RelativeLayout
+            android:id="@+id/page0_4_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/page0_4_later"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            android:layout_marginBottom="24dp">
+            // 계획형
+            <TextView
+                android:id="@+id/page0_4_a1"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@drawable/box_round"
+                android:text="하나부터 열까지 꼼꼼하게 계획하기"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_regular"
+                android:elevation="3dp"
+                android:clickable="true"/>
+
+            // 무계획형
+            <TextView
+                android:id="@+id/page0_4_a2"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@drawable/box_round"
+                android:text="차표와 두 발만 있다면 만사 OK~!"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_regular"
+                android:layout_below="@+id/page0_4_a1"
+                android:layout_marginTop="8dp"
+                android:elevation="3dp"
+                android:clickable="true"/>
+        </RelativeLayout>
+
+        // 나중에 하기 버튼
+        <TextView
+            android:id="@+id/page0_4_later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:text="나중에 다시 하기"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
             android:fontFamily="@font/notosans_semibold"
-            android:textColor="#000000"
-            android:textSize="24dp"
-            android:gravity="left"/>
-    </RelativeLayout>
-
-    // 대답 버튼 레이아웃
-    <RelativeLayout
-        android:id="@+id/page0_4_answer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/page0_4_later"
-        android:clipToPadding="false"
-        android:padding="4dp"
-        android:layout_marginBottom="24dp">
-        // 계획형
-        <TextView
-            android:id="@+id/page0_4_a1"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@drawable/box_round"
-            android:text="하나부터 열까지 꼼꼼하게 계획하기"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/notosans_regular"
-            android:elevation="3dp"
-            android:clickable="true"/>
-
-        // 무계획형
-        <TextView
-            android:id="@+id/page0_4_a2"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@drawable/box_round"
-            android:text="차표와 두 발만 있다면 만사 OK~!"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/notosans_regular"
-            android:layout_below="@+id/page0_4_a1"
-            android:layout_marginTop="8dp"
-            android:elevation="3dp"
+            android:textColor="#CC000000"
             android:clickable="true"/>
     </RelativeLayout>
 
-    // 나중에 하기 버튼
-    <TextView
-        android:id="@+id/page0_4_later"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="11dp"
-        android:text="나중에 다시 하기"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:fontFamily="@font/notosans_semibold"
-        android:textColor="#CC000000"
-        android:clickable="true"/>
 </RelativeLayout>

@@ -1,47 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_background">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingTop="10dp"
+        app:layout_collapseMode="pin"
+        android:elevation="3dp"
+        android:theme="@style/Theme.Dark">
+
+        <ImageButton
+            android:id="@+id/main_logo_page3_1"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_logo_0519"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
     <RelativeLayout
         android:id="@+id/layout_page3"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        //왼쪽 위 목록 버튼
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/btn_background"/>
-
-        //가운데 로고 이미지
-        <TextView
-            android:layout_width="105dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="logo"
-            android:background="#AAAAAA"/>
-
-        //오른쪽 위 마이페이지 버튼
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/btn_background"/>
 
         //최단 경로 안내 텍스트
         <TextView
+            android:id="@+id/shortest_txt"
             android:layout_width="162dp"
             android:layout_height="33dp"
-            android:layout_marginTop="70dp"
             android:layout_marginLeft="16dp"
             android:text="최단 경로 안내"
             android:textSize="24dp"
@@ -55,7 +59,8 @@
             android:id="@+id/page3.1_subtitle"
             android:layout_width="275dp"
             android:layout_height="22dp"
-            android:layout_marginTop="110dp"
+            android:layout_below="@+id/shortest_txt"
+            android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:text="슈니 님이 선택한 도시의 최단 경로입니다."
             android:textSize="16dp"
@@ -126,4 +131,18 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="#ffffff"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/menu_header_main"/>
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
 

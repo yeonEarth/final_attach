@@ -1,53 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginRight="8dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
 
-        //앞에 원
-        <TextView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_margin="1dp"
-            android:background="@drawable/circle"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="01"
-            android:textSize="15sp"
-            android:textColor="#ffffff"
-            android:fontFamily="@font/notosans"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp">
 
-    </RelativeLayout>
+            //앞에 원
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="1dp"
+                android:background="@drawable/circle"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="01"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/notosans"/>
+
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:layout_weight="10"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical">
+        <RelativeLayout
+            android:layout_weight="9"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center_vertical">
 
-        //기차시간 넣는 부분 텍스트
-        <TextView
-            android:id="@+id/page3_1_1_1_cityText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_centerVertical="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="기차 시간 검색"
-            android:textSize="16sp"
-            android:ellipsize="end"/>
+            //관광지 넣는 부분 텍스트
+            <TextView
+                android:id="@+id/page3_1_1_1_cityText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="기차 시간 검색"
+                android:textSize="16sp"
+                android:ellipsize="end"/>
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</LinearLayout>
+
+        //삭제 버튼 이미지---------------------------------------------------
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@drawable/ic_delete"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    //삭제 터치 받는 곳
+    <Button
+        android:id="@+id/page3_1_1_1_tourDelete"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="#00FFFFFF"
+        android:clickable="true" />
+
+</RelativeLayout>

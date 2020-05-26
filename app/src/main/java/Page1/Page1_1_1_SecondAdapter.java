@@ -29,16 +29,10 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
     private List<Page1_1_1.Recycler_item> items;  //리사이클러뷰 안에 들어갈 값 저장
     private OnItemClick mCallback;
 
+    private List<Page1_1_1.Recycler_item> real_items;   // 찐아이템
 
 
-    long nowIndex;
-    static ArrayList<String> arrayIndex =  new ArrayList<String>();
-    static ArrayList<String> arrayData = new ArrayList<String>();
-    private DbOpenHelper mDbOpenHelper;
 
-    ArrayAdapter<String> arrayAdapter;
-
-    String sort = "userid";
 
     public Page1_1_1_SecondAdapter(List<Page1_1_1.Recycler_item> items, OnItemClick mCallback) {
         this.items = items;
@@ -59,15 +53,16 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
         holder.title.setText(items.get(position).title);
         //이미지뷰에 url 이미지 넣기.
         Glide.with(context).load(item.getImage()).centerCrop().into(holder.imageView);
+        holder.type.setText(item.type);
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                    stay[position] = null;
-                    mCallback.delete_db(item.getContentviewID());
-
-                }
+                stay[position] = null;
+                mCallback.delete_db(item.getContentviewID());
+                items.remove(position);
+                notifyItemRemoved(position);
+            }
 
         });
     }
@@ -90,39 +85,5 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
             title = itemView.findViewById(R.id.page1_1_1_cardview_title);
             heart = itemView.findViewById(R.id.page1_1_1_cardview_heart);
         }
-    }
-
-    public void showDatabase(String sort){
-        Cursor iCursor = mDbOpenHelper.selectColumns();
-        //iCursor.moveToFirst();
-        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
-        arrayData.clear();
-        arrayIndex.clear();
-
-        while(iCursor.moveToNext()){
-            String tempIndex = iCursor.getString(iCursor.getColumnIndex("_id"));
-            String tempID = iCursor.getString(iCursor.getColumnIndex("userid"));
-            tempID = setTextLength(tempID,10);
-            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
-            tempName = setTextLength(tempName,10);
-
-            String Result = tempID + tempName;
-            arrayData.add(Result);
-            arrayIndex.add(tempIndex);
-        }
-
-        arrayAdapter.clear();
-        arrayAdapter.addAll(arrayData);
-        arrayAdapter.notifyDataSetChanged();
-    }
-
-    public String setTextLength(String text, int length){
-        if(text.length()<length){
-            int gap = length - text.length();
-            for (int i=0; i<gap; i++){
-                text = text + " ";
-            }
-        }
-        return text;
     }
 }

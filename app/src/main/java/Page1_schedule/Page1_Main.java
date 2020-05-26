@@ -1,35 +1,65 @@
 package Page1_schedule;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.hansol.spot_200510_hs.BuildConfig;
 import com.example.hansol.spot_200510_hs.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.rd.PageIndicatorView;
 
 import org.json.JSONArray;
@@ -52,15 +82,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import DB.Menu_DbOpenHelper;
 import DB.Train_DbOpenHelper;
+import Page1.EndDrawerToggle;
+import Page1.Main_RecyclerviewAdapter;
+import Page1.Page1;
+import Page2_1_1.NetworkStatus;
+import Page3.Page3_Main;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
-public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter.send_expand{
+public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapter.send_expand, Page1_Position, SharedPreferences.OnSharedPreferenceChangeListener {
 
     //최상위 레이아웃
-    ScrollView page1_scrollView;
+    NestedScrollView page1_scrollView;
     ImageView last_station;
     TextView userName;
     TextView startStation, endStation;
@@ -72,14 +108,17 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     EditText editDate;
 
     //뷰페이저 관련
-    boolean isFirst = false;
+    boolean pastTime;
+    boolean forTime;
     ViewPager viewPager;
     PagerAdapter pagerAdapter;
     PageIndicatorView pageIndicatorView;
+    Handler handler = new Handler();
     List<String> arrayLocal= new ArrayList<>();
     int position = 0;
 
     //기차시간표 관련
+    TextView no_data;
     ListView dataList;
     LinearLayout table_title;
     Page1_ListAdapter itemAdapter;
@@ -88,17 +127,14 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     private  String receiveMsg;
     private  String [] data_split;
     private  ArrayList<Api_Item> completeList;              //정제된 리스트값
-    private  ArrayList<Api_Item> header_data;               //정제전 헤더값
-    private  ArrayList<Api_Item> child1_data;               //정제전 차일드 값(경유1
-    private  ArrayList<Api_Item> child2_data;               //정제전 차일드 값(경유2
-    private  ArrayList<Api_Item> child3_data;               //정제전 차일드 값(경유3
     private  String[] arr_line;
     private  String[] arr_all;
     private  String[] _name = new String[238];                                              //txt에서 받은 역이름
     private  String[] _code = new String[238];                                              //txt에서 받은 역코드
     private  String startCode, endCode, trainCode;
-    private  String[] trainCodelist = {"01", "02", "03"}; //, "04", "08", "09", "15"
+    private  String[] trainCodelist = {"01", "02", "03", "04", "08", "09", "15"};
     String date;
+    int isNetworkConnect;
 
     //전체 스케쥴 관련
     Button all_schedule_btn;
@@ -108,8 +144,26 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     ArrayList<RecycleItem> All_items = new ArrayList<RecycleItem>();
     ArrayList<RecycleItem> Day_items = new ArrayList<RecycleItem>();
 
+    //메뉴 관련
+    private Context context;
+    private ImageButton menu_edit;
+    private ImageView userImg;
+    private TextView userText1;
+    private TextView userText2;
+    private RecyclerView recyclerView1;
+    private Switch positionBtn;
+    private Switch alramBtn;
+    Main_RecyclerviewAdapter adapter2;
+    ArrayList<String> name2 = new ArrayList<>();
+    private Toolbar toolbar2;
+    private DrawerLayout drawer;
+    private EndDrawerToggle mDrawerToggle;
+
+    ImageButton logo;
+
     //데이터베이스 관련
     private String db_key;
+    private Menu_DbOpenHelper menu_dbOpenHelper;
     private Train_DbOpenHelper mDbOpenHelper;
     private static ArrayList<Database_Item> db_data = new ArrayList<Database_Item>();
     private String startDate;
@@ -119,6 +173,32 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     //dp 변환
     float d;
 
+    //위치서비스 관련
+    String key;
+    int gotData = -1;
+    List<Integer> getPosition= new ArrayList<>();
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
+    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
+    private MyReceiver myReceiver;
+    private LocationUpdatesService mService = null;
+    private boolean mBound = false;
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LocationUpdatesService.LocalBinder binder = (LocationUpdatesService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mService = null;
+            mBound = false;
+        }
+    };
+
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -126,11 +206,15 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.page1_main_schedule);
+        myReceiver = new MyReceiver();
+        isNetworkConnect  = NetworkStatus.getConnectivityStatus(Page1_Main.this);
+
 
         //픽셀을 dp 로 변환하기 위함
         d = Page1_Main.this.getResources().getDisplayMetrics().density;
 
         //객체연결
+        no_data = (TextView) findViewById(R.id.page1_timeTable_noData);
         editDate = (EditText) findViewById(R.id.page1_date);
         dataList = (ListView) findViewById(R.id.list_item);
         viewPager = (ViewPager) findViewById(R.id.page1_pager);
@@ -140,16 +224,70 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         userName = (TextView)findViewById(R.id.page1_userName);
         startStation = (TextView)findViewById(R.id.page1_startTxt);
         endStation = (TextView)findViewById(R.id.page1_endTxt);
-        page1_scrollView = (ScrollView) findViewById(R.id.page1_scrollView);
         last_station = (ImageView)findViewById(R.id.page1_timeTable_lastimg);
         table_title = (LinearLayout)findViewById(R.id.table_title);
 
         completeList= new ArrayList<Api_Item>();
-        header_data = new ArrayList<Api_Item>();
-        child1_data = new ArrayList<>();
-        child2_data = new ArrayList<>();
-        child3_data = new ArrayList<>();
-        pagerAdapter = new Page1_pagerAdapter(this, this, arrayLocal);
+        pagerAdapter = new Page1_pagerAdapter(this, this, arrayLocal, this);
+
+
+        page1_scrollView = (NestedScrollView)findViewById(R.id.nestScrollView_page1_schedule);
+
+        //객체 연결
+        context = getApplicationContext();
+        toolbar2 = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        userImg = (ImageView)findViewById(R.id.menu_userImage);
+        userText1 = (TextView)findViewById(R.id.menu_text1);
+        userText2 = (TextView)findViewById(R.id.menu_text2);
+        positionBtn = (Switch)findViewById(R.id.menu_postion_btn);
+        recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
+
+        mDrawerToggle = new EndDrawerToggle(this,drawer,toolbar2,R.string.open_drawer,R.string.close_drawer){
+            @Override //드로어가 열렸을때
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+            @Override //드로어가 닫혔을때
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+
+        setSupportActionBar(toolbar2);
+        drawer.addDrawerListener(mDrawerToggle);
+
+        //메뉴 안 내용 구성
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        adapter2 = new Main_RecyclerviewAdapter(name2, context);
+        recyclerView1.setAdapter(adapter2);
+
+        //리사이클러뷰 헤더
+        name2.add("0");
+        name2.add("1");
+        name2.add("2");
+
+        //툴바 타이틀 없애기
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //메인로고
+        logo = (ImageButton) findViewById(R.id.main_logo_page1_schedule);
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Page1.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                //overridePendingTransition(0,0);
+                startActivity(intent);
+
+            }
+        });
+
+        completeList= new ArrayList<Api_Item>();
+        pagerAdapter = new Page1_pagerAdapter(this, this, arrayLocal, this);
 
         //page3_1_1_1_1 에서 일정저장하기 누를때 받아옴
         Intent get = getIntent();
@@ -162,6 +300,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         sdf = new SimpleDateFormat(myFormat, Locale.KOREA);
         forcompare = new SimpleDateFormat(FormatforCompare, Locale.KOREA);
         time = sdf.format(myCalendar.getTime());
+        forcomparedate = forcompare.format((myCalendar.getTime()));  //현재 날짜와 일정 등록한 날짜와 비교를 위함
         editDate.setText(time);
 
 
@@ -189,7 +328,11 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
 
 
         //출발 날짜(디데이 계산)
-        startDate = db_data.get(0).date;
+        if(key != null){
+            startDate = key;
+        } else
+            startDate = db_data.get(0).date;
+
         int myear = Integer.parseInt(startDate.substring(0,4));
         int mmonth = Integer.parseInt(startDate.substring(4,6));
         int mday = Integer.parseInt(startDate.substring(6));
@@ -201,7 +344,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         long dday = start_date.getTimeInMillis()/86400000;
         long count = dday - today;
 
-        if((int)count != 0){
+        if((int)count != 0 && today < dday){
             userName.setText("D-" + String.valueOf((int)count));
         } else {
             userName.setText("지금은 여행 중");
@@ -220,7 +363,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
 
         //출발, 경유, 도착역
         for(int i =0; i < station.size(); i++){
-            String station_split[] = station.get(i).split("-");
+            String station_split[] = station.get(i).split(",");
             if(i < station.size() -1){
                 arrayLocal.add(station_split[0]);
             }
@@ -260,8 +403,6 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         /*뷰페이져 부분**************************************************/
         //어댑터 연결
         settingList(Page1_Main.this);
-        viewPager.setAdapter(pagerAdapter);
-        pageIndicatorView.setCount(arrayLocal.size());
 
 
         //뷰페이저 양쪽 미리보기
@@ -273,14 +414,64 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         viewPager.setPageMargin(margin / 2);
 
 
-        //첫번째 뷰페이저에 들어갈 열차시간표
-        if(!isFirst){
-            Day_schedule_data(stationWithTransfer.get(0));
-            send_Api(stationWithTransfer.get(0));
-            startStation.setText(arrayLocal.get(0));
-            endStation.setText(arrayLocal.get(1));
-            isFirst = true;
+        //현재시간 기준 또는 지도위치 기준 뷰페이져 포커스 이동
+        if(gotData == -1){ forTime = true; }
+        else {forTime = false; }
+        if(forTime) {
+
+            //데이터 초기화
+            Day_items.clear();
+            completeList.clear();
+            getPosition.clear();
+
+            for (int i = 0; i < stationWithTransfer.size(); i++) {
+                //현재 날짜와 같은 일정을 찾고  && 지도에서 값을 받지 못했으면
+                if (forcomparedate.trim().equals(stationWithTransfer.get(i).substring(0, 8).trim())) {
+                    Day_schedule_data(stationWithTransfer.get(i));
+                    if (isNetworkConnect != 3) {
+                        send_Api(stationWithTransfer.get(i));
+                    }
+                    Log.i("여긴가", String.valueOf(i));
+                    err_message();
+                    startStation.setText(arrayLocal.get(i));
+                    endStation.setText(arrayLocal.get(i + 1));
+                    getPosition.add(i);
+
+                    final int finalI = i;
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewPager.setCurrentItem(finalI);
+                        }
+                    }, 500);
+                    break;
+                }
+
+                //해당 일자에 일정이 없을 때 && 지도에서 값을 못 받았을 경우
+                else if (Integer.parseInt(forcomparedate.trim()) < Integer.parseInt(stationWithTransfer.get(i).substring(0, 8).trim()) ) {
+                    final int finalI = i;
+                    Log.i("여긴가", "2");
+                    Day_schedule_data(stationWithTransfer.get(i));
+                    if (isNetworkConnect != 3) {
+                        send_Api(stationWithTransfer.get(i));
+                    }
+                    err_message();
+                    startStation.setText(arrayLocal.get(i));
+                    endStation.setText(arrayLocal.get(i + 1));
+                    getPosition.add(i);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            viewPager.setCurrentItem(finalI);
+                        }
+                    }, 500);
+                    break;
+                }
+            }
         }
+
+        viewPager.setAdapter(pagerAdapter);
+        pageIndicatorView.setCount(arrayLocal.size());
 
 
         //뷰페이저 리스너
@@ -293,15 +484,19 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
 
             @Override
             public void onPageSelected(int position) {
-                // 데이터 요청
+                // 데이터 초기화
                 completeList.clear();
-                header_data.clear();
-                child1_data.clear();
-                child2_data.clear();
-                child3_data.clear();
+                Day_items.clear();
+
                 if (position != arrayLocal.size() - 1){
-                    Day_items.clear();
-                    send_Api(stationWithTransfer.get(position));
+                    //---------------------------여기 추가: api 연결하기 전에 인터넷 연결 검사(이래야 뻑이 안남)
+                    if(isNetworkConnect != 3 && Integer.parseInt(forcomparedate.trim())  <= Integer.parseInt(stationWithTransfer.get(position).substring(0,8).trim()) ){
+                        send_Api(stationWithTransfer.get(position));
+                        pastTime = false;
+                    } else{
+                        pastTime = true;
+                    }
+                    err_message();
                     startStation.setText(arrayLocal.get(position));
                     endStation.setText(arrayLocal.get(position+1));
                     last_station.setVisibility(View.INVISIBLE);
@@ -311,6 +506,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
                 }
                 else {
                     //마지막 역이기 때문에 시간표 리스트 초기화 및 갱신
+                    no_data.setText("");
                     itemAdapter.notifyDataSetChanged();
                     pageIndicatorView.setSelection(position);
                     last_station.setVisibility(View.VISIBLE);
@@ -318,6 +514,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
                 }
             }
         });
+
 
 
 
@@ -329,6 +526,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
                 Intent intent = new Intent(Page1_Main.this, Page1_full_Schedule.class);
                 intent.putExtra("schedule_data", (Serializable)All_items);
                 intent.putExtra("dayNumber", finalDayNumber);
+                intent.putExtra("key", db_key);
                 intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
@@ -336,12 +534,21 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         });
 
 
+        //스케쥴 어댑터 연결
         inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.paeg1_recyclerview, schedule_layout, true);
         RecyclerView schedule_recyclerview = (RecyclerView) findViewById(R.id.page1_scheedule_recyclerview);
+        ImageView no_sche = (ImageView)findViewById(R.id.no_sche);
         schedule_recyclerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new Page1_ScheduleAdapter(Day_items);
         schedule_recyclerview.setAdapter(adapter);
+
+        //스케쥴이 없을 때no_img 띄움
+        if(Day_items.size() < 2){
+            no_sche.setVisibility(View.VISIBLE);
+        } else
+            no_sche.setVisibility(View.INVISIBLE);
+
     }
 
 
@@ -375,6 +582,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
 
     //데이터베이스 받기(앞에서 저장한 값만 바로 보여줌)
     private void getDatabase(String db_key){
+        String db_key2 = db_key.trim();
         Cursor iCursor = mDbOpenHelper.selecteNumber(db_key);
         db_data.clear();
 
@@ -441,7 +649,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
                 try {
                     new Task().execute().get();
                     Log.i("결과값", receiveMsg);
-                    trianjsonParser(receiveMsg, isMiddle);
+                    trianjsonParser(receiveMsg);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -452,161 +660,17 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         }
 
         //출발 시간 정렬
-        Collections.sort(header_data);
+        Collections.sort(completeList);
 
-        //직행이라면
-        if (isMiddle == 0) {
-            completeList = header_data;
-        }
-
-        //환승한다면
-        else {
-            switch (isMiddle) {
-
-                //1회 환승
-                case 1:
-                    Collections.sort(child1_data);
-
-                    //첫번째 기차의 시간표이 기준
-                    for (int i = 0; i < header_data.size(); i++) {
-                        String[] header_time_split = header_data.get(i).getArrTime().split(":");
-                        Log.i("뭔데", "사이즈:" + String.valueOf(header_data.size()) + "/도착시간:" + String.valueOf( header_data.get(i).getArrTime()+"/넘버"+String.valueOf(i) ));
-
-                        //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                        if (Integer.parseInt(header_time_split[0].replaceAll("[^0-9]", "")) < 3)
-                            continue;
-
-                        //도착시간과 환승역의 출발시간을 비교해서 리스트에 넣어줌
-                        for (int p = 0; p < child1_data.size(); p++) {
-                            String[] child1_time_split = child1_data.get(p).getDepTime().split(":");
-                            if (Integer.parseInt(header_time_split[0]) <= Integer.parseInt(child1_time_split[0])
-                                    && Integer.parseInt(header_time_split[1].substring(0,2)) + 10 < Integer.parseInt(child1_time_split[1])) {
-                                 completeList.add(new Api_Item(
-                                        Page1_ListAdapter.CHILD,
-                                        header_data.get(i).getDepTime() + "\n" + child1_data.get(p).getDepTime(),
-                                        header_data.get(i).getArrTime() + "\n" + child1_data.get(p).getArrTime(),
-                                        header_data.get(i).getTrainNumber() + "\n" + child1_data.get(p).getTrainNumber()
-                                ));
-                                break;
-                            }
-                        }
-                    }
-                    break;
-
-
-                //2회 환승
-                case 2:
-                    Collections.sort(child1_data);
-                    Collections.sort(child2_data);
-
-                    //첫번째 기차의 시간표이 기준
-                    for (int i = 0; i < header_data.size(); i++) {
-                        String[] header_time_split = header_data.get(i).getArrTime().split(":");
-
-                        //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                        if (Integer.parseInt(header_time_split[0].replaceAll("[^0-9]", "")) < 3)
-                            continue;
-
-                        //환승(1)
-                        for (int p = 0; p < child1_data.size(); p++) {
-                            String[] child1_Deptime_split = child1_data.get(p).getDepTime().split(":");
-                            String[] child1_Arrtime_split = child1_data.get(p).getArrTime().split(":");
-
-                            //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                            if (Integer.parseInt(child1_Arrtime_split[0].replaceAll("[^0-9]", "")) < 3)
-                                continue;
-                            ;
-
-                            //환승(2)
-                            //도착시간과 환승역의 출발시간을 비교해서 리스트에 넣어줌
-                            for (int t = 0; t < child2_data.size(); t++) {
-                                String[] child2_time_split = child2_data.get(t).getDepTime().split(":");
-
-                                if (Integer.parseInt(header_time_split[0]) <= Integer.parseInt(child1_Deptime_split[0])
-                                        && Integer.parseInt(header_time_split[1].substring(0,2)) + 10 < Integer.parseInt(child1_Deptime_split[1].substring(0,2))
-                                        && Integer.parseInt(child1_Arrtime_split[0]) <= Integer.parseInt(child2_time_split[0])
-                                        && Integer.parseInt(child1_Arrtime_split[1].substring(0,2)) + 10 < Integer.parseInt(child2_time_split[1].substring(0,2))) {
-
-                                    completeList.add(new Api_Item(
-                                            Page1_ListAdapter.CHILD,
-                                            header_data.get(i).getDepTime() + "\n" + child1_data.get(p).getDepTime() + "\n" + child2_data.get(t).getDepTime(),
-                                            header_data.get(i).getArrTime() + "\n" + child1_data.get(p).getArrTime() + "\n" + child2_data.get(t).getArrTime(),
-                                            header_data.get(i).getTrainNumber() + "\n" + child1_data.get(p).getTrainNumber() + "\n" + child2_data.get(t).getTrainNumber()
-                                    ));
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    break;
-
-
-                //3회 환승
-                case 3:
-                    Collections.sort(child1_data);
-                    Collections.sort(child2_data);
-                    Collections.sort(child3_data);
-
-                    //첫번째 기차의 시간표이 기준
-                    for (int i = 0; i < header_data.size(); i++) {
-                        String[] header_time_split = header_data.get(i).getArrTime().split(":");
-
-                        //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                        if (Integer.parseInt(header_time_split[0].replaceAll("[^0-9]", "")) < 3)
-                            continue;
-
-                        //환승(1)
-                        for (int p = 0; p < child1_data.size(); p++) {
-                            String[] child1_Deptime_split = child1_data.get(p).getDepTime().split(":");
-                            String[] child1_Arrtime_split = child1_data.get(p).getArrTime().split(":");
-
-                            //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                            if (Integer.parseInt(child1_Arrtime_split[0].replaceAll("[^0-9]", "")) < 3)
-                                continue;
-
-                            //환승(2)
-                            for (int t = 0; t < child2_data.size(); t++) {
-                                String[] child2_Deptime_split = child2_data.get(t).getDepTime().split(":");
-                                String[] child2_Arrtime_split = child2_data.get(t).getArrTime().split(":");
-
-                                //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                                if (Integer.parseInt(child2_Arrtime_split[0].replaceAll("[^0-9]", "")) < 3)
-                                    continue;
-
-                                //환승(3)
-                                //도착시간과 환승역의 출발시간을 비교해서 리스트에 넣어줌
-                                for (int g = 0; g < child3_data.size(); g++) {
-                                    String[] child3_time_split = child3_data.get(g).getDepTime().split(":");
-
-                                    if (Integer.parseInt(header_time_split[0]) <= Integer.parseInt(child1_Deptime_split[0])
-                                            && Integer.parseInt(header_time_split[1].substring(0,2)) + 10 < Integer.parseInt(child1_Deptime_split[1].substring(0,2))
-                                            && Integer.parseInt(child1_Arrtime_split[0]) <= Integer.parseInt(child2_Deptime_split[0])
-                                            && Integer.parseInt(child1_Arrtime_split[1].substring(0,2)) + 10 < Integer.parseInt(child2_Deptime_split[1].substring(0,2))
-                                            && Integer.parseInt(child2_Arrtime_split[0]) <= Integer.parseInt(child3_time_split[0])
-                                            && Integer.parseInt(child2_Arrtime_split[1].substring(0,2)) + 10 < Integer.parseInt(child3_time_split[1].substring(0,2))) {
-
-                                        completeList.add(new Api_Item(
-                                                Page1_ListAdapter.CHILD,
-                                                header_data.get(i).getDepTime() + "\n" + child1_data.get(p).getDepTime() + "\n" + child2_data.get(t).getDepTime() + "\n" + child3_data.get(g).getDepTime(),
-                                                header_data.get(i).getArrTime() + "\n" + child1_data.get(p).getArrTime() + "\n" + child2_data.get(t).getArrTime() + "\n" + child3_data.get(g).getArrTime(),
-                                                header_data.get(i).getTrainNumber() + "\n" + child1_data.get(p).getTrainNumber() + "\n" + child2_data.get(t).getTrainNumber() + "\n" + child3_data.get(g).getTrainNumber()
-                                        ));
-                                        break;
-                                    }
-                                }
-
-
-                            }
-                        }
-                    }
-                    break;
-            }
-        }
         itemAdapter = new Page1_ListAdapter(this, completeList);
         dataList.setAdapter(itemAdapter);
         itemAdapter.notifyDataSetChanged();
         scrollList();
+
+
+
     }
+
 
 
     //앞 액티비티에서 선택된 역과 같은 역을 찾는다.
@@ -630,9 +694,10 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         protected String doInBackground(String... strings) {
             URL url = null;
             try{
+                //Z2ABtX1mu7Z%2FVsuir30gFJ%2BRDlNdWq8ujTgba2ZIu%2BRRiT65hy%2BOVzjmZxFXW04kGY08%2FgNrX7w%2BCexXYOz6Jg%3D%3D
                 url = new URL("http://openapi.tago.go.kr/openapi/service/TrainInfoService/" +
-                        "getStrtpntAlocFndTrainInfo?serviceKey=7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D&" +
-                        "numOfRows=2" +
+                        "getStrtpntAlocFndTrainInfo?serviceKey=7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
+                        "numOfRows=30" +
                         "&pageNo=1&" +
                         "depPlaceId=" + startCode +
                         "&arrPlaceId=" + endCode +
@@ -665,7 +730,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
 
 
     //api 값을 정제
-    public String[] trianjsonParser(String jsonString, int isMiddle){
+    public String[] trianjsonParser(String jsonString){
         String arrplacename = null;
         String arrplandtime = null;
         String depplacename = null;
@@ -692,40 +757,49 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
                 String depTime = depplandtime.substring(8, 12);
                 String arrTime = arrplandtime.substring(8, 12);
 
-                switch (isMiddle) {
-                    case 0:
-                        header_data.add(new Api_Item(Page1_ListAdapter.HEADER, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2),  traingradename));
-                        Log.i("여기서부터..?11", arrTime);
-                        break;
-                    case 1:
-                        child1_data.add(new Api_Item(Page1_ListAdapter.CHILD, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2),  traingradename));
-                        Log.i("여기서부터..?22", arrTime);
-                        break;
-                    case 2:
-                        child2_data.add(new Api_Item(Page1_ListAdapter.CHILD, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2),  traingradename));
-                        break;
-                    case 3:
-                        child3_data.add(new Api_Item(Page1_ListAdapter.CHILD, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2),  traingradename));
-                        break;
-                    default:
-                        break;
-                }
+                completeList.add(new Api_Item(Page1_ListAdapter.HEADER, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2),  traingradename));
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return  arraysum;
     }
 
+    //오류메시지
+    private void err_message(){
+        if(completeList.size() < 1){
+
+            //(1)인터넷 연결이 안되어있을 때
+            if(isNetworkConnect == 3){
+                no_data.setText(R.string.train_err_internet);
+            }
+
+            //(2)지난 일정은 시간표 제공 안함
+            else if(pastTime){
+                no_data.setText(R.string.train_err_time);
+            }
+
+            //(3)API연결 오류(공공데이터포털 오류)
+            else if( receiveMsg.contains("LIMITED")){
+                no_data.setText(R.string.train_err_api);
+            }
+
+            //(4)열차 연결이 없는 경우
+            else
+                no_data.setText(R.string.train_err_course);
+        }
+        else {
+            no_data.setText("");
+        }
+    }
 
 
+    //****************인터페이스****************************************
     //혜택확인 누르면 레이아웃 펼쳐지기 위한 인터페이스
     @Override
     public void send(boolean isExpand) {
         if (!isExpand){
-            viewPager.getLayoutParams().height = (int)(350*d);
+            viewPager.getLayoutParams().height = (int)(280*d);
             viewPager.requestLayout();
         } else {
             viewPager.getLayoutParams().height = (int)(200*d);
@@ -733,15 +807,46 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         }
     }
 
-
-   //화면 꺼지면
+    //포커스 되는 도시의 위치를 전달하기 위한 인터페이스
     @Override
-    protected void onResume() {
-        super.onResume();
-        scrollList();
+    public int gotPosition() {
+        return getPosition.get(0);
     }
 
 
+    //여행 시작 버튼을 누르면 ( page1_viewpager와 연결된 인터페이스)
+    @Override
+    public void onClick_startBtn() {
+
+        if(!checkLocationServicesStatus()) {
+            showDialogForLocationServiceSetting();
+        } else if (!checkPermissions()) {
+            requestPermissions();
+            Toast.makeText(getApplicationContext(), "한번 더 눌러주세요.", Toast.LENGTH_LONG).show();
+        } else
+        {
+            //포그라운드로 도시,날짜,데베키를 보냄
+            mService.getData(arrayLocal);
+            mService.getDate(startDate);
+            mService.sendKey(db_key);
+            mService.requestLocationUpdates();
+        }
+    }
+
+    //뒤로가기버튼 누르면 스케쥴 메인으로 이동
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(Page1_Main.this, Page3_Main.class);
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+    }
+
+
+
+
+    //****************Arraylist 데이터 구성****************************************
     //기차시간표 아이템 변수 선언
     public static class Api_Item implements Comparable<Api_Item>{
         int type;
@@ -821,6 +926,34 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         String contentName;
         String contentId;
 
+        public int getType() {
+            return type;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public String getDaypass() {
+            return daypass;
+        }
+
+        public String getTrain_time() {
+            return train_time;
+        }
+
+        public String getStation() {
+            return station;
+        }
+
+        public String getContentName() {
+            return contentName;
+        }
+
+        public String getContentId() {
+            return contentId;
+        }
+
         public RecycleItem(int type, String date, String daypass, String train_time, String station, String contentName, String contentId) {
             this.type = type;
             this.date = date;
@@ -841,6 +974,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
             contentId = in.readString();
         }
 
+
         public static final Creator<RecycleItem> CREATOR = new Creator<RecycleItem>() {
             @Override
             public RecycleItem createFromParcel(Parcel in) {
@@ -854,9 +988,7 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
         };
 
         @Override
-        public int describeContents() {
-            return 0;
-        }
+        public int describeContents() { return 0; }
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
@@ -869,6 +1001,219 @@ public class Page1_Main extends AppCompatActivity implements  Page1_pagerAdapter
             dest.writeString(contentId);
         }
     }
+
+
+    /**위치서비스 관련**********************************************************************************************************************************/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+        bindService(new Intent(this, LocationUpdatesService.class), mServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scrollList();
+        LocalBroadcastManager.getInstance(this).registerReceiver(myReceiver, new IntentFilter(LocationUpdatesService.ACTION_BROADCAST));
+
+        //포그라운드에서 보낸 값
+        Intent intent = getIntent();
+        gotData = intent.getIntExtra("smsMsg", -1);
+        startDate = intent.getStringExtra("date");
+        db_key = intent.getStringExtra("key");
+
+        if(gotData!=-1){
+            forTime = false;
+            //데이터 초기화
+            Day_items.clear();
+            completeList.clear();
+            getPosition.clear();
+
+            Day_schedule_data(stationWithTransfer.get(gotData));
+            if (isNetworkConnect != 3) {
+                send_Api(stationWithTransfer.get(gotData));
+            }
+            err_message();
+            startStation.setText(arrayLocal.get(gotData));
+            endStation.setText(arrayLocal.get(gotData + 1));
+            getPosition.add(gotData);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    viewPager.setCurrentItem(gotData);
+                }
+            }, 400);
+        }
+    }
+
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(myReceiver);
+        super.onPause();
+    }
+
+
+    @Override
+    protected void onStop() {
+        if (mBound) {
+            unbindService(mServiceConnection);
+            mBound = false;
+        }
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        super.onStop();
+    }
+
+
+    //위치 서비스 연결되어있는지
+    public boolean checkLocationServicesStatus() {
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+
+    //위치 서비스 비활성화시
+    private void showDialogForLocationServiceSetting() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Page1_Main.this);
+        builder.setTitle("현재 위치 서비스 비활성화");
+        builder.setMessage("앱을 사용하기 위해서는 위치 서비스가 필요합니다.");
+        builder.setCancelable(true);
+        builder.setPositiveButton("위치 설정", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent callGPSSettingIntent
+                        = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE);
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        builder.create().show();
+    }
+
+
+    //위치 권한 받았는지 확인
+    private boolean checkPermissions() {
+        return  PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+    }
+
+
+    //위치 권한 요청
+    private void requestPermissions() {
+        boolean shouldProvideRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+        // Provide an additional rationale to the user. This would happen if the user denied the
+        // request previously, but didn't check the "Don't ask again" checkbox.
+        if (shouldProvideRationale) {
+            Snackbar.make(
+                    findViewById(R.id.nestScrollView_page1_schedule),
+                    R.string.permission_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.ok, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions(Page1_Main.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    REQUEST_PERMISSIONS_REQUEST_CODE);
+                        }
+                    })
+                    .show();
+        } else {
+            ActivityCompat.requestPermissions(Page1_Main.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS_REQUEST_CODE);
+        }
+    }
+
+
+    //위치 연결
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
+            if (grantResults.length <= 0) {
+            } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted.
+                // mService.requestLocationUpdates();
+            } else {
+                // Permission denied.
+                //  setButtonsState(false);
+                Snackbar.make(
+                        findViewById(R.id.nestScrollView_page1_schedule),
+                        R.string.permission_denied_explanation,
+                        Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.settings, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Build intent that displays the App settings screen.
+                                Intent intent = new Intent();
+                                intent.setAction(
+                                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                Uri uri = Uri.fromParts("package",
+                                        BuildConfig.APPLICATION_ID, null);
+                                intent.setData(uri);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                Log.i("어디로 가는 거지", "뭘 누른거지");
+                                startActivity(intent);
+                            }
+                        })
+                        .show();
+            }
+        }
+    }
+
+
+    //포그라운드와 연결 ( 핸드폰 껐을 때도 돌아가도록 하는 부분)
+    private class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Location location = intent.getParcelableExtra(LocationUpdatesService.EXTRA_LOCATION);
+            if (location != null) {
+                double latitude = Location_Utils.getLatitude(location);
+                double longitude = Location_Utils.getLongitude(location);
+
+                String address = getCurrentAddress(latitude, longitude);
+                Toast.makeText(getApplicationContext(), address, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) { }
+
+
+    //GPS를 주소로 변환
+    public String getCurrentAddress( double latitude, double longitude) {
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 7);
+        } catch (IOException ioException) {
+
+            //네트워크 문제
+            Toast.makeText(this, "네트워크를 연결해주세요.", Toast.LENGTH_LONG).show();
+            return "지오코더 서비스 사용불가";
+
+        } catch (IllegalArgumentException illegalArgumentException) {
+            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            return "잘못된 GPS 좌표";
+        }
+
+        if (addresses == null || addresses.size() == 0) {
+            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            return "주소 미발견";
+        }
+
+        Address address = addresses.get(0);
+        return address.getAddressLine(0).toString()+"\n";
+    }
+
 
 }
 

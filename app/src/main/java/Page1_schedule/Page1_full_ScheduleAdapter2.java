@@ -70,8 +70,9 @@ public class Page1_full_ScheduleAdapter2 extends RecyclerView.Adapter<RecyclerVi
 
         else if (itemViewType == CHILD) {
             final ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            itemViewHolder.mCourseText.setText(item.station);
-            itemViewHolder.mTimeText.setText(item.train_time);
+            String station_split[] = item.station.split(",");
+            itemViewHolder.mTimeText.setText(station_split[0] + " - " + station_split[1]);
+            itemViewHolder.mCourseText.setText(item.train_time);
         }
 
         else {

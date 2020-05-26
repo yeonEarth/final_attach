@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,8 +51,14 @@ public class Page1_full_ScheduleAdapter1 extends  RecyclerView.Adapter<Page1_ful
         for(int i =0; i < All_items.size(); i++){
             if(All_items.get(i).date.equals(String.valueOf(date+position))){
                 Day_items.add(All_items.get(i));
-                Log.i("잘넘어오고 있냐", String.valueOf(date+position) + String.valueOf(position) ) ;
             }
+        }
+
+        //데이터가 없으면
+        if(Day_items.size() < 2){
+            viewHolder.no_sche.setVisibility(View.VISIBLE);
+        } else{
+            viewHolder.no_sche.setVisibility(View.INVISIBLE);
         }
 
         //리사이클러뷰 넣는 부분
@@ -67,10 +74,12 @@ public class Page1_full_ScheduleAdapter1 extends  RecyclerView.Adapter<Page1_ful
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private RecyclerView recyclerView;
+        private ImageView no_sche;
 
         public ViewHolder(View itemView) {
             super(itemView);
             recyclerView = itemView.findViewById(R.id.page1_full_schedule_recyclerview2);
+            no_sche = itemView.findViewById(R.id.no_sche);
         }
     }
 }

@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -55,14 +56,12 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
     public static final int CITY =2;
 
     //바텀시트 관련(맨 아래 함수)
+    int isNetworkConnect;
+    boolean isApiError = false;
     FragmentManager fragmentManager;
-    String receiveMsg;
+    String receiveMsg = "";
     String [] data_split;
     ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item> completeList;              //정제된 리스트값
-    ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item> header_data;               //정제전 헤더값
-    ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item> child1_data;               //정제전 차일드 값(경유1
-    ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item> child2_data;               //정제전 차일드 값(경유2
-    ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item> child3_data;               //정제전 차일드 값(경유3
     String[] arr_line;
     String[] arr_all;
     String[] _name = new String[238];                                              //txt에서 받은 역이름
@@ -73,9 +72,10 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
     //부모 액티비티와 연결
-    Page3_1_1_1_trainAdapter(ArrayList<Page3_1_1_1_Main.RecycleItem> list, FragmentManager supportFragmentManager) {
+    Page3_1_1_1_trainAdapter(ArrayList<Page3_1_1_1_Main.RecycleItem> list, FragmentManager supportFragmentManager, int isNetworkConnect) {
         items = list;
         this.fragmentManager = supportFragmentManager;
+        this.isNetworkConnect = isNetworkConnect;
     }
 
 
@@ -147,15 +147,50 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
                     }
                 }
             }
-            ;
-            itemViewHolder.mCourseText.setText(item.text);
+
+            //도시1-도시2 텍스트 연결 (환승)에 따라 색상,크기 변화 줌
+            String text_split[] = item.text.split(",");
+            if(text_split[0].contains("환승")){
+                itemViewHolder.mCourseText1.setTextSize(11);
+                itemViewHolder.mCourseText1.setTextColor(Color.parseColor("#C0C0C0"));
+            }else{
+                itemViewHolder.mCourseText1.setTextSize(16);
+                itemViewHolder.mCourseText1.setTextColor(Color.parseColor("#000000"));
+            }
+            if(text_split[1].contains("환승")){
+                itemViewHolder.mCourseText2.setTextSize(11);
+                itemViewHolder.mCourseText2.setTextColor(Color.parseColor("#C0C0C0"));
+            }else{
+                itemViewHolder.mCourseText2.setTextSize(16);
+                itemViewHolder.mCourseText2.setTextColor(Color.parseColor("#000000"));
+            }
+            itemViewHolder.mCourseText1.setText(text_split[0]);
+            itemViewHolder.mCourseText2.setText(text_split[1]);
             itemViewHolder.mShadowText.setText(item.text_shadow);
+            itemViewHolder.mTimeText.setText(item.train_time);
+            if(item.train_time.length() > 0){
+                itemViewHolder.mTimeText.setTextColor(Color.parseColor("#000000"));
+                itemViewHolder.mTimeText.setTextSize(16f);
+                itemViewHolder.search_img.setVisibility(View.INVISIBLE);
+            } else
+                itemViewHolder.search_img.setVisibility(View.VISIBLE);
         }
+
 
         //itemViewType == CITY
         else {
             CityViewHolder cityViewHolder = (CityViewHolder) holder;
             cityViewHolder.city_text.setText(item.text);
+
+            //삭제누르면
+            cityViewHolder.delete_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    items.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, items.size());
+                }
+            });
         }
     }
 
@@ -176,6 +211,7 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
             notifyItemChanged(fromPos);
             notifyItemChanged(toPos);
         }
+
     }
 
     public int getItemViewType(int position) {
@@ -191,10 +227,10 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
 
     //헤더 xml 연결
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        public TextView header_title;
-        public TextView move_btn;
-        public LinearLayout list_header;
-        public ImageView move_img;
+        private TextView header_title;
+        private TextView move_btn;
+        private LinearLayout list_header;
+        private ImageView move_img;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
@@ -208,26 +244,30 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
 
     //촤일드 xml 연결
     public class ItemViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTimeText, mCourseText, mShadowText; // 시간, 경로
-        public ImageView search_img;
+        private TextView mTimeText, mCourseText1, mCourseText2, mShadowText; // 시간, 경로
+        private ImageView search_img;
         LinearLayout item_touch;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            mCourseText = (TextView) itemView.findViewById(R.id.course_Page3_1_1);
+            mCourseText1 = (TextView) itemView.findViewById(R.id.course1_Page3_1_1);
+            mCourseText2 = (TextView) itemView.findViewById(R.id.course2_Page3_1_1);
             mShadowText = (TextView) itemView.findViewById(R.id.searchTime_Page3_1_1_shadow);
             mTimeText = (TextView) itemView.findViewById(R.id.searchTime_Page3_1_1);
             search_img = (ImageView) itemView.findViewById(R.id.search_img);
             item_touch = (LinearLayout) itemView.findViewById(R.id.item_touch);
 
 
-            //기차 시간표 부분
+            //기차 시간표 부분------------------------------------------------여기 아래 수정함
+            //page3_1_1_1_bottomSheet_Adapter 자바 파일도 수정함
+            //page3_1_1_1_apisheet.xml 에 textview 추가 하시길
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //현재 위치를 받아오기 위함
                     final Context context = v.getContext();
                     final int pos = getAdapterPosition() ;
+                    final Page3_1_1_1_Main.RecycleItem item = items.get(pos);
 
                     //바텀시트에 전달할 값
                     ArrayList<String> data = new ArrayList<>();
@@ -243,28 +283,41 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
 
                     //바텀시트 구성
                     ListView listView = view.findViewById(R.id.api_list);
+                    TextView error_msg = view.findViewById(R.id.page3_1_1_1_error);
                     completeList= new ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item>();
-                    header_data = new ArrayList<Page3_1_1_1_bottomSheet_Adapter.Api_Item>();
-                    child1_data = new ArrayList<>();
-                    child2_data = new ArrayList<>();
-                    child3_data = new ArrayList<>();
 
                     //리스트 초기화
                     completeList.clear();
-                    header_data.clear();
-                    child1_data.clear();
-                    child2_data.clear();
-                    child3_data.clear();
                     settingList(context);
-                    send(data, date);
+
+                    //인터넷 연결이 되어있을 때만 api 돌린 ( 아니면 오류남)-
+                    if( isNetworkConnect != 3){
+                        send(data, date);
+                    }
+
+                    //기차시간표 오류 메시지
+                    //(1)인터넷 연결 안되어있을 때 / (2)API 연결 오류 / (3)연결되는 노선이 없음
+                    if(completeList.size() < 1){
+                        if(isNetworkConnect == 3){
+                            error_msg.setText(R.string.train_err_internet);
+                        }
+                        else if(isApiError ){
+                            error_msg.setText(R.string.train_err_api);
+                        }
+                        else {
+                            error_msg.setText(R.string.train_err_course);
+                        }
+                        error_msg.setVisibility(View.VISIBLE);
+                    } else
+                        error_msg.setVisibility(View.INVISIBLE);
 
 
                     //api 트래픽 다 써서 임의값 넣어놓음
-                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "00:04"+"00:35","00:24"+"02:07", " ", "무궁화"+"ITX-새마을"));
-                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "09:48"+"10:46","10:08"+"12:07", " ", "무궁화"+"ITX-새마을"));
-                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "10:44"+"11:19","11:07"+"12:33", " ", "무궁화"+"ITX-새마을"));
-                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "16:41"+"17:22","17:01"+"18:57", " ", "새마을"+"무궁화"));
-                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "17:46"+"18:27","18:08"+"20:01", " ", "무궁화"+"무궁화"));
+//                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "00:04"+"00:35","00:24"+"02:07", " ", "무궁화"+"ITX-새마을"));
+//                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "09:48"+"10:46","10:08"+"12:07", " ", "무궁화"+"ITX-새마을"));
+//                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "10:44"+"11:19","11:07"+"12:33", " ", "무궁화"+"ITX-새마을"));
+//                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "16:41"+"17:22","17:01"+"18:57", " ", "새마을"+"무궁화"));
+//                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, "17:46"+"18:27","18:08"+"20:01", " ", "무궁화"+"무궁화"));
 
                     //바텀시트 어댑터 연결
                     Page3_1_1_1_bottomSheet_Adapter adapter = new Page3_1_1_1_bottomSheet_Adapter(completeList, context);
@@ -277,17 +330,14 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
                             int action = event.getAction();
                             switch (action) {
                                 case MotionEvent.ACTION_DOWN:
-                                    // Disallow NestedScrollView to intercept touch events.
                                     v.getParent().requestDisallowInterceptTouchEvent(true);
                                     break;
 
                                 case MotionEvent.ACTION_UP:
-                                    // Allow NestedScrollView to intercept touch events.
                                     v.getParent().requestDisallowInterceptTouchEvent(false);
                                     break;
                             }
 
-                            // Handle ListView touch events.
                             v.onTouchEvent(event);
                             return true;
                         }
@@ -302,6 +352,7 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
                             mTimeText.setText(startTIme[0]+" - "+endTime[endTime.length-1]);
                             mTimeText.setTextColor(Color.parseColor("#000000"));
                             mTimeText.setTextSize(16f);
+                            items.set(pos, new Page3_1_1_1_Main.RecycleItem(Page3_1_1_1_trainAdapter.CHILD,  item.text_shadow, item.text, item.date,startTIme[0]+" - "+endTime[endTime.length-1] , "",""));
                             search_img.setVisibility(View.INVISIBLE);
                             dialog.dismiss();
                         }
@@ -318,10 +369,12 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
     //시티 xml 연결
     public class CityViewHolder extends RecyclerView.ViewHolder {
         public TextView city_text;
+        private Button delete_btn;
 
         public CityViewHolder(View itemView) {
             super(itemView);
-            city_text = (TextView) itemView.findViewById(R.id.page3_1_1_1_cityText);
+            city_text =  itemView.findViewById(R.id.page3_1_1_1_cityText);
+            delete_btn = itemView.findViewById(R.id.page3_1_1_1_tourDelete);
         }
     }
 
@@ -329,9 +382,9 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
     /*
-    *바텀시트 관련 함수
-    *****************************************************************************************
-    */
+     *바텀시트 관련 함수
+     *****************************************************************************************
+     */
 
     //txt 돌려 역 비교할 배열 만들기(이름 지역코드 동네코드)<-로 구성
     private void settingList(Context context){
@@ -383,8 +436,8 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
             URL url = null;
             try{
                 url = new URL("http://openapi.tago.go.kr/openapi/service/TrainInfoService/" +
-                        "getStrtpntAlocFndTrainInfo?serviceKey=7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D&" +
-                        "numOfRows=10" +
+                        "getStrtpntAlocFndTrainInfo?serviceKey=7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
+                        "&numOfRows=30" +
                         "&pageNo=1&" +
                         "depPlaceId=" + startCode +
                         "&arrPlaceId=" + endCode +
@@ -417,7 +470,7 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
 
 
     //api 값을 정제
-    public String[] trianjsonParser(String jsonString, int isMiddle){
+    public String[] trianjsonParser(String jsonString){
         String arrplacename = null;
         String arrplandtime = null;
         String depplacename = null;
@@ -444,34 +497,10 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
                 String depTime = depplandtime.substring(8, 12);
                 String arrTime = arrplandtime.substring(8, 12);
 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HHmm", Locale.KOREA);
-                Date dep = simpleDateFormat.parse(depTime);
-                Date arr = simpleDateFormat.parse(arrTime);
-                long time = (arr.getTime() - dep.getTime()) / 60000;
-
-
-                switch (isMiddle) {
-                    case 0:
-                        header_data.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2), "["+depplacename+"]", traingradename));
-                        break;
-                    case 1:
-                        child1_data.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.CHILD, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2), "["+depplacename+"]", traingradename));
-                        break;
-                    case 2:
-                        child2_data.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.CHILD, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2), "["+depplacename+"]", traingradename));
-                        break;
-                    case 3:
-                        child3_data.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.CHILD, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2), "["+depplacename+"]", traingradename));
-                        break;
-                    default:
-                        break;
-                }
+                completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(Page3_1_1_1_bottomSheet_Adapter.HEADER, depTime.substring(0,2)+":"+depTime.substring(2), arrTime.substring(0,2)+":"+arrTime.substring(2), "["+depplacename+"]", traingradename));
             }
 
-
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
         return  arraysum;
@@ -483,185 +512,30 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
     public void send(ArrayList<String> data, String date) {
         data_split = data.get(0).split(",");
         this.date = date;
-        int isMiddle = 0;
 
-        for (int p = 0; p < data_split.length - 1; p++) {
+        compareStation(data_split[0], data_split[1]);
 
-            if (p != 0)
-                isMiddle++;
-
-            compareStation(data_split[p], data_split[p + 1]);
-
-            //열차 종류별 api 검색(1)
-            for (int i = 0; i < trainCodelist.length; i++) {
-                trainCode = trainCodelist[i];
-                try {
-                    new Task().execute().get();
-                    trianjsonParser(receiveMsg, isMiddle);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+        //열차 종류별 api 검색(1)
+        for (int i = 0; i < trainCodelist.length; i++) {
+            trainCode = trainCodelist[i];
+            try {
+                new Task().execute().get();
+                trianjsonParser(receiveMsg);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
-
         }
 
         //출발 시간 정렬
-        Collections.sort(header_data);
+        Collections.sort(completeList);
 
-        //직행이라면
-        if (isMiddle == 0) {
-            completeList = header_data;
-        }
-
-        //환승한다면
-        else {
-            switch (isMiddle) {
-
-                //1회 환승
-                case 1:
-                    Collections.sort(child1_data);
-
-                    //첫번째 기차의 시간표이 기준
-                    for (int i = 0; i < header_data.size(); i++) {
-                        String[] header_time_split = header_data.get(i).getArrTime().split(":");
-
-                        //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                        if (Integer.parseInt(header_time_split[0].replaceAll("[^0-9]", "")) < 3)
-                            continue;
-
-                        //도착시간과 환승역의 출발시간을 비교해서 리스트에 넣어줌
-                        for (int p = 0; p < child1_data.size(); p++) {
-                            String[] child1_time_split = child1_data.get(p).getDepTime().split(":");
-                            if (Integer.parseInt(header_time_split[0]) <= Integer.parseInt(child1_time_split[0])
-                                    && Integer.parseInt(header_time_split[1]) + 10 < Integer.parseInt(child1_time_split[1])) {
-                                completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(
-                                        Page3_1_1_1_bottomSheet_Adapter.CHILD,
-                                        header_data.get(i).getDepTime() + "\n" + child1_data.get(p).getDepTime(),
-                                        header_data.get(i).getArrTime() + "\n" + child1_data.get(p).getArrTime(),
-                                        header_data.get(i).getSpendTime() + "\n" + child1_data.get(p).getSpendTime(),
-                                        header_data.get(i).getTrainNumber() + "\n" + child1_data.get(p).getTrainNumber()
-                                ));
-                                break;
-                            }
-                        }
-                    }
-                    break;
-
-
-                //2회 환승
-                case 2:
-                    Collections.sort(child1_data);
-                    Collections.sort(child2_data);
-
-                    //첫번째 기차의 시간표이 기준
-                    for (int i = 0; i < header_data.size(); i++) {
-                        String[] header_time_split = header_data.get(i).getArrTime().split(":");
-
-                        //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                        if (Integer.parseInt(header_time_split[0].replaceAll("[^0-9]", "")) < 3)
-                            continue;
-
-                        //환승(1)
-                        for (int p = 0; p < child1_data.size(); p++) {
-                            String[] child1_Deptime_split = child1_data.get(p).getDepTime().split(":");
-                            String[] child1_Arrtime_split = child1_data.get(p).getArrTime().split(":");
-
-                            //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                            if (Integer.parseInt(child1_Arrtime_split[0].replaceAll("[^0-9]", "")) < 3)
-                                continue;
-                            ;
-
-                            //환승(2)
-                            //도착시간과 환승역의 출발시간을 비교해서 리스트에 넣어줌
-                            for (int t = 0; t < child2_data.size(); t++) {
-                                String[] child2_time_split = child2_data.get(t).getDepTime().split(":");
-
-                                if (Integer.parseInt(header_time_split[0]) <= Integer.parseInt(child1_Deptime_split[0])
-                                        && Integer.parseInt(header_time_split[1]) + 10 < Integer.parseInt(child1_Deptime_split[1])
-                                        && Integer.parseInt(child1_Arrtime_split[0]) <= Integer.parseInt(child2_time_split[0])
-                                        && Integer.parseInt(child1_Arrtime_split[1]) + 10 < Integer.parseInt(child2_time_split[1])) {
-
-                                    completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(
-                                            Page3_1_1_1_bottomSheet_Adapter.CHILD,
-                                            header_data.get(i).getDepTime() + "\n" + child1_data.get(p).getDepTime() + "\n" + child2_data.get(t).getDepTime(),
-                                            header_data.get(i).getArrTime() + "\n" + child1_data.get(p).getArrTime() + "\n" + child2_data.get(t).getArrTime(),
-                                            header_data.get(i).getSpendTime() + "\n" + child1_data.get(p).getSpendTime() + "\n" + child2_data.get(t).getSpendTime(),
-                                            header_data.get(i).getTrainNumber() + "\n" + child1_data.get(p).getTrainNumber() + "\n" + child2_data.get(t).getTrainNumber()
-                                    ));
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    break;
-
-
-                //3회 환승
-                case 3:
-                    Collections.sort(child1_data);
-                    Collections.sort(child2_data);
-                    Collections.sort(child3_data);
-
-                    //첫번째 기차의 시간표이 기준
-                    for (int i = 0; i < header_data.size(); i++) {
-                        String[] header_time_split = header_data.get(i).getArrTime().split(":");
-
-                        //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                        if (Integer.parseInt(header_time_split[0].replaceAll("[^0-9]", "")) < 3)
-                            continue;
-
-                        //환승(1)
-                        for (int p = 0; p < child1_data.size(); p++) {
-                            String[] child1_Deptime_split = child1_data.get(p).getDepTime().split(":");
-                            String[] child1_Arrtime_split = child1_data.get(p).getArrTime().split(":");
-
-                            //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                            if (Integer.parseInt(child1_Arrtime_split[0].replaceAll("[^0-9]", "")) < 3)
-                                continue;
-
-                            //환승(2)
-                            for (int t = 0; t < child2_data.size(); t++) {
-                                String[] child2_Deptime_split = child2_data.get(t).getDepTime().split(":");
-                                String[] child2_Arrtime_split = child2_data.get(t).getArrTime().split(":");
-
-                                //도착시간이 자정을 넘기면 스케줄에 포함하지 않음
-                                if (Integer.parseInt(child2_Arrtime_split[0].replaceAll("[^0-9]", "")) < 3)
-                                    continue;
-
-                                //환승(3)
-                                //도착시간과 환승역의 출발시간을 비교해서 리스트에 넣어줌
-                                for (int g = 0; g < child3_data.size(); g++) {
-                                    String[] child3_time_split = child3_data.get(g).getDepTime().split(":");
-
-                                    if (Integer.parseInt(header_time_split[0]) <= Integer.parseInt(child1_Deptime_split[0])
-                                            && Integer.parseInt(header_time_split[1]) + 10 < Integer.parseInt(child1_Deptime_split[1])
-                                            && Integer.parseInt(child1_Arrtime_split[0]) <= Integer.parseInt(child2_Deptime_split[0])
-                                            && Integer.parseInt(child1_Arrtime_split[1]) + 10 < Integer.parseInt(child2_Deptime_split[1])
-                                            && Integer.parseInt(child2_Arrtime_split[0]) <= Integer.parseInt(child3_time_split[0])
-                                            && Integer.parseInt(child2_Arrtime_split[1]) + 10 < Integer.parseInt(child3_time_split[1])) {
-
-                                        completeList.add(new Page3_1_1_1_bottomSheet_Adapter.Api_Item(
-                                                Page3_1_1_1_bottomSheet_Adapter.CHILD,
-                                                header_data.get(i).getDepTime() + "\n" + child1_data.get(p).getDepTime() + "\n" + child2_data.get(t).getDepTime() + "\n" + child3_data.get(g).getDepTime(),
-                                                header_data.get(i).getArrTime() + "\n" + child1_data.get(p).getArrTime() + "\n" + child2_data.get(t).getArrTime() + "\n" + child3_data.get(g).getArrTime(),
-                                                header_data.get(i).getSpendTime() + "\n" + child1_data.get(p).getSpendTime() + "\n" + child2_data.get(t).getSpendTime() + "\n" + child3_data.get(g).getSpendTime(),
-                                                header_data.get(i).getTrainNumber() + "\n" + child1_data.get(p).getTrainNumber() + "\n" + child2_data.get(t).getTrainNumber() + "\n" + child3_data.get(g).getTrainNumber()
-                                        ));
-                                        break;
-                                    }
-                                }
-
-
-                            }
-                        }
-                    }
-                    break;
-            }
+        //api 오류가 나면 true
+        if(receiveMsg.contains("LIMITED") || receiveMsg.contains("SERVICE"))  {
+            isApiError = true;
         }
     }
-
 
 
 

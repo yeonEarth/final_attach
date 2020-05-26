@@ -35,7 +35,7 @@ public class Page2_1_1_CardViewAdapter extends RecyclerView.Adapter<Page2_1_1_Ca
     private String[] stay = new String[5];  // 하트의 클릭 여부
     private List<Recycler_item> items;  //리사이클러뷰 안에 들어갈 값 저장
     OnItemClick mCallback;
-    String cityName;
+    String cityName, click;
 
     Context context;
 
@@ -67,6 +67,18 @@ public class Page2_1_1_CardViewAdapter extends RecyclerView.Adapter<Page2_1_1_Ca
         holder.title.setText(item.getTitle());
         holder.type.setText(item.getType());
 
+        click = mCallback.isClick(item.getContentviewID());
+        if(click ==null){
+            click = "";
+        }
+        if (click.equals(item.getContentviewID())) {
+            holder.heart.setBackgroundResource(R.drawable.ic_heart_off);
+            stay[position] = "ON";
+        } else {
+            holder.heart.setBackgroundResource(R.drawable.ic_icon_addmy);
+            stay[position] = null;
+        }
+
         //하트누르면 내부 데이터에 저장
         holder.heart.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -74,7 +86,7 @@ public class Page2_1_1_CardViewAdapter extends RecyclerView.Adapter<Page2_1_1_Ca
             public void onClick(View v) {
                 if(stay[position]==null){
                     holder.heart.setBackgroundResource(R.drawable.ic_heart_off);
-                    mCallback.make_db(item.getContentviewID(), item.getTitle(),cityName);   //countId랑 title을 db에 넣으려고 함( make_db라는 인터페이스 이용)
+                    mCallback.make_db(item.getContentviewID(), item.getTitle(),cityName, item.getType(), item.getImage(), "1");   //countId랑 title을 db에 넣으려고 함( make_db라는 인터페이스 이용)
                     mCallback.make_dialog();                                       //db에 잘 넣으면 띄우는 다이얼로그(위와 마찬가지로 인터페이스 이용
                     stay[position] = "ON";
                      Toast.makeText(context,"관심관광지를 눌렀습니다",Toast.LENGTH_SHORT).show();
@@ -94,9 +106,11 @@ public class Page2_1_1_CardViewAdapter extends RecyclerView.Adapter<Page2_1_1_Ca
                 if (view.getId() == R.id.page2_1_1_linearitem) {
                     Toast.makeText(context, item.getTitle() + "눌림", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, Page2_1_X.class);
-                    intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
                     intent.putExtra("title", item.getTitle());
+                    intent.putExtra("contentID", item.getContentviewID());
+                    intent.putExtra("contenttypeid", item.getType());
+                    intent.putExtra("image", item.getImage());
+                    intent.putExtra("cityname", cityName);
                     context.startActivity(intent);
                 }
             }

@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
+
+import Page1.Page1;
+
 public class Page0_2 extends AppCompatActivity implements View.OnClickListener {
 
     TextView a1_alone;
@@ -21,6 +25,11 @@ public class Page0_2 extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page0_1);
+
+        //애니메이션
+        LottieAnimationView animationView = findViewById(R.id.page0_1_bg);
+        animationView.setImageAssetsFolder("images/");
+        animationView.playAnimation();
 
         a1_alone = (TextView)findViewById(R.id.page0_2_a1);
         a2_family = (TextView)findViewById(R.id.page0_2_a2);
@@ -39,7 +48,9 @@ public class Page0_2 extends AppCompatActivity implements View.OnClickListener {
         page2_later_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Page0_2.this, Page0.class);
+                score[1] = 3; score[4] = 1; score[5] = 0;
+                Intent intent = new Intent(Page0_2.this, Page1.class);
+                intent.putExtra("Main", score);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
             }

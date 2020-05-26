@@ -4,228 +4,246 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_bg_02beach"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    // 뒤로가기 버튼
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/page0_3_back"
-        android:layout_width="43dp"
-        android:layout_height="43dp"
-        android:background="@drawable/ic_icon_back_page0"
-        android:elevation="5dp"
-        android:clickable="true"
-        android:layout_marginTop="8dp"/>
 
-    // Step 부분
-    <RelativeLayout
-        android:id="@+id/page0_3_step_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/page0_3_back"
-        android:layout_marginTop="35dp"
-        android:gravity="center_vertical">
-        // Step2
-        <TextView
-            android:id="@+id/page0_3_step2"
-            android:layout_width="78dp"
-            android:layout_height="22dp"
-            android:background="@drawable/round_purple"
-            android:layout_toRightOf="@+id/round1"
-            android:text="STEP 2"
-            android:fontFamily="@font/notosans_semibold"
-            android:textColor="#FFFFFF"
-            android:gravity="center" />
-
-        // 동그라미들
-        <ImageView
-            android:id="@+id/round1"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_marginRight="6dp"
-            android:layout_centerVertical="true"/>
-
-        <ImageView
-            android:id="@+id/round2"
-            android:layout_toRightOf="@+id/page0_3_step2"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-        <ImageView
-            android:id="@+id/round3"
-            android:layout_toRightOf="@+id/round2"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-
-        <ImageView
-            android:id="@+id/round4"
-            android:layout_toRightOf="@+id/round3"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-
-        <ImageView
-            android:id="@+id/round5"
-            android:layout_toRightOf="@+id/round4"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-
-        <ImageView
-            android:id="@+id/round6"
-            android:layout_toRightOf="@+id/round5"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:background="@drawable/round_gray"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="6dp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/page3_question"
+    //애니메이션
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/page0_2_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/page0_3_step_layout">
-        // Q2
-        <TextView
-            android:id="@+id/page0_3_q"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="bg02.json"
+        app:lottie_loop="true"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+
+        // 뒤로가기 버튼
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/page0_3_back"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:background="@drawable/ic_icon_back_page0"
+            android:elevation="5dp"
+            android:clickable="true"
+            android:layout_marginTop="8dp"/>
+
+        // Step 부분
+        <RelativeLayout
+            android:id="@+id/page0_3_step_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="여행을 떠나게 된 당신, 누구와\n함께 갈까요?"
-            android:fontFamily="@font/notosans_semibold"
-            android:textColor="#000000"
-            android:textSize="24dp"
-            android:gravity="left"/>
+            android:layout_below="@+id/page0_3_back"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+            // Step2
+            <TextView
+                android:id="@+id/page0_3_step2"
+                android:layout_width="78dp"
+                android:layout_height="22dp"
+                android:background="@drawable/round_purple"
+                android:layout_toRightOf="@+id/round1"
+                android:text="STEP 2"
+                android:fontFamily="@font/notosans_semibold"
+                android:textColor="#FFFFFF"
+                android:gravity="center" />
+
+            // 동그라미들
+            <ImageView
+                android:id="@+id/round1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_marginRight="6dp"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:id="@+id/round2"
+                android:layout_toRightOf="@+id/page0_3_step2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+            <ImageView
+                android:id="@+id/round3"
+                android:layout_toRightOf="@+id/round2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+
+            <ImageView
+                android:id="@+id/round4"
+                android:layout_toRightOf="@+id/round3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+
+            <ImageView
+                android:id="@+id/round5"
+                android:layout_toRightOf="@+id/round4"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+
+            <ImageView
+                android:id="@+id/round6"
+                android:layout_toRightOf="@+id/round5"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/round_gray"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="6dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/page3_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/page0_3_step_layout">
+            // Q2
+            <TextView
+                android:id="@+id/page0_3_q"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여행을 떠나게 된 당신, 누구와\n함께 갈까요?"
+                android:fontFamily="@font/notosans_semibold"
+                android:textColor="#000000"
+                android:textSize="24dp"
+                android:gravity="left"/>
+        </RelativeLayout>
+
+        // 대답 버튼 레이아웃
+        <LinearLayout
+            android:id="@+id/page0_3_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/page0_3_later"
+            android:layout_marginBottom="24dp"
+            android:clipToPadding="false"
+            android:padding="4dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:clipToPadding="false"
+                android:padding="4dp"
+                android:layout_marginBottom="4dp">
+                // 도시/문화체험
+                <TextView
+                    android:id="@+id/page0_3_a1"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@drawable/box_round"
+                    android:text="도시/문화 체험"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_regular"
+                    android:layout_weight="1"
+                    android:layout_marginRight="2dp"
+                    android:elevation="3dp"
+                    android:clickable="true"/>
+
+                // 자연 속 힐링
+                <TextView
+                    android:id="@+id/page0_3_a2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@drawable/box_round"
+                    android:text="자연 속 힐링"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_regular"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:elevation="3dp"
+                    android:layout_marginLeft="2dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:clipToPadding="false"
+                android:padding="4dp"
+                android:layout_marginBottom="4dp">
+                // 맛집 탐방
+                <TextView
+                    android:id="@+id/page0_3_a3"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@drawable/box_round"
+                    android:text="맛집 탐방"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_regular"
+                    android:layout_weight="1"
+                    android:elevation="3dp"
+                    android:layout_marginRight="2dp"
+                    android:clickable="true" />
+
+                // 역사/ 유적 탐험
+                <TextView
+                    android:id="@+id/page0_3_a4"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@drawable/box_round"
+                    android:text="역사/유적 탐험"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/notosans_regular"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:elevation="3dp"
+                    android:layout_marginLeft="2dp"/>
+            </LinearLayout>
+            // 뭐든 여행이면 다 좋아
+            <TextView
+                android:id="@+id/page0_3_a5"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@drawable/box_round"
+                android:text="뭐든 여행이면 다 좋아~!"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_regular"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:elevation="3dp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/page0_3_later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:text="나중에 다시 하기"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:fontFamily="@font/notosans_extralight"
+            android:textColor="#CC000000"
+            android:clickable="true"/>
     </RelativeLayout>
 
-    // 대답 버튼 레이아웃
-    <LinearLayout
-        android:id="@+id/page0_3_answer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/page0_3_later"
-        android:layout_marginBottom="24dp"
-        android:clipToPadding="false"
-        android:padding="4dp"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:clipToPadding="false"
-            android:padding="4dp"
-            android:layout_marginBottom="4dp">
-            // 도시/문화체험
-            <TextView
-                android:id="@+id/page0_3_a1"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/box_round"
-                android:text="도시/문화 체험"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:fontFamily="@font/notosans_regular"
-                android:layout_weight="1"
-                android:layout_marginRight="2dp"
-                android:elevation="3dp"
-                android:clickable="true"/>
-
-            // 자연 속 힐링
-            <TextView
-                android:id="@+id/page0_3_a2"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/box_round"
-                android:text="자연 속 힐링"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:fontFamily="@font/notosans_regular"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:elevation="3dp"
-                android:layout_marginLeft="2dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp"
-            android:clipToPadding="false"
-            android:padding="4dp"
-            android:layout_marginBottom="4dp">
-            // 맛집 탐방
-            <TextView
-                android:id="@+id/page0_3_a3"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/box_round"
-                android:text="맛집 탐방"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:fontFamily="@font/notosans_regular"
-                android:layout_weight="1"
-                android:elevation="3dp"
-                android:layout_marginRight="2dp"
-                android:clickable="true" />
-
-            // 역사/ 유적 탐험
-            <TextView
-                android:id="@+id/page0_3_a4"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/box_round"
-                android:text="역사/유적 탐험"
-                android:gravity="center"
-                android:textSize="16dp"
-                android:textColor="#000000"
-                android:fontFamily="@font/notosans_regular"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:elevation="3dp"
-                android:layout_marginLeft="2dp"/>
-        </LinearLayout>
-        // 뭐든 여행이면 다 좋아
-        <TextView
-            android:id="@+id/page0_3_a5"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@drawable/box_round"
-            android:text="뭐든 여행이면 다 좋아~!"
-            android:gravity="center"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/notosans_regular"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:elevation="3dp"
-            android:layout_marginTop="4dp"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/page0_3_later"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="11dp"
-        android:text="나중에 다시 하기"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:fontFamily="@font/notosans_extralight"
-        android:textColor="#CC000000"
-        android:clickable="true"/>
 </RelativeLayout>

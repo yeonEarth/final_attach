@@ -5,36 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Page2.Page2_1"
+    tools:context="Page1.Page2_1"
     android:background="@drawable/ic_bg_photospot"
     android:paddingTop="8dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp">
 
-    // 로고 레이아웃
-    <RelativeLayout
-        android:id="@+id/page2_1_logolayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    //뒤로가기 버튼
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/empty_btn"
+        android:layout_width="9dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/ic_back_btn"/>
 
-        // 로고
-        <TextView
-            android:id="@+id/page2_1_logo"
-            android:layout_width="105dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_logo_0519"
-            android:layout_alignParentLeft="true" />
-
-        // 메뉴
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/page2_1_menu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_top_menu"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+    //뒤로가기버튼 버튼 영역을 넓게 주기 위해서 빈 이미지 생성
+    <ImageView
+        android:id="@+id/all_cat_back_btn"
+        android:layout_width="70dp"
+        android:layout_height="40dp" />
 
     // 타이틀
     <TextView
@@ -46,8 +36,8 @@
         android:fontFamily="@font/notosans"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:layout_below="@+id/page2_1_logolayout"
-        android:layout_marginTop="32dp"/>
+        android:layout_below="@+id/empty_btn"
+        android:layout_marginTop="12dp"/>
 
     // 카테고리 레이아웃
     <LinearLayout

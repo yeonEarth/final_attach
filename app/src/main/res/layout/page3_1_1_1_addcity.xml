@@ -76,8 +76,8 @@
     </RelativeLayout>
 
     //리스트뷰
-    <ListView
-        android:id="@+id/api_list_city"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/page3_1_1_1_1_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="165dp"

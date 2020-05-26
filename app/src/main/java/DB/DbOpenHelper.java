@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DbOpenHelper {
+public class  DbOpenHelper {
 
     private static final String DATABASE_NAME = "HeartCity_data(2).db";
     private static final int DATABASE_VERSION = 1;
@@ -62,21 +62,26 @@ public class DbOpenHelper {
 
 
     // Insert DB
-    public long insertColumn(String userid, String name, String city){
+    public long insertColumn(String userid, String name, String city, String type, String image, String click){
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateDB.USERID, userid);
         values.put(DataBases.CreateDB.NAME, name);
         values.put(DataBases.CreateDB.CITYNAME, city);
+        values.put(DataBases.CreateDB.TYPE, type);
+        values.put(DataBases.CreateDB.IMAGE, image);
+        values.put(DataBases.CreateDB.CLICK, click);
         return mDB.insert(DataBases.CreateDB._TABLENAME0, null, values);
     }
 
-
     // Update DB
-    public boolean updateColumn(long id, String userid, String name, String cityname){
+    public boolean updateColumn(long id, String userid, String name, String cityname, String type, String image, String click){
         ContentValues values = new ContentValues();
         values.put(DataBases.CreateDB.USERID, userid);
         values.put(DataBases.CreateDB.NAME, name);
         values.put(DataBases.CreateDB.CITYNAME, cityname);
+        values.put(DataBases.CreateDB.TYPE, type);
+        values.put(DataBases.CreateDB.IMAGE, image);
+        values.put(DataBases.CreateDB.CLICK, click);
         return mDB.update(DataBases.CreateDB._TABLENAME0, values, "_id=" + id, null) > 0;
     }
 
@@ -104,10 +109,23 @@ public class DbOpenHelper {
         return mDB.query(DataBases.CreateDB._TABLENAME0, null, null, null, null, null, null);
     }
 
+    // 컨텐츠id 검색
+    public Cursor selectIdCulumns(String contentID) {
+//        Cursor c = mDB.rawQuery("SELECT * FROM usertable WHERE userid = '" + contentID + "'", null);
+//        return c;
+        return mDB.query(DataBases.CreateDB._TABLENAME0, null, contentID, null, null, null,null);
+    }
+
 
     // sort by column
     public Cursor sortColumn(String sort){
-        Cursor c = mDB.rawQuery( "SELECT * FROM usertable ORDER BY " + sort + ";", null);
+        Cursor c = mDB.rawQuery( "SELECT DISTINCT * FROM usertable ORDER BY " + sort + " ASC;", null);
+        return c;
+    }
+
+    // 도시 이름만 검색 및 중복 제거
+    public Cursor sortCityColumn(String sort) {
+        Cursor c = mDB.rawQuery( "SELECT DISTINCT cityname FROM usertable ORDER BY " + sort + " ASC;", null);
         return c;
     }
 }

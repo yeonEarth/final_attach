@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,11 +30,16 @@ public class Page1_pagerAdapter extends PagerAdapter {
     private send_expand send;
     boolean isExpand = false;
 
+    //위치 관련
+    private Page1_Position page1_position;
+    private boolean First_click= false;
 
-    public Page1_pagerAdapter(send_expand send, Context context , List<String> arrayList){
+
+    public Page1_pagerAdapter(send_expand send, Context context , List<String> arrayList, Page1_Position page1_position){
         this.send = send;
         mContext = context;
         localArray = arrayList;
+        this.page1_position = page1_position;
     }
 
 
@@ -61,6 +67,9 @@ public class Page1_pagerAdapter extends PagerAdapter {
         View view = null ;
         benefit_list();
 
+        //액티비티에서 현재 시간에 해당되는 페이지 위치 얻기
+        int gotPosition = send.gotPosition();
+
         if (mContext != null) {
 
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -74,50 +83,57 @@ public class Page1_pagerAdapter extends PagerAdapter {
             final TextView now_station = view.findViewById(R.id.page1_nowStation);
             final TextView benefit_text = view.findViewById(R.id.benefit_content);
             final TextView benefit_check = view.findViewById(R.id.page1_giftTxt);
+            final ImageView check_updown_btn = view.findViewById(R.id.down_btn);
             final Button checkIn_btn =  view.findViewById(R.id.checkIn_btn);
             final LinearLayout page1_pager_layout =  view.findViewById(R.id.page1_pager_layout);
             final RelativeLayout page1_gift_layout =  view.findViewById(R.id.page1_gift_layout);
 
-            //첫번째 페이지가 아니면
-            if(position > 0) {
-                checkIn_btn.setText("해당역에 도착");
+            //버튼 관련-----------------------------------------
+            //첫번째 페이지
+            if(position == 0 && position==gotPosition) {
+                checkIn_btn.setText("여행 시작하기");
+                checkIn_btn.setClickable(true);
+                pre_station.setVisibility(View.INVISIBLE);
+                next_station.setVisibility(View.VISIBLE);
+                now_station.setVisibility(View.VISIBLE);
+            }
+
+//현재역보다 이전역이면
+            else if ( position < gotPosition){
                 pre_station.setVisibility(View.INVISIBLE);
                 next_station.setVisibility(View.INVISIBLE);
                 now_station.setVisibility(View.INVISIBLE);
+                checkIn_btn.setText("여행완료");
+                checkIn_btn.setSelected(true);
+                checkIn_btn.setTextColor(Color.parseColor("#FFFEFE"));
+                page1_pager_layout.setBackgroundResource(R.drawable.rectangle4);
+                page1_gift_layout.setBackgroundResource(R.drawable.rectangle4);
+                textView.setTextColor(Color.parseColor("#2D624F"));
             }
 
+            //현재역이면
+            else if(position == gotPosition){
+                pre_station.setVisibility(View.VISIBLE);
+                next_station.setVisibility(View.VISIBLE);
+                now_station.setVisibility(View.VISIBLE);
+                checkIn_btn.setText("여행중");
+                checkIn_btn.setSelected(true);
+                checkIn_btn.setTextColor(Color.parseColor("#FFFEFE"));
+                page1_pager_layout.setBackgroundResource(R.drawable.rectangle4);
+                page1_gift_layout.setBackgroundResource(R.drawable.rectangle4);
+                textView.setTextColor(Color.parseColor("#2D624F"));
+            }
 
-
-           //여행 시작하기 or 도착확인 버튼
+            //여행 시작하기 버튼
             checkIn_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View view){
-
-                    //여행 시작하기
-                    if(position == 0){
-                        checkIn_btn.setText("여행 시작");
-                        checkIn_btn.setTextColor(Color.parseColor("#FFFEFE"));
+                    //여행 시작하기 : 위치 권한 + 서비스 사용 요청
+                    if(position == 0) {
+                        page1_position.onClick_startBtn();
+                        checkIn_btn.setText("여행중");
                         checkIn_btn.setSelected(true);
-                        page1_pager_layout.setBackgroundResource(R.drawable.rectangle4);
-                        page1_gift_layout.setBackgroundResource(R.drawable.rectangle4);
-                        textView.setTextColor(Color.parseColor("#2D624F"));
-                    }
-
-                    //도착 확인 버튼
-                    else {
-                        pre_station.setText("< 이전역");
-                        pre_station.setVisibility(View.VISIBLE);
-                        next_station.setVisibility(View.VISIBLE);
-                        now_station.setVisibility(View.VISIBLE);
-
-                        //마지막 페이지가 아니라면
-                        if(position != localArray.size()-1){
-                            next_station.setVisibility(View.VISIBLE);
-                        }
-
-                        checkIn_btn.setText("도착 확인");
                         checkIn_btn.setTextColor(Color.parseColor("#FFFEFE"));
-                        checkIn_btn.setSelected(true);
                         page1_pager_layout.setBackgroundResource(R.drawable.rectangle4);
                         page1_gift_layout.setBackgroundResource(R.drawable.rectangle4);
                         textView.setTextColor(Color.parseColor("#2D624F"));
@@ -126,31 +142,39 @@ public class Page1_pagerAdapter extends PagerAdapter {
             });
 
 
-            //혜택보기 레이아웃 펼치기
+
+            //혜택보기 레이아웃 펼치기----------------------------------------------여기 수정함
             page1_gift_layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View view){
                     float d = mContext.getResources().getDisplayMetrics().density;
+                    String benefit_station;
+                    String text = textView.getText().toString();
+                    if(text.contains("환승")){
+                        benefit_station = text.substring(4).replace("역", "");
+                    } else {
+                        benefit_station = text.replace("역", "");
+                    }
 
+
+                    //펼쳤을 때
                     if(!isExpand){
-                        if(benefit.get(stationName)  != null){
-                            benefit_text.setText(benefit.get(stationName));
+                        if(benefit.get(benefit_station)  != null){
+                            benefit_text.setText(benefit.get(benefit_station));
                         } else{
                             benefit_text.setText("해당역은 사은품이 없습니다.");
                         }
-
-                        benefit_check.setText("현재 역에서 제공하는 내일로 사은품입니다.");
-                        benefit_check.setTextColor(Color.parseColor("#4D000000"));
+                        check_updown_btn.setBackgroundResource(R.drawable.ic_down_btn);
                         benefit_text.setVisibility(View.VISIBLE);
-                        page1_gift_layout.getLayoutParams().height = (int)(200*d);
+                        page1_gift_layout.getLayoutParams().height = (int)(170*d);
                         page1_gift_layout.requestLayout();
                         send.send(isExpand);
                         isExpand = true;
-
                     }
+
+                    //닫았을 때
                     else {
-                        benefit_check.setText("정차역 혜택 확인하기");
-                        benefit_check.setTextColor(Color.parseColor("#000000"));
+                        check_updown_btn.setBackgroundResource(R.drawable.ic_up_btn);
                         benefit_text.setVisibility(View.INVISIBLE);
                         page1_gift_layout.getLayoutParams().height =(int)(60*d);
                         page1_gift_layout.requestLayout();
@@ -170,8 +194,8 @@ public class Page1_pagerAdapter extends PagerAdapter {
     //뷰페이져 확장을 위한 인터페이스
     public interface send_expand{
         void send(boolean isExpand);
+        int gotPosition();
     }
-
 
     //혜택 리스트
     private void benefit_list(){

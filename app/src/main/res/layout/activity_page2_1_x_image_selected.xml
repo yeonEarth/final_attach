@@ -1,0 +1,43 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/image_selected_layout"
+    android:background="@android:color/transparent">
+
+    // 이미지 선택시 보이는 레이아웃
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/page2_1_1_selected_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/no_image"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_shadow"/>
+    </RelativeLayout>
+    // 왼쪽 버튼
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/page2_1_1_left_btn"
+        android:layout_width="25dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_arrow_left"
+        android:elevation="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"/>
+
+    // 오른쪽 버튼
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/page2_1_1_right_btn"
+        android:layout_width="25dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/ic_arrow_right"/>
+</FrameLayout>

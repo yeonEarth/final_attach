@@ -1,12 +1,15 @@
-package Page2;
+package Page1;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.hansol.spot_200510_hs.R;
+
+import Page2.Page2;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -29,6 +32,8 @@ public class Page2_1 extends AppCompatActivity implements View.OnClickListener {
     String[] subject_name = {"자연", "역사", "휴양", "체험", "산업", "건축/조형", "문화", "레포츠"};
     Button[] subject = new Button[button_id.length];
 
+    ImageView back_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +42,18 @@ public class Page2_1 extends AppCompatActivity implements View.OnClickListener {
         for(int i = 0; i<button_id.length; i++){
             subject[i] = (Button) findViewById(button_id[i]);
             subject[i].setOnClickListener(this);
+
+
         }
+        //뒤로가기 버튼 구현
+        ImageView back_btn = (ImageView) findViewById(R.id.all_cat_back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     @Override
@@ -53,6 +69,7 @@ public class Page2_1 extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
+
 
     //뒤로가기 화면 전환 효과 없앰
     @Override

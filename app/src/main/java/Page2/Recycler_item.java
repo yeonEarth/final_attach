@@ -6,6 +6,8 @@ public class Recycler_item {
     String title;
     String contentviewID;
     String type;
+    String areaCode;
+    String sigunguCode;
 
     public String getImage() {
         return this.image;
@@ -23,10 +25,17 @@ public class Recycler_item {
         return this.type;
     }
 
-    public Recycler_item(String image, String title, String contentviewID, String type) {
+    public String getAreaCode() { return this.areaCode; }
+
+    public String getSigunguCode() { return this.sigunguCode; }
+
+
+    public Recycler_item(String image, String title, String contentviewID, String type, String areaCode, String sigunguCode) {
         this.image = image;
         this.title = title;
         this.contentviewID = contentviewID;
         this.type = type;
+        this.areaCode = areaCode;
+        this.sigunguCode = sigunguCode;
     }
 }

@@ -1,40 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/page1_scrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="Page1_schedule.Page1_Main">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="3dp">
+
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:toolbarId="@+id/toolbar"
+                android:elevation="3dp">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingTop="10dp"
+                    app:layout_collapseMode="pin"
+                    android:elevation="3dp"
+                    android:theme="@style/Theme.Dark">
+
+                    <ImageButton
+                        android:id="@+id/main_logo_page1_schedule"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="16dp"
+                        android:background="@drawable/ic_logo_0519"/>
+
+                </androidx.appcompat.widget.Toolbar>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="Page1_schedule.Page1_Main"
+            android:id="@+id/nestScrollView_page1_schedule"
+            android:background="@drawable/ic_background"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
 
     <RelativeLayout
         android:id="@+id/layout_page1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
 
-
-        // 로고
-        <TextView
-            android:id="@+id/page1_schedule_main_logo"
-            android:layout_width="105dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/ic_logo_0519"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
-
-        // 프로필 버튼
-        <ImageButton
-            android:id="@+id/page1_schedule_main_profile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/ic_top_menu"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true" />
 
 
         //page1 - 날짜 텍스트
@@ -42,7 +74,6 @@
             android:id="@+id/page1_date"
             android:layout_width="match_parent"
             android:layout_height="22dp"
-            android:layout_marginTop="78dp"
             android:layout_marginLeft="16dp"
             android:clickable="false"
             android:focusable="false"
@@ -57,7 +88,8 @@
             android:id="@+id/page1_userName"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_marginTop="102dp"
+            android:layout_below="@+id/page1_date"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="16dp"
             android:text="슈니는 여행중!"
             android:textSize="32sp"
@@ -70,7 +102,8 @@
             android:id="@+id/page1_pager"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="174dp"
+            android:layout_below="@+id/page1_userName"
+            android:layout_marginTop="28dp"
             android:layout_centerHorizontal="true">
 
         </androidx.viewpager.widget.ViewPager>
@@ -219,6 +252,16 @@
                 android:dividerHeight="1px"
                 android:divider="#9C9C9C" />
 
+            //열차 시간표가 없을 때
+            <TextView
+                android:id="@+id/page1_timeTable_noData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/table_line"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/train_err_internet"/>
+
         </RelativeLayout>
 
 
@@ -277,4 +320,19 @@
         </LinearLayout>
 
     </RelativeLayout>
-</ScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <RelativeLayout
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="#ffffff"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/menu_header_main"/>
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

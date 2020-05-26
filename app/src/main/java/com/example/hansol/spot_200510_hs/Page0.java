@@ -3,6 +3,7 @@ package com.example.hansol.spot_200510_hs;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -31,6 +32,14 @@ public class Page0 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page0);
 
+        // Page1에 눌렸다고 알려주기
+        int firstFin = 1;
+        SharedPreferences a = getSharedPreferences("a", MODE_PRIVATE);
+        SharedPreferences.Editor editor = a.edit();
+        editor.putInt("First", firstFin);
+        editor.commit();
+
+
         btn_later = (TextView) findViewById(R.id.page0_later_btn);
         btn_start = (TextView) findViewById(R.id.page0_start_btn);
 
@@ -49,7 +58,7 @@ public class Page0 extends AppCompatActivity {
         btn_later.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "나중에 하기 버튼 눌림", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "나중에 하기 버튼 눌림", Toast.LENGTH_SHORT).show();
                 // 임의의 값 넘겨서 기본 카테고리 보여주기
                 score[1] = 3; score[4] = 1; score[5] = 0;
                 Intent intent = new Intent(Page0.this, Page1.class);
@@ -71,6 +80,7 @@ public class Page0 extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -78,4 +88,6 @@ public class Page0 extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.anim_slide, R.anim.hold);
     }
+
+
 }

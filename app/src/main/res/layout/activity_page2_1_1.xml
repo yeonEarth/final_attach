@@ -8,6 +8,7 @@
     android:background="@drawable/ic_bg_photospot"
     android:padding="16dp">
 
+
     //뒤로가기 버튼
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/empty_btn"
@@ -42,3 +43,4 @@
         android:layout_below="@id/some_id"
         android:layout_marginTop="12dp" />
 </RelativeLayout>
+

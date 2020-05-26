@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:id="@+id/page2_1_x_linear_item">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="TITLE"
+                android:textSize="16sp"
+                android:textColor="#AD73DC"
+                android:textStyle="bold"
+                android:fontFamily="@font/notosans"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:padding="8dp">
+
+            //선
+            <View
+                android:id="@+id/vertical_line"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#A7A7A7"/>
+
+            //열차 종류 텍스트
+            <TextView
+                android:id="@+id/detail_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="contents"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/notosans_extralight"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    //아래 경계 선
+    <View
+        android:id="@+id/horizon_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EAEAEA" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/page2_1_x_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="텍스트"
+            android:gravity="center_vertical"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/notosans_extralight" />
+    </ScrollView>
+</LinearLayout>

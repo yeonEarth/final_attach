@@ -4,11 +4,14 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,6 +31,12 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
     Page1_1_1_SecondAdapter adapter;
     private List<Page1_1_1.Recycler_item> items;
     private DbOpenHelper mDbOpenHelper;
+    private boolean isFirst = true;
+
+    String id;
+
+    private List<Page1_1_1.Recycler_item> listForSecond = new ArrayList<>();    // 두 번째 어댑터로 보낼 어레이
+
 
     // 어댑터에 들어갈 리스트
     private ArrayList<String > listData;
@@ -48,17 +57,42 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
+        mDbOpenHelper = new DbOpenHelper(context);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.page1_1_1_item, parent, false);
         return new ViewHolder(v);
     }
 
+
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        if(isFirst) {
+            if(position==0){
+
+                selectedItems.put(position, true);
+                prePosition = position;
+            }
+            else{
+                isFirst = false;
+            }
+        }
+
+        listForSecond.clear();
+
+        for (int i = 0 ; i < items.size() ; i++) {
+            if (listData.get(position).equals(items.get(i).city)) {
+                listForSecond.add(items.get(i));
+            }
+        }
+
         //리사이클러뷰 넣는 부분
         holder.recyclerView.setLayoutManager( new LinearLayoutManager(context));
         adapter = new Page1_1_1_SecondAdapter(items , this);
         holder.recyclerView.setAdapter(adapter);
-        holder.cityCount.setText("" + items.size());
+        holder.cityCount.setText("" + listForSecond.size());
 
         holder.onBind(position);
         holder.textView1.setText(listData.get(position));
@@ -68,13 +102,13 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
                 if (selectedItems.get(position)) {
                     // 펼쳐진 Item을 클릭 시
                     selectedItems.delete(position);
-                    holder.togle.setBackgroundResource(R.drawable.ic_up_btn);
+                    holder.togle.setBackgroundResource(R.drawable.ic_down_btn);
                 } else {
                     // 직전의 클릭됐던 Item의 클릭상태를 지움
                     selectedItems.delete(prePosition);
                     // 클릭한 Item의 position을 저장
                     selectedItems.put(position, true);
-                    holder.togle.setBackgroundResource(R.drawable.ic_down_btn);
+                    holder.togle.setBackgroundResource(R.drawable.ic_up_btn);
                 }
                 // 해당 포지션의 변화를 알림
                 if (prePosition != -1) notifyItemChanged(prePosition);
@@ -96,9 +130,9 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
     }
 
     @Override
-    public void make_db(String countId, String name, String cityname) {
+    public void make_db(String countId, String name, String cityname, String type, String image, String click) {
         mDbOpenHelper.open();
-        mDbOpenHelper.insertColumn(countId, name, cityname);
+        mDbOpenHelper.insertColumn(countId, name, cityname, type, image, click);
         mDbOpenHelper.close();
     }
 
@@ -108,10 +142,23 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
         mDbOpenHelper.deleteColumnByContentID(contentId);
         mDbOpenHelper.close();
        // items.clear();
-
-
-
         delete_dialog();
+    }
+
+    @Override
+    public String isClick(String countid) {
+        mDbOpenHelper.open();
+        Cursor iCursor = mDbOpenHelper.selectIdCulumns(countid);
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+
+        while (iCursor.moveToNext()) {
+            String userId = iCursor.getString(iCursor.getColumnIndex("userid"));
+
+            id = userId;
+        }
+        mDbOpenHelper.close();
+
+        return id;
     }
 
     @Override
@@ -171,6 +218,8 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
         private int position;
         private TextView cityCount;
         private TextView togle;
+        private View line;
+        private ScrollView view;
 
 
         public ViewHolder(View itemView) {
@@ -179,6 +228,8 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
             recyclerView = itemView.findViewById(R.id.page1_1_1_fragment_recyclerview);
             cityCount = itemView.findViewById(R.id.page1_1_1_city_number);
             togle = itemView.findViewById(R.id.page1_1_1_togle);
+            line = itemView.findViewById(R.id.horizon_line);
+            view = itemView.findViewById(R.id.page1_1_1_view);
         }
 
 

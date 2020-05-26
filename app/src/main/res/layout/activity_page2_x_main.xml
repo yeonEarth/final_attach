@@ -30,71 +30,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                //상단 검색바
-                <ImageView
-                    android:id="@+id/search_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="16dp"
+                //뒤로가기 버튼
+                <TextView
+                    android:id="@+id/page2_x_back_btn"
+                    android:layout_width="15dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="16dp"
-                    android:background="@drawable/ic_search_bar"/>
+                    android:layout_marginTop="32dp"
+                    android:clickable="true"
+                    android:background="@drawable/ic_vector_14"/>
 
-                //검색 아이콘
-                <ImageView
-                    android:layout_width="19dp"
-                    android:layout_height="19dp"
-                    android:layout_alignTop="@+id/search_bar"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginLeft="30dp"
-                    android:background="@drawable/ic_icon_gift"/>
 
-                //상단 검색바 텍스트
-                <EditText
-                    android:id="@+id/search_name"
+                //상단 도시이름 텍스트
+                <TextView
+                    android:id="@+id/page2_x_cityName"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/search_bar"
-                    android:layout_marginLeft="63dp"
-                    android:text="서울"
-                    android:textColor="#000000"
-                    android:textSize="18sp"/>
+                    android:layout_height="33dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_toRightOf="@+id/page2_x_back_btn"
+                    android:layout_marginLeft="18dp"
+                    android:text="#서울"
+                    android:textSize="24sp"
+                    android:textColor="#4B4B4B" />
 
-                //카테고리 누르면 생기는 버튼
-                <HorizontalScrollView
-                    android:id="@+id/selected_category_btn"
-                    android:layout_below="@id/search_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                <View
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:background="@drawable/ic_icon_search2"
+                    android:layout_toLeftOf="@+id/page2_x_searchCity"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="35dp"/>
 
-                    // 버튼 동적 생성
-                    <LinearLayout
-                        android:id="@+id/category_add_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp">
+                <TextView
+                    android:id="@+id/page2_x_searchCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:text="다른 도시 검색해보기"
+                    android:clickable="true"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="16dp"
+                    android:textSize="11sp"
+                    android:textColor="#000000"/>
 
-                    </LinearLayout>
-
-                </HorizontalScrollView>
 
 
                 //맵뷰
                 <RelativeLayout
                     android:id="@+id/map"
-                    android:layout_below="@id/selected_category_btn"
+                    android:layout_below="@id/page2_x_cityName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="8dp"
+                    android:paddingBottom="30dp"
                     android:layout_marginTop="16dp">
 
                     <RelativeLayout
                         android:id="@+id/map_view"
                         android:layout_width="match_parent"
                         android:layout_height="277dp">
+
+                        <TextView
+                            android:id="@+id/map_error_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="지도를 불러올 수 없습니다.\n 인터넷 연결을 확인해주세요."
+                            android:gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="#666666"
+                            android:visibility="invisible"/>
 
                         //맵뷰 확장 버튼
                         <androidx.appcompat.widget.AppCompatButton
@@ -106,6 +110,8 @@
                             android:background="@drawable/ic_icon_mapexpand"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="25dp"/>
+
+
 
                         //맵뷰 리셋 버튼
                         <androidx.appcompat.widget.AppCompatButton

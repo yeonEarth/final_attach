@@ -1,299 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_bg_photospot"
     android:padding="16dp"
-    android:scrollbars="none"
-    android:id="@+id/page2_1_x_scrollView">
+    android:background="@drawable/ic_bg_photospot">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/page2_1_x_scrollView">
 
-        //뒤로가기 버튼
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/empty_btn"
-            android:layout_width="9dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/ic_back_btn"/>
-
-        //뒤로가기버튼 버튼 영역을 넓게 주기 위해서 빈 이미지 생성
-        <ImageView
-            android:id="@+id/page2_1_x_back_btn"
-            android:layout_width="70dp"
-            android:layout_height="70dp" />
-
-        // 타이틀
-        <TextView
-            android:id="@+id/page2_1_x_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/empty_btn"
-            android:text="순천 오픈 세트장"
-            android:textSize="24dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/notosans_bold"
-            android:textStyle="bold"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="23dp"/>
-
-        // 이미지 슬라이드 들어감
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/page2_1_x_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@id/page2_1_x_title"/>
-
-        // 관광지 정보
         <RelativeLayout
-            android:id="@+id/page2_1_1_info_layout"
-            android:layout_marginTop="23dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:background="@drawable/box_white"
-            android:layout_below="@+id/page2_1_x_viewpager">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            // TableLayout로 표만들기
-            <TableLayout
-                android:id="@+id/page2_1_1_tableLayout"
+            //뒤로가기 버튼
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/empty_btn"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/ic_back_btn"/>
+
+            //뒤로가기버튼 버튼 영역을 넓게 주기 위해서 빈 이미지 생성
+            <ImageView
+                android:id="@+id/page2_1_x_back_btn"
+                android:layout_width="70dp"
+                android:layout_height="70dp" />
+
+            // 타이틀
+            <TextView
+                android:id="@+id/page2_1_x_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/empty_btn"
+                android:text="순천 오픈 세트장"
+                android:textSize="24dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/notosans_bold"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="23dp"/>
+
+            // 이미지 슬라이드 들어감
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/page2_1_x_viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:stretchColumns="*"
-                android:background="#C4C4C4">
+                android:layout_height="180dp"
+                android:layout_below="@id/page2_1_x_title"/>
 
-                // 연락처
-                <TableRow
+            // 관광지 정보
+            <LinearLayout
+                android:id="@+id/page2_1_1_info_layout"
+                android:layout_marginTop="23dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="@drawable/box_white"
+                android:layout_below="@+id/page2_1_x_viewpager">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/page2_1_x_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/notosans_bold"
-                        android:textStyle="bold"
-                        android:letterSpacing="-0.03"
-                        android:padding="3dp"
-                        android:text="연락처"
-                        android:textColor="#AD73DC"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:gravity="center"/>
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"/>
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/page2_1_1_info_tel"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="-3dp"
-                        android:layout_marginBottom="1dp"
-                        android:layout_span="5"
-                        android:background="#FFFFFF"
-                        android:fontFamily="@font/notosans_extralight"
-                        android:gravity="left"
-                        android:letterSpacing="-0.03"
-                        android:padding="8dp"
-                        android:text="061-749-4003"
-                        android:textColor="#000000"
-                        android:textSize="16dp" />
-                </TableRow>
-
-                // 개관시간
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/notosans_bold"
-                        android:textStyle="bold"
-                        android:letterSpacing="-0.03"
-                        android:padding="3dp"
-                        android:text="개관시간"
-                        android:textColor="#AD73DC"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/page2_1_1_info_openTime"
-                        android:fontFamily="@font/notosans_extralight"
-                        android:letterSpacing="-0.03"
-                        android:padding="8dp"
-                        android:text="매일 09:00-18:00\n17시까지 입장가능"
-                        android:textColor="#000000"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:gravity="left"
-                        android:layout_span="5"
-                        android:layout_marginRight="-3dp"/>
-                </TableRow>
-
-                // 휴일
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/notosans_bold"
-                        android:textStyle="bold"
-                        android:letterSpacing="-0.03"
-                        android:padding="3dp"
-                        android:text="휴일"
-                        android:textColor="#AD73DC"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/page2_1_1_info_holiday"
-                        android:fontFamily="@font/notosans_extralight"
-                        android:letterSpacing="-0.03"
-                        android:padding="8dp"
-                        android:text="연중무휴"
-                        android:textColor="#000000"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="-3dp"
-                        android:gravity="left"
-                        android:layout_span="5"/>
-                </TableRow>
-
-                // 휴일
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/notosans_bold"
-                        android:textStyle="bold"
-                        android:letterSpacing="-0.03"
-                        android:padding="3dp"
-                        android:text="입장료"
-                        android:textColor="#AD73DC"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/page2_1_1_info_admissionFee"
-                        android:fontFamily="@font/notosans_extralight"
-                        android:letterSpacing="-0.03"
-                        android:padding="8dp"
-                        android:text="성인 3,000원"
-                        android:textColor="#000000"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="-3dp"
-                        android:gravity="left"
-                        android:layout_span="5"/>
-                </TableRow>
-
-                // 내일로 혜택
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/notosans_bold"
-                        android:textStyle="bold"
-                        android:letterSpacing="-0.03"
-                        android:padding="3dp"
-                        android:text="내일로 혜택"
-                        android:textColor="#AD73DC"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/page2_1_1_info_benefit"
-                        android:fontFamily="@font/notosans_extralight"
-                        android:letterSpacing="-0.03"
-                        android:padding="8dp"
-                        android:text="입장료 500원 할인"
-                        android:textColor="#000000"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginBottom="1dp"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="-3dp"
-                        android:gravity="left"
-                        android:layout_span="5"/>
-                </TableRow>
-
-                // 주소
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/notosans_bold"
-                        android:textStyle="bold"
-                        android:letterSpacing="-0.03"
-                        android:padding="3dp"
-                        android:text="주소"
-                        android:textColor="#AD73DC"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/page2_1_1_address"
-                        android:fontFamily="@font/notosans_extralight"
-                        android:letterSpacing="-0.03"
-                        android:padding="8dp"
-                        android:text="순천시 비례골길 24"
-                        android:textColor="#000000"
-                        android:textSize="16dp"
-                        android:background="#FFFFFF"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="-3dp"
-                        android:gravity="left"
-                        android:layout_span="5"/>
-                </TableRow>
-            </TableLayout>
-        </RelativeLayout>
-
-        // 지도
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/page2_1_1_info_layout"
-            android:layout_marginTop="24dp">
-
+            // 지도
             <RelativeLayout
                 android:id="@+id/page2_1_1_map"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:background="@drawable/box_round" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_1_like"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/ic_icon_add_float_1"
-                android:layout_alignBottom="@+id/page2_1_1_map"
-                android:layout_gravity="right|bottom"/>
-        </FrameLayout>
-    </RelativeLayout>
-</ScrollView>
+                android:background="@drawable/box_round"
+                android:layout_below="@+id/page2_1_1_info_layout"
+                android:layout_marginTop="24dp"/>
+        </RelativeLayout>
+    </ScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/page2_1_1_like"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_icon_add_float_1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

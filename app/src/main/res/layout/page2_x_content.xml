@@ -12,6 +12,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+            android:id="@+id/spot_error_txt"
+            android:layout_width="match_parent"
+            android:layout_height="277dp"
+            android:text="관광지를 불러올 수 없습니다.\n 인터넷 연결을 확인해주세요."
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:background="@drawable/box_round"
+            android:visibility="invisible"
+            />
+
             //arrow버튼
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/arrow_btn"
@@ -29,6 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#ffffff"/>
+
+
 
         </RelativeLayout>
 

@@ -22,6 +22,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 public class Page2_1_1 extends AppCompatActivity {
     Page2_1_1_ViewPagerAdapter viewpager_adapter;
     ArrayList<course> items = new ArrayList<>();
+
     Recyclerview_Rearrange recyclerview_rearrange;
 
     //관광지 주제별 코스를 저장하는 배열
@@ -30,6 +31,9 @@ public class Page2_1_1 extends AppCompatActivity {
     String[] st2;
     String[] st3;
     String[] st4;
+
+    // 앞에서 받아온 포지션
+    int numCourse;
 
     //코스 전체 추가 버튼
     Button schedule_btn;
@@ -43,31 +47,18 @@ public class Page2_1_1 extends AppCompatActivity {
         Intent intent = getIntent();
         getSubject = intent.getStringExtra("subject_title");
         Toast.makeText(getApplicationContext(), getSubject, Toast.LENGTH_SHORT).show();
+        numCourse = intent.getIntExtra("position", numCourse);
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.page2_1_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //뷰페이저 어댑터를 연결해주면서 프래그먼트 연결
-        viewpager_adapter = new Page2_1_1_ViewPagerAdapter(getSupportFragmentManager(), items, recyclerview_rearrange);
+        viewpager_adapter = new Page2_1_1_ViewPagerAdapter(getSupportFragmentManager(), items, recyclerview_rearrange, numCourse);
         recyclerView.setAdapter(viewpager_adapter);
 
         schedule_btn = (Button) findViewById(R.id.page2_1_schedulePlus_btn);
 
-//        schedule_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ArrayList <String> course = new ArrayList<>();
-//                course.add(t1.getText().toString());
-//                course.add(t2.getText().toString());
-//                course.add(t3.getText().toString());
-//                course.add(t4.getText().toString());
-//                Intent intent = new Intent(getApplicationContext(), Page3_Main.class);
-//                intent.putExtra("course", course);
-//                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-//                startActivity(intent);
-//            }
-//        });
+
 
 
         //뒤로가기 버튼 구현
@@ -110,10 +101,10 @@ public class Page2_1_1 extends AppCompatActivity {
                 st4 = new String[]{"순천", "논산", "보성"};
                 break;
             case "산업":
-                st1 = new String[]{"서울"};
-                st2 = new String[]{"인천"};
-                st3 = new String[]{"대전"};
-                st4 = new String[]{"대구"};
+                st1 = new String[]{"서울","김제"};
+                st2 = new String[]{"인천","광양"};
+                st3 = new String[]{"대전","창원"};
+                st4 = new String[]{"대구","부전"};
                 break;
             case "건축/조형":
                 st1 = new String[]{"서울", "인천"};
@@ -143,6 +134,8 @@ public class Page2_1_1 extends AppCompatActivity {
             }
         }
 
+
+
         // adapter의 값이 변경(+추가) 되었다는 것을 알려줌 .
         viewpager_adapter.notifyDataSetChanged();
     }
@@ -153,6 +146,7 @@ public class Page2_1_1 extends AppCompatActivity {
         viewpager_adapter.onRearrange();
         overridePendingTransition(0,0);
     }
+
 
 
     //뒤로가기 누르면 확장된 레이아웃을 닫는 인터페이스

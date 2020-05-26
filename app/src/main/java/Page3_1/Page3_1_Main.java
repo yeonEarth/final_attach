@@ -7,9 +7,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.hansol.spot_200510_hs.R;
@@ -22,6 +32,9 @@ import java.util.ArrayList;
 import Algorithm.Subway;
 import Algorithm.SubwayBuilder;
 import Algorithm.SubwayController;
+import Page1.EndDrawerToggle;
+import Page1.Main_RecyclerviewAdapter;
+import Page2.Page2;
 import Page3_1_1.Page3_1_1_Main;
 import Page3_1_1_1.Page3_1_1_1_Main;
 
@@ -43,12 +56,28 @@ public class Page3_1_Main extends AppCompatActivity {
     int number = 0;
     String date;
 
+    //메뉴 관련
+    private Context context;
+    private ImageButton menu_edit;
+    private ImageView userImg;
+    private TextView userText1;
+    private TextView userText2;
+    private RecyclerView recyclerView1;
+    private Switch positionBtn;
+    private Switch alramBtn;
+    Main_RecyclerviewAdapter adapter;
+    ArrayList<String> name = new ArrayList<>();
+    private Toolbar toolbar2;
+    private DrawerLayout drawer;
+    private EndDrawerToggle mDrawerToggle;
+    ImageButton logo;
+
     //알고리즘
     SubwayController controller;
     SubwayBuilder builder;
     Subway subway = null;
     String result = "";
-    Context context;
+
 
     boolean checkStart = false;     //'출발'을 한 번만 넣기 위함
     ArrayList<String> next_data = new ArrayList<>();
@@ -65,6 +94,18 @@ public class Page3_1_Main extends AppCompatActivity {
         //객체 연결
         context = getApplicationContext();
         builder = new SubwayBuilder();
+
+        //객체 연결
+        context = getApplicationContext();
+        toolbar2 = findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        userImg = (ImageView)findViewById(R.id.menu_userImage);
+        userText1 = (TextView)findViewById(R.id.menu_text1);
+        userText2 = (TextView)findViewById(R.id.menu_text2);
+        positionBtn = (Switch)findViewById(R.id.menu_postion_btn);
+        recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
+
+
 
 
         //앞에서 값을 받아온다.(1)
@@ -96,6 +137,50 @@ public class Page3_1_Main extends AppCompatActivity {
         else {
             fix_order_algorithm();
         }
+
+        mDrawerToggle = new EndDrawerToggle(this,drawer,toolbar2,R.string.open_drawer,R.string.close_drawer){
+            @Override //드로어가 열렸을때
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+            @Override //드로어가 닫혔을때
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+
+        setSupportActionBar(toolbar2);
+        drawer.addDrawerListener(mDrawerToggle);
+
+        //메뉴 안 내용 구성
+        recyclerView1.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Main_RecyclerviewAdapter(name, context);
+        recyclerView1.setAdapter(adapter);
+
+        //리사이클러뷰 헤더
+        name.add("0");
+        name.add("1");
+        name.add("2");
+
+        //툴바 타이틀 없애기
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        logo = (ImageButton) findViewById(R.id.main_logo_page3_1);
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Page1.Page1.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                //overridePendingTransition(0,0);
+                startActivity(intent);
+
+            }
+        });
+
+
 
 
         //뷰페이져 연결

@@ -61,8 +61,10 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/page1_1_1_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         // api들어가는 곳
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/page1_1_1_fragment_recyclerview"

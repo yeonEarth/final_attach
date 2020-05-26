@@ -4,14 +4,14 @@
     <!--버튼이 눌리면 색이 변한다.-->
     <item android:state_pressed="true">
         <shape >
-            <solid android:color="#F3F3F3"/>
+            <solid android:color="#E6F3F3F3"/>
             <corners android:radius="4dp"/>
         </shape>
     </item>
 
     <item android:state_pressed="false">
         <shape >
-            <solid android:color="#FFFFFF"/>
+            <solid android:color="#E6FFFFFF"/>
             <corners android:radius="4dp"/>
         </shape>
     </item>

@@ -426,6 +426,11 @@ function on_focusOut() {
 	pin_sh.setAttribute("y", 0);
 }
 
+// 내일로 정차역이 아니면
+function no_train(){
+	 alert( 'error' );
+}
+
 
 </script>
 
@@ -491,25 +496,25 @@ function on_focusOut() {
 
 		<g id="circle">
 			<circle id="circle1"   name="station" class="cls-26" cx="379.25" cy="206" r="5.25" onclick ="on_click(evt)" value="상봉"/>
-			<circle  id="circle2"    name="station"  class="cls-27"  cx="295.75" cy="58.5" r="5.25"  onclick ="on_click(evt)" value="도라산"/>
-			<circle  id="circle3"    name="station"  class="cls-27"  cx="301.25" cy="78" r="5.25"    onclick ="on_click(evt)" value="임진강"/>
-			<circle  id="circle4"    name="station"  class="cls-27"  cx="306.25" cy="96" r="5.25"    onclick ="on_click(evt)" value="운천"/>
-			<circle  id="circle5"    name="station"  class="cls-27"  cx="309.25" cy="119" r="5.25"   onclick ="on_click(evt)" value="문산"/>
-			<circle  id="circle6"    name="station"  class="cls-26"  cx="294.25" cy="176" r="5.25"   onclick ="on_click(evt)" value="행신"/>
+			<circle  id="circle2"    name="station"  class="cls-27"  cx="295.75" cy="58.5" r="5.25"  onclick ="no_train()" value="도라산"/>
+			<circle  id="circle3"    name="station"  class="cls-27"  cx="301.25" cy="78" r="5.25"    onclick ="no_train()" value="임진강"/>
+			<circle  id="circle4"    name="station"  class="cls-27"  cx="306.25" cy="96" r="5.25"    onclick ="no_train()" value="운천"/>
+			<circle  id="circle5"    name="station"  class="cls-27"  cx="309.25" cy="119" r="5.25"   onclick ="no_train()" value="문산"/>
+			<circle  id="circle6"    name="station"  class="cls-26"  cx="294.25" cy="176" r="5.25"   onclick ="no_train()" value="행신"/>
 			<circle  id="circle7"    name="station"  class="cls-26"  cx="335.25" cy="200" r="5.25"   onclick ="on_click(evt)" value="서울"/>
 			<circle  id="circle8"    name="station"  class="cls-26"  cx="323.25" cy="217" r="5.25"   onclick ="on_click(evt)" value="용산"/>
 			<circle  id="circle9"    name="station"  class="cls-26"  cx="311.25" cy="236" r="5.25"   onclick ="on_click(evt)" value="영등포"/>
 			<circle  id="circle10"   name="station"   class="cls-28" cx="311.25" cy="262" r="5.25"   onclick ="on_click(evt)"  value="안양"/>
 			<circle  id="circle11"   name="station"   class="cls-26" cx="330.25" cy="318" r="5.25"   onclick ="on_click(evt)"  value="수원"/>
-			<circle  id="circle12"   name="station"   class="cls-26" cx="349.25" cy="243" r="5.25"   onclick ="on_click(evt)"  value="수서"/>
+			<circle  id="circle12"   name="station"   class="cls-26" cx="349.25" cy="243" r="5.25"   onclick ="no_train()"  value="수서"/>
 			<circle  id="circle13"   name="station"   class="cls-28" cx="334.25" cy="350" r="5.25"   onclick ="on_click(evt)"  value="오산"/>
 			<circle  id="circle14"   name="station"   class="cls-28" cx="336.25" cy="373" r="5.25"   onclick ="on_click(evt)"  value="서정리"/>
-			<circle  id="circle15"   name="station"   class="cls-26" cx="340.25" cy="393" r="5.25"   onclick ="on_click(evt)"  value="지제"/>
-			<circle  id="circle16"   name="station"   class="cls-26" cx="356.25" cy="342" r="5.25"   onclick ="on_click(evt)"  value="동탄"/>
+			<circle  id="circle15"   name="station"   class="cls-26" cx="340.25" cy="393" r="5.25"   onclick ="no_train()"  value="지제"/>
+			<circle  id="circle16"   name="station"   class="cls-26" cx="356.25" cy="342" r="5.25"   onclick ="no_train()"  value="동탄"/>
 			<circle  id="circle17"   name="station"   class="cls-28" cx="346.25" cy="411" r="5.25"   onclick ="on_click(evt)"  value="평택"/>
 			<circle  id="circle18"   name="station"   class="cls-28" cx="366.25" cy="448" r="5.25"   onclick ="on_click(evt)"  value="성환"/>
 			<circle  id="circle19"   name="station"   class="cls-28" cx="369.25" cy="480" r="5.25"   onclick ="on_click(evt)"  value="천안"/>
-			<circle  id="circle20"   name="station"   class="cls-26" cx="333.25" cy="487" r="5.25"   onclick ="on_click(evt)"  value="천안아산"/>
+			<circle  id="circle20"   name="station"   class="cls-26" cx="333.25" cy="487" r="5.25"   onclick ="no_train()"  value="천안아산"/>
 			<circle  id="circle21"   name="station"   class="cls-29" cx="333.25" cy="506" r="5.25"   onclick ="on_click(evt)"  value="아산"/>
 			<circle  id="circle22"   name="station"   class="cls-29" cx="314.25" cy="503" r="5.25"   onclick ="on_click(evt)"  value="온양온천"/>
 			<circle  id="circle23"   name="station"   class="cls-29" cx="295.25" cy="506" r="5.25"   onclick ="on_click(evt)"  value="신창"/>
@@ -535,7 +540,7 @@ function on_focusOut() {
 			<circle  id="circle43"   name="station"   class="cls-26" cx="356.25" cy="670" r="5.25"   onclick ="on_click(evt)"  value="계룡"/>
 			<circle  id="circle44"   name="station"   class="cls-26" cx="386.25" cy="671" r="5.25"   onclick ="on_click(evt)"  value="서대전"/>
 			<circle  id="circle45"   name="station"   class="cls-26" cx="418.25" cy="673" r="5.25"   onclick ="on_click(evt)"  value="대전"/>
-			<circle  id="circle46"   name="station"   class="cls-26" cx="323.25" cy="640" r="5.25"   onclick ="on_click(evt)"  value="공주"/>
+			<circle  id="circle46"   name="station"   class="cls-26" cx="323.25" cy="640" r="5.25"   onclick ="no_train()"  value="공주"/>
 			<circle  id="circle47"   name="station"   class="cls-28" cx="383.25" cy="573" r="5.25"   onclick ="on_click(evt)"  value="조치원"/>
 			<circle  id="circle48"   name="station"   class="cls-28" cx="397.25" cy="596" r="5.25"   onclick ="on_click(evt)"  value="부강"/>
 			<circle  id="circle49"   name="station"   class="cls-26" cx="423.25" cy="625" r="5.25"   onclick ="on_click(evt)"  value="신탄진"/>
@@ -581,8 +586,8 @@ function on_focusOut() {
 			<circle  id="circle89"   name="station"   class="cls-33" cx="835.25" cy="817" r="5.25"   onclick ="on_click(evt)"  value="북영천"/>
 			<circle  id="circle90"   name="station"   class="cls-33" cx="853.25" cy="842" r="5.25"   onclick ="on_click(evt)"  value="영천"/>
 			<circle  id="circle91"   name="station"   class="cls-33" cx="873.25" cy="883" r="5.25"   onclick ="on_click(evt)"  value="건천"/>
-			<circle  id="circle92"   name="station"   class="cls-26" cx="872.25" cy="907" r="5.25"   onclick ="on_click(evt)"  value="신경주"/>
-			<circle  id="circle93"   name="station"   class="cls-26" cx="911.25" cy="971" r="5.25"   onclick ="on_click(evt)"  value="울산"/>
+			<circle  id="circle92"   name="station"   class="cls-26" cx="872.25" cy="907" r="5.25"   onclick ="no_train()"  value="신경주"/>
+			<circle  id="circle93"   name="station"   class="cls-26" cx="911.25" cy="971" r="5.25"   onclick ="no_train()"  value="울산"/>
 			<circle  id="circle94"   name="station"   class="cls-33" cx="901.25" cy="869" r="5.25"   onclick ="on_click(evt)"  value="서경주"/>
 			<circle  id="circle95"   name="station"   class="cls-34" cx="932.25" cy="876" r="5.25"   onclick ="on_click(evt)"  value="경주"/>
 			<circle  id="circle96"   name="station"   class="cls-34" cx="955.25" cy="908" r="5.25"   onclick ="on_click(evt)"  value="불국사"/>
@@ -659,7 +664,7 @@ function on_focusOut() {
 			<circle  id="circle167"  name="station"   class="cls-34" cx="975.25" cy="690" r="5.25"   onclick ="on_click(evt)"   value="장사"/>
 			<circle  id="circle168"  name="station"   class="cls-34" cx="983.25" cy="657" r="5.25"   onclick ="on_click(evt)"   value="강구"/>
 			<circle  id="circle169"  name="station"   class="cls-34" cx="987.25" cy="631" r="5.25"   onclick ="on_click(evt)"   value="영덕"/>
-			<circle  id="circle170"  name="station"   class="cls-26" cx="288.25" cy="247" r="5.25"   onclick ="on_click(evt)"   value="광명"/>
+			<circle  id="circle170"  name="station"   class="cls-26" cx="288.25" cy="247" r="5.25"   onclick ="no_train()"   value="광명"/>
 			<circle  id="circle171"  name="station"   class="cls-26" cx="357.25" cy="198" r="5.25"   onclick ="on_click(evt)"  value="청량리"/>
 			<circle  id="circle172"  name="station"   class="cls-38" cx="361.25" cy="219" r="5.25"  value="없음"/>
 			<circle  id="circle173"  name="station"   class="cls-38" cx="343.25" cy="220" r="5.25"  value="없음"/>
@@ -678,17 +683,17 @@ function on_focusOut() {
 			<circle  id="circle186"  name="station"   class="cls-33" cx="586.25" cy="313" r="5.25"  onclick ="on_click(evt)"   value="원주"/>
 			<circle  id="circle187"  name="station"   class="cls-33" cx="605.25" cy="325" r="5.25"  onclick ="on_click(evt)"   value="반곡"/>
 			<circle  id="circle188"  name="station"   class="cls-33" cx="619.25" cy="342" r="5.25"  onclick ="on_click(evt)"   value="신림"/>
-			<circle  id="circle189"  name="station"   class="cls-39" cx="656.25" cy="253" r="5.25"  onclick ="on_click(evt)"   value="횡성"/>
-			<circle  id="circle190"  name="station"   class="cls-39" cx="702.25" cy="240" r="5.25"  onclick ="on_click(evt)"   value="둔내"/>
-			<circle  id="circle191"  name="station"   class="cls-39" cx="756.25" cy="232" r="5.25"  onclick ="on_click(evt)"   value="평창"/>
-			<circle  id="circle192"  name="station"   class="cls-39" cx="807.25" cy="210" r="5.25"  onclick ="on_click(evt)"   value="진부"/>
+			<circle  id="circle189"  name="station"   class="cls-39" cx="656.25" cy="253" r="5.25"  onclick ="no_train()"   value="횡성"/>
+			<circle  id="circle190"  name="station"   class="cls-39" cx="702.25" cy="240" r="5.25"  onclick ="no_train()"   value="둔내"/>
+			<circle  id="circle191"  name="station"   class="cls-39" cx="756.25" cy="232" r="5.25"  onclick ="no_train()"   value="평창"/>
+			<circle  id="circle192"  name="station"   class="cls-39" cx="807.25" cy="210" r="5.25"  onclick ="no_train()"   value="진부"/>
 			<circle  id="circle193"  name="station"   class="cls-39" cx="858.25" cy="161" r="5.25"  onclick ="on_click(evt)"   value="강릉"/>
 			<circle  id="circle194"  name="station"   class="cls-40" cx="911.25" cy="214" r="5.25"  onclick ="on_click(evt)"   value="정동진"/>
-			<circle  id="circle195"  name="station"   class="cls-40" cx="922.25" cy="246" r="5.25"  onclick ="on_click(evt)"   value="망상해수욕장"/>
+			<circle  id="circle195"  name="station"   class="cls-40" cx="922.25" cy="246" r="5.25"  onclick ="no_train()"   value="망상해수욕장"/>
 			<circle  id="circle196"  name="station"   class="cls-40" cx="920.25" cy="265" r="5.25"  onclick ="on_click(evt)"   value="묵호"/>
 			<circle  id="circle197"  name="station"   class="cls-40" cx="910.25" cy="282" r="5.25"  onclick ="on_click(evt)"   value="동해"/>
-			<circle  id="circle198"  name="station"   class="cls-41" cx="925.25" cy="292" r="5.25"  onclick ="on_click(evt)"   value="추암"/>
-			<circle  id="circle199"  name="station"   class="cls-41" cx="943.25" cy="299" r="5.25"  onclick ="on_click(evt)"   value="삼척해변"/>
+			<circle  id="circle198"  name="station"   class="cls-41" cx="925.25" cy="292" r="5.25"  onclick ="no_train()"   value="추암"/>
+			<circle  id="circle199"  name="station"   class="cls-41" cx="943.25" cy="299" r="5.25"  onclick ="no_train()"   value="삼척해변"/>
 			<circle  id="circle200"  name="station"   class="cls-40" cx="894.25" cy="340" r="5.25"  onclick ="on_click(evt)"   value="신기"/>
 			<circle  id="circle201"  name="station"   class="cls-40" cx="891.25" cy="359" r="5.25"  onclick ="on_click(evt)"   value="도계"/>
 			<circle  id="circle202"  name="station"   class="cls-40" cx="893.25" cy="380" r="5.25"  onclick ="on_click(evt)"   value="동백산"/>
@@ -697,11 +702,11 @@ function on_focusOut() {
 			<circle  id="circle205"  name="station"   class="cls-42" cx="853.25" cy="377" r="5.25"  onclick ="on_click(evt)"   value="고한"/>
 			<circle  id="circle206"  name="station"   class="cls-42" cx="835.25" cy="366" r="5.25"  onclick ="on_click(evt)"   value="사북"/>
 			<circle  id="circle207"  name="station"   class="cls-42" cx="816.25" cy="359" r="5.25"  onclick ="on_click(evt)"   value="민둥산"/>
-			<circle  id="circle208"  name="station"   class="cls-43" cx="805.25" cy="335" r="5.25"  onclick ="on_click(evt)"   value="별어곡"/>
-			<circle  id="circle209"  name="station"   class="cls-43" cx="798.25" cy="316" r="5.25"  onclick ="on_click(evt)"   value="선평"/>
-			<circle  id="circle210"  name="station"   class="cls-43" cx="802.25" cy="297" r="5.25"  onclick ="on_click(evt)"   value="정선"/>
-			<circle  id="circle211"  name="station"   class="cls-43" cx="819.25" cy="282" r="5.25"  onclick ="on_click(evt)"   value="나전"/>
-			<circle  id="circle212"  name="station"   class="cls-43" cx="840.25" cy="273" r="5.25"  onclick ="on_click(evt)"   value="아우라지"/>
+			<circle  id="circle208"  name="station"   class="cls-43" cx="805.25" cy="335" r="5.25"  onclick ="no_train()"   value="별어곡"/>
+			<circle  id="circle209"  name="station"   class="cls-43" cx="798.25" cy="316" r="5.25"  onclick ="no_train()"   value="선평"/>
+			<circle  id="circle210"  name="station"   class="cls-43" cx="802.25" cy="297" r="5.25"  onclick ="no_train()"   value="정선"/>
+			<circle  id="circle211"  name="station"   class="cls-43" cx="819.25" cy="282" r="5.25"  onclick ="no_train()"   value="나전"/>
+			<circle  id="circle212"  name="station"   class="cls-43" cx="840.25" cy="273" r="5.25"  onclick ="no_train()"   value="아우라지"/>
 			<circle  id="circle213"  name="station"   class="cls-42" cx="798.25" cy="354" r="5.25"  onclick ="on_click(evt)"   value="예미"/>
 			<circle  id="circle214"  name="station"   class="cls-42" cx="768.25" cy="372" r="5.25"  onclick ="on_click(evt)"   value="영월"/>
 			<circle  id="circle215"  name="station"   class="cls-42" cx="746.25" cy="377" r="5.25"  onclick ="on_click(evt)"   value="쌍룡"/>

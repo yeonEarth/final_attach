@@ -30,7 +30,7 @@
         android:layout_marginTop="41dp"
         android:background="@drawable/box_white"
         android:layout_centerInParent="true"
-        android:elevation="5dp"/>
+        android:elevation="5dp" />
 
 
     // 결과값 레이아웃
@@ -51,18 +51,37 @@
             android:text="금강산도 식후경~! 전국 맛집 찾아다니는"
             android:textColor="#000000"
             android:textSize="16dp" />
-        // 결과
-        <TextView
-            android:id="@+id/page0_9_result"
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="평화로운 나무늘보 입니다"
-            android:fontFamily="@font/notosans_bold"
-            android:textSize="24dp"
-            android:textColor="#000000"
-            android:textStyle="bold"
             android:layout_below="@id/page0_9_type1"
-            android:gravity="center"/>
+            android:gravity="center">
+            // 결과
+            <TextView
+                android:id="@+id/page0_9_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="평화로운 나무늘보"
+                android:fontFamily="@font/notosans_bold"
+                android:textSize="24dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            // 결과
+            <TextView
+                android:id="@+id/page0_9_result_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="입니다"
+                android:fontFamily="@font/notosans_bold"
+                android:textSize="24dp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/page0_9_result"
+                android:gravity="center" />
+        </RelativeLayout>
     </RelativeLayout>
 
     // 버튼 레이아웃

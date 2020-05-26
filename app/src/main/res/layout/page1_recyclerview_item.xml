@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/item_touch"
-    android:layout_marginLeft="24dp">
+    android:layout_marginLeft="24dp"
+    android:layout_centerVertical="true">
 
     <RelativeLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:layout_marginRight="8dp">
 
         //'T' 모양 아이콘
@@ -31,9 +31,8 @@
 
     //역1-역2 텍스트
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_weight="5"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -50,24 +49,24 @@
 
 
     //기차검색창 부분
-    <RelativeLayout
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:layout_weight="5"
-        android:layout_marginRight="8dp"
-        android:gravity="center_vertical">
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         //기차시간검색 텍스트
         <TextView
             android:id="@+id/page1_scheedule_traintext"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
             android:text="07:11 ~ 08:12"
             android:textSize="14sp"
             android:textAlignment="center" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

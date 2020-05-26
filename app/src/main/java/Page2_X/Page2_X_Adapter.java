@@ -29,12 +29,12 @@ public class Page2_X_Adapter extends RecyclerView.Adapter<Page2_X_Adapter.ViewHo
 
     private Context context;
     private List<Page2_X_Main.Recycler_item> items;  //리사이클러뷰 안에 들어갈 값 저장
-    private OnItemClick mCallback;
-    String cityName;
+    private Page2_X_Interface mCallback;
+    String cityName, click;
 
 
     //메인에서 불러올 때, 이 함수를 씀
-    public Page2_X_Adapter(Context context, List<Page2_X_Main.Recycler_item> items, String cityName,  OnItemClick mCallback) {
+    public Page2_X_Adapter(Context context, List<Page2_X_Main.Recycler_item> items, String cityName,  Page2_X_Interface mCallback) {
         this.context=context;
         this.items=items;   //리스트
         this.cityName = cityName;
@@ -87,6 +87,19 @@ public class Page2_X_Adapter extends RecyclerView.Adapter<Page2_X_Adapter.ViewHo
         Glide.with(context).load(item.getImage()).centerCrop().into(holder.image);
         holder.title.setText(item.getTitle());
 
+        click = mCallback.isClick(item.getContentviewID());
+        if(click ==null){
+            click = "";
+        }
+        if (click.equals(item.getContentviewID())) {
+            holder.heart.setBackgroundResource(R.drawable.ic_heart_off);
+            stay[position] = "ON";
+        } else {
+            holder.heart.setBackgroundResource(R.drawable.ic_icon_addmy);
+            stay[position] = null;
+        }
+
+
 
         //하트누르면 내부 데이터에 저장
         holder.heart.setOnClickListener(new View.OnClickListener() {
@@ -95,12 +108,13 @@ public class Page2_X_Adapter extends RecyclerView.Adapter<Page2_X_Adapter.ViewHo
             public void onClick(View v) {
                 if(stay[position]==null){
                     holder.heart.setBackgroundResource(R.drawable.ic_heart_on);
-                    mCallback.make_db(item.getContentviewID(), item.getTitle() , cityName);   //countId랑 title을 db에 넣으려고 함( make_db라는 인터페이스 이용)
+                    mCallback.make_db(item.getContentviewID(), item.getTitle() , cityName, (String) holder.type.getText(), item.getImage(), "1");   //countId랑 title을 db에 넣으려고 함( make_db라는 인터페이스 이용)
                     mCallback.make_dialog();                                       //db에 잘 넣으면 띄우는 다이얼로그(위와 마찬가지로 인터페이스 이용
                     stay[position] = "ON";
                 } else{
                     holder.heart.setBackgroundResource(R.drawable.ic_icon_addmy);
                     stay[position] = null;
+                    mCallback.delete_db(item.getContentviewID());
                     Toast.makeText(context,"관심관광지를 취소했습니다",Toast.LENGTH_SHORT).show();
                 }
             }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/nestScrollView2"
+    tools:showIn="@layout/activity_page2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/spot_error_txt2"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:text="관광지를 불러올 수 없습니다.\n 인터넷 연결을 확인해주세요."
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:background="@drawable/box_round"
+            android:visibility="invisible"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/page2_recyclerview"
+            android:paddingTop="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"/>
+
+    </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
