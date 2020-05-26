@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="당신의 여행 유형을\n 알아볼까요?"
             android:gravity="end"
-            android:fontFamily="@font/notosans_bold"
+            android:fontFamily="@font/gothica1_regular"
             android:textSize="32dp"
             android:textStyle="bold"
             android:textColor="#534040" />
