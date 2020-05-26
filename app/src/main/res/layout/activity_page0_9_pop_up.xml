@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Page0_9_PopUp"
+    android:gravity="center"
+    android:id="@+id/page0_9_ll">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/page0_9_box_gray"
+        android:orientation="vertical"
+        android:padding="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right">
+            <Button
+                android:id="@+id/page0_9_close_btn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+               android:text="X"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            // 프로필 사진
+            <ImageView
+                android:id="@+id/page0_9_profile"
+                android:layout_width="76dp"
+                android:layout_height="76dp"
+                android:background="@drawable/round_gray"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"/>
+
+            // 닉네임
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/page0_9_subname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="자연속에서 힐링하기 좋아하는"
+                    android:textSize="16dp"
+                    android:fontFamily="@font/notosans_extralight"
+                    android:textColor="#000000"/>
+
+                <EditText
+                    android:id="@+id/page0_9_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="평화로운 나무늘보"
+                    android:fontFamily="@font/notosans"
+                    android:textSize="20dp"
+                    android:textColor="#000000"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:hint="닉네임을 입력해주세요."
+                    android:textColorHint="#C4C4C4"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right">
+            <Button
+                android:id="@+id/page0_9_check_btn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/round_gray" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
