@@ -292,7 +292,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
         // 1이 아니라면 취향파악페이지 보여주기 = 처음 실행이라면
         if (firstviewShow != 1) {
             Intent intent2 = new Intent(Page1.this, Page0.class);
-            startActivity(intent);
+            startActivity(intent2);
         }
 
         // DB열기
