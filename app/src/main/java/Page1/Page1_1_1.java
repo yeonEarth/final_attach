@@ -1,7 +1,5 @@
 package Page1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,13 +10,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.appbar.AppBarLayout;
@@ -27,7 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DB.DbOpenHelper;
-import Page2.Page2;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -107,12 +103,19 @@ public class Page1_1_1 extends AppCompatActivity {
             }
         };
 
+        // DB열기
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+
+        showDatabase(sort);
+
         setSupportActionBar(toolbar2);
         drawer.addDrawerListener(mDrawerToggle);
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name, context);
+        adapter2 = new Main_RecyclerviewAdapter(name, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         logo = (ImageButton) findViewById(R.id.main_logo_page1_1_1);
@@ -129,15 +132,6 @@ public class Page1_1_1 extends AppCompatActivity {
 
             }
         });
-
-
-
-        // DB열기
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open();
-        mDbOpenHelper.create();
-
-        showDatabase(sort);
 
         // 리사이클러뷰 헤더
         //name.add("나의 관광지");

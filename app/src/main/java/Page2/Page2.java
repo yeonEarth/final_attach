@@ -22,18 +22,6 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.appbar.AppBarLayout;
@@ -61,6 +49,16 @@ import Page2_1_1.course;
 import Page2_X.NetworkStatus;
 import Page2_X.Page2_X_CategoryBottom;
 import Page3.Page3_Main;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -115,6 +113,9 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
     private String  subject, station, id;
     private String contentTypeId, cat1, cat2;
 
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
+
     //역 이름을 받아서 지역코드랑 시군구코드 받기 위한 배열
     String returnResult, url;
 
@@ -168,6 +169,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
         mDbOpenHelper = new DbOpenHelper(Page2.this);
         mDbOpenHelper.open();
         mDbOpenHelper.create();
+        showDatabase();
 
         //scrollView = (ScrollView)findViewById(R.id.page2_scroll);
         //scrollView.smoothScrollBy(0, 0);
@@ -199,7 +201,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name, context);
+        adapter2 = new Main_RecyclerviewAdapter(name, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         //리사이클러뷰 헤더
@@ -681,6 +683,19 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick {
         t6.setText(items.get(1).getSt2());
         t7.setText(items.get(1).getSt3());
         t8.setText(items.get(1).getSt4());
+    }
+
+    public void showDatabase(){
+        Cursor iCursor = mDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
+
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
     }
 
     //URL에 들어갈 contentTypeId, cat1, cat2를 지정하는 작업

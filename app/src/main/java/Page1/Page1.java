@@ -174,9 +174,23 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
         setSupportActionBar(toolbar2);
         drawer.addDrawerListener(mDrawerToggle);
 
+        // DB열기
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+
+
+        // 취향파악 DB열기
+        mLikeDpOpenHelper = new Like_DbOpenHelper(this);
+        mLikeDpOpenHelper.open();
+        mLikeDpOpenHelper.create();
+
+        showDatabase(sort);
+        showLikeDB();
+
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Main_RecyclerviewAdapter(name, context);
+        adapter = new Main_RecyclerviewAdapter(name, context, mySpot.size());
         recyclerView1.setAdapter(adapter);
 
         //리사이클러뷰 헤더
@@ -284,19 +298,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
             startActivity(intent2);
         }
 
-        // DB열기
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open();
-        mDbOpenHelper.create();
-
-
-        // 취향파악 DB열기
-        mLikeDpOpenHelper = new Like_DbOpenHelper(this);
-        mLikeDpOpenHelper.open();
-        mLikeDpOpenHelper.create();
-
-        showDatabase(sort);
-        showLikeDB();
 
         // DB에 값이 있다면
         if (like != null) {
@@ -358,6 +359,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
 //                startActivity(intent3);
                 if (mySpot.size() == 0) {
                     Intent intent3 = new Intent(getApplicationContext(), Page1_1_0.class);
+                    intent3.putExtra("spotSize", mySpot.size());
                     intent3.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     intent3.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent3);

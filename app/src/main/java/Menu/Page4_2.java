@@ -12,25 +12,22 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.example.hansol.spot_200510_hs.R;
 
 import java.util.ArrayList;
+
+import DB.DbOpenHelper;
 import DB.Train_DbOpenHelper;
 import Page1.EndDrawerToggle;
 import Page1.Main_RecyclerviewAdapter;
-import Page2.Page2;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -65,6 +62,11 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
 
     ImageButton logo;
 
+    private DbOpenHelper spotDbOpenHelper;
+
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +86,12 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
         mDbOpenHelper.open();
         mDbOpenHelper.create();
         showDatabase();
+
+        // 찜한 관광지 DB열기
+        spotDbOpenHelper = new DbOpenHelper(this);
+        spotDbOpenHelper.open();
+        spotDbOpenHelper.create();
+        showSpotDatabase();
 
 
         //데이터가 없으면
@@ -151,7 +159,7 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name, context);
+        adapter2 = new Main_RecyclerviewAdapter(name, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         //리사이클러뷰 헤더
@@ -199,6 +207,19 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
         }
 
 
+    }
+
+    public void showSpotDatabase(){
+        Cursor iCursor = spotDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
+
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
     }
 
 

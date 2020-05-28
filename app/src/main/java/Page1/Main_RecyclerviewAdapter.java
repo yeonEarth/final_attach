@@ -12,14 +12,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-
 import com.example.hansol.spot_200510_hs.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class Main_RecyclerviewAdapter extends  RecyclerView.Adapter<Main_RecyclerviewAdapter.ViewHolder> {
@@ -27,6 +26,8 @@ public class Main_RecyclerviewAdapter extends  RecyclerView.Adapter<Main_Recycle
     //리아시클러뷰 안 리사이클러뷰 관련
     Second_RecyclerviewAdapater adapter;
     private List<String> real_items = new ArrayList<String>();
+
+    private int mySpotSize;
 
     // adapter에 들어갈 list 입니다.
     private ArrayList<String> listData;
@@ -39,10 +40,10 @@ public class Main_RecyclerviewAdapter extends  RecyclerView.Adapter<Main_Recycle
     private int prePosition = -1;
     private boolean isFirst = true;
 
-
-    public Main_RecyclerviewAdapter(ArrayList<String> data, Context context){
+    public Main_RecyclerviewAdapter(ArrayList<String> data, Context context, int mySpotSize){
         this.listData = data;
         this.context = context;
+        this.mySpotSize = mySpotSize;
     }
 
     @Override
@@ -84,7 +85,7 @@ public class Main_RecyclerviewAdapter extends  RecyclerView.Adapter<Main_Recycle
 
 
         //어댑터 연결
-        adapter = new Second_RecyclerviewAdapater(context, real_items);
+        adapter = new Second_RecyclerviewAdapater(context, real_items, mySpotSize);
         viewHolder.recyclerView.setLayoutManager( new LinearLayoutManager(context));
         viewHolder.recyclerView.setAdapter(adapter);
 

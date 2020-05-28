@@ -14,9 +14,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.hansol.spot_200510_hs.R;
 
 import java.util.ArrayList;
@@ -25,6 +22,8 @@ import java.util.List;
 import DB.DbOpenHelper;
 import Page2_1_1.OnItemClick;
 import Page2_X.Page2_X_CategoryBottom;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.ViewHolder> implements OnItemClick {
     // 리사이클러뷰 안 리사이클러뷰
@@ -191,10 +190,17 @@ public class Page1_1_1_Adapter extends RecyclerView.Adapter<Page1_1_1_Adapter.Vi
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //관심관광지 페이지로 감
-                Intent intent = new Intent(context, Page1_1_1.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                if (listForSecond.size() == 0) {
+                    //관심관광지 페이지로 감
+                    Intent intent = new Intent(context, Page1_1_0.class);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                } else {
+                    //관심관광지 페이지로 감
+                    Intent intent = new Intent(context, Page1_1_0.class);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
             }
         });
         builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {

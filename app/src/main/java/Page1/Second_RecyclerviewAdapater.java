@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-
 import com.example.hansol.spot_200510_hs.Page0;
 import com.example.hansol.spot_200510_hs.R;
 
@@ -21,16 +17,20 @@ import java.util.List;
 import Menu.Page4_2;
 import Page2_X.Page2_X;
 import Page3.Page3_Main;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Second_RecyclerviewAdapater extends RecyclerView.Adapter<Second_RecyclerviewAdapater.ViewHolder> {
 
     Context context;
     private int position2;
     private List<String> items;  //리사이클러뷰 안에 들어갈 값 저장
+    private int mySpotSize;
 
-    public Second_RecyclerviewAdapater(Context context, List<String> items){
+    public Second_RecyclerviewAdapater(Context context, List<String> items, int mySpotSize){
         this.context = context;
         this.items =  items;
+        this.mySpotSize = mySpotSize;
     }
 
 
@@ -67,8 +67,15 @@ public class Second_RecyclerviewAdapater extends RecyclerView.Adapter<Second_Rec
                         context.startActivity(intent4);
                         break;
                     case "내가 찜한 관광지":
-                        Intent intent5 = new Intent(context, Page1_1_1.class);
-                        context.startActivity(intent5);
+                        if (mySpotSize == 0) {
+                            // 찜한 관광지가 없다면
+                            Intent intent5 = new Intent(context, Page1_1_0.class);
+                            context.startActivity(intent5);
+                        } else {
+                            // 찜한관광지가 있다면
+                            Intent intent5 = new Intent(context, Page1_1_1.class);
+                            context.startActivity(intent5);
+                        }
                         break;
                     case "기차 스케쥴짜기":
                         Intent intent6 = new Intent(context, Page3_Main.class);

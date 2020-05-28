@@ -3,6 +3,7 @@ package Page3_1;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,16 +12,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.hansol.spot_200510_hs.R;
 import com.example.hansol.spot_200510_hs.send_data;
@@ -32,11 +23,18 @@ import java.util.ArrayList;
 import Algorithm.Subway;
 import Algorithm.SubwayBuilder;
 import Algorithm.SubwayController;
+import DB.DbOpenHelper;
 import Page1.EndDrawerToggle;
 import Page1.Main_RecyclerviewAdapter;
-import Page2.Page2;
 import Page3_1_1.Page3_1_1_Main;
 import Page3_1_1_1.Page3_1_1_1_Main;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -78,6 +76,10 @@ public class Page3_1_Main extends AppCompatActivity {
     Subway subway = null;
     String result = "";
 
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
+    private DbOpenHelper mDbOpenHelper;
+
 
     boolean checkStart = false;     //'출발'을 한 번만 넣기 위함
     ArrayList<String> next_data = new ArrayList<>();
@@ -105,8 +107,11 @@ public class Page3_1_Main extends AppCompatActivity {
         positionBtn = (Switch)findViewById(R.id.menu_postion_btn);
         recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
 
-
-
+        // DB열기
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+        showDatabase();
 
         //앞에서 값을 받아온다.(1)
         Intent get = getIntent();
@@ -154,7 +159,7 @@ public class Page3_1_Main extends AppCompatActivity {
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Main_RecyclerviewAdapter(name, context);
+        adapter = new Main_RecyclerviewAdapter(name, context, mySpot.size());
         recyclerView1.setAdapter(adapter);
 
         //리사이클러뷰 헤더
@@ -752,5 +757,16 @@ public class Page3_1_Main extends AppCompatActivity {
         overridePendingTransition(R.anim.backbutton, R.anim.backbutton);
     }
 
+    public void showDatabase(){
+        Cursor iCursor = mDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
 
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
+    }
 }

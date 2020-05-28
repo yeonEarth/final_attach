@@ -14,14 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hansol.spot_200510_hs.R;
 
@@ -33,11 +25,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import DB.DbOpenHelper;
 import DB.Train_DbOpenHelper;
 import Page1.EndDrawerToggle;
 import Page1.Main_RecyclerviewAdapter;
 import Page1_schedule.Page1_Main;
 import Page2_1_1.NetworkStatus;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -85,6 +84,9 @@ public  class Page3_1_1_1_Main extends AppCompatActivity implements Page3_1_1_1_
 
     ImageButton logo;
 
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
+    private DbOpenHelper mDbOpenHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,9 +142,15 @@ public  class Page3_1_1_1_Main extends AppCompatActivity implements Page3_1_1_1_
         setSupportActionBar(toolbar2);
         drawer.addDrawerListener(mDrawerToggle);
 
+        // DB열기
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+        showDatabase();
+
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name2, context);
+        adapter2 = new Main_RecyclerviewAdapter(name2, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         //리사이클러뷰 헤더
@@ -519,5 +527,16 @@ public  class Page3_1_1_1_Main extends AppCompatActivity implements Page3_1_1_1_
 
     }
 
+    public void showDatabase(){
+        Cursor iCursor = mDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
 
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
+    }
 }

@@ -37,25 +37,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.hansol.spot_200510_hs.BuildConfig;
 import com.example.hansol.spot_200510_hs.R;
@@ -82,6 +66,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import DB.DbOpenHelper;
 import DB.Menu_DbOpenHelper;
 import DB.Train_DbOpenHelper;
 import Page1.EndDrawerToggle;
@@ -89,6 +74,18 @@ import Page1.Main_RecyclerviewAdapter;
 import Page1.Page1;
 import Page2_1_1.NetworkStatus;
 import Page3.Page3_Main;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -170,6 +167,11 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
     private List<String> station = new ArrayList<String>();
     private List<String> stationWithTransfer = new ArrayList<String>();
 
+    // 찜한 관광지 DB
+    private DbOpenHelper spotDbOpenHelper;
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
+
     //dp 변환
     float d;
 
@@ -243,6 +245,12 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
         positionBtn = (Switch)findViewById(R.id.menu_postion_btn);
         recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
 
+        // 찜한 관광지 DB열기
+        spotDbOpenHelper = new DbOpenHelper(this);
+        spotDbOpenHelper.open();
+        spotDbOpenHelper.create();
+        showDatabase();
+
         mDrawerToggle = new EndDrawerToggle(this,drawer,toolbar2,R.string.open_drawer,R.string.close_drawer){
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
@@ -259,7 +267,7 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name2, context);
+        adapter2 = new Main_RecyclerviewAdapter(name2, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         //리사이클러뷰 헤더
@@ -577,6 +585,19 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
                 dataList.smoothScrollToPosition(position);
             }
         },500);
+    }
+
+    public void showDatabase(){
+        Cursor iCursor = spotDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
+
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
     }
 
 

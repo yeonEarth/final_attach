@@ -1,11 +1,5 @@
 package Page1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,16 +9,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.example.hansol.spot_200510_hs.R;
 
 import java.util.ArrayList;
 
-import Page2.Page2;
 import Page2_X.Page2_X;
-import Page3.Page3_Main;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -49,6 +44,8 @@ public class Page1_1_0 extends AppCompatActivity {
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
 
+    private int spotSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +65,9 @@ public class Page1_1_0 extends AppCompatActivity {
         recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
 
         logo = (ImageButton) findViewById(R.id.main_logo_page1_1_0);
+
+        Intent intent = getIntent();
+        spotSize = intent.getIntExtra("spotSize", 0);
 
         //메인 로고 눌렀을때 메인페이지 이동
         logo.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +124,7 @@ public class Page1_1_0 extends AppCompatActivity {
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new Main_RecyclerviewAdapter(name, context);
+        adapter = new Main_RecyclerviewAdapter(name, context, spotSize);
         recyclerView1.setAdapter(adapter);
 
         //리사이클러뷰 헤더

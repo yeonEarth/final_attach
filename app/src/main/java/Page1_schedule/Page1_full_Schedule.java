@@ -10,14 +10,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,10 +17,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import DB.DbOpenHelper;
 import DB.Train_DbOpenHelper;
 import Page1.EndDrawerToggle;
 import Page1.Main_RecyclerviewAdapter;
 import Page3_1_1_1.Page3_1_1_1_Main;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -48,6 +47,11 @@ public class Page1_full_Schedule extends AppCompatActivity {
     private String startDate;
     private List<String> station = new ArrayList<String>();
     private List<String> stationWithTransfer = new ArrayList<String>();
+
+    // 찜한 관광지 DB
+    private DbOpenHelper spotDbOpenHelper;
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
 
     //메뉴 관련
     private Context context;
@@ -115,6 +119,11 @@ public class Page1_full_Schedule extends AppCompatActivity {
         String startDate = db_data.get(0).date;
         String endDate = db_data.get(db_data.size()-1).date;
 
+        // 찜한 관광지DB열기
+        spotDbOpenHelper = new DbOpenHelper(this);
+        spotDbOpenHelper.open();
+        spotDbOpenHelper.create();
+        showDatabase();
 
         //객체 연결
         context = getApplicationContext();
@@ -142,7 +151,7 @@ public class Page1_full_Schedule extends AppCompatActivity {
 
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name2, context);
+        adapter2 = new Main_RecyclerviewAdapter(name2, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         //리사이클러뷰 헤더
@@ -197,6 +206,19 @@ public class Page1_full_Schedule extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void showDatabase(){
+        Cursor iCursor = spotDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
+
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
     }
 
 

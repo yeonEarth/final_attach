@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,15 +31,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidtagview.ColorFactory;
 import com.example.androidtagview.TagContainerLayout;
@@ -57,11 +49,18 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import DB.DbOpenHelper;
 import DB.Page3_DbOpenHelper;
 import Page1.EndDrawerToggle;
 import Page1.Main_RecyclerviewAdapter;
-import Page2.Page2;
 import Page3_1.Page3_1_Main;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -149,6 +148,10 @@ public class Page3_Main extends AppCompatActivity {
 
     ImageButton logo;
 
+    // 찜한 관광지 DB
+    private DbOpenHelper mDbOpenHelper;
+    // 찜한 여행지 저장하는 리스트
+    private ArrayList<String > mySpot = new ArrayList<String >();
 
 
     @Override
@@ -198,9 +201,15 @@ public class Page3_Main extends AppCompatActivity {
         setSupportActionBar(toolbar2);
         drawer.addDrawerListener(mDrawerToggle);
 
+        // DB열기
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+        showDatabase();
+
         //메뉴 안 내용 구성
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-        adapter2 = new Main_RecyclerviewAdapter(name2, context);
+        adapter2 = new Main_RecyclerviewAdapter(name2, context, mySpot.size());
         recyclerView1.setAdapter(adapter2);
 
         //리사이클러뷰 헤더
@@ -856,7 +865,18 @@ public class Page3_Main extends AppCompatActivity {
         overridePendingTransition(0,0);
     }
 
+    public void showDatabase(){
+        Cursor iCursor = mDbOpenHelper.selectColumns();
+        //iCursor.moveToFirst();
+        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
+        mySpot.clear();
 
+        while(iCursor.moveToNext()){
+            String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
+
+            mySpot.add(tempName);
+        }
+    }
 }
 
 

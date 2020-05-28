@@ -1,18 +1,9 @@
 package Page1;
 
 import android.content.Context;
-
-import DB.DbOpenHelper;
-import Page2_1_1.OnItemClick;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,8 +11,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.hansol.spot_200510_hs.R;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import Page2_1_1.OnItemClick;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_SecondAdapter.ViewHolder> {
     Context context;
@@ -62,6 +55,12 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
                 mCallback.delete_db(item.getContentviewID());
                 items.remove(position);
                 notifyItemRemoved(position);
+
+//                if (items.size() == 0) {
+//                    Intent intent = new Intent(context, Page1_1_0.class);
+//                    intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                    context.startActivity(intent);
+//                }
             }
 
         });
