@@ -38,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:layout_alignParentRight="true"
-                android:text="2020.02.24"/>
+                android:text="2020.02.24"
+                android:fontFamily="@font/gothic_medium"/>
         </RelativeLayout>
 
         //텍스트

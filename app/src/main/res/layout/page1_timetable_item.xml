@@ -20,9 +20,10 @@
             android:layout_gravity="center_horizontal"
             android:text="출발"
             android:textSize="16dp"
-            android:textAlignment="center"
-            android:fontFamily="@font/notosans_semibold"
-            android:letterSpacing="0.02" />
+            android:gravity="center"
+            android:fontFamily="@font/gothic_medium"
+            android:letterSpacing="0.02"
+            android:scaleX="0.98"/>
 
         <TextView
             android:id="@+id/page1_arrTime"
@@ -33,9 +34,10 @@
             android:layout_gravity="center_horizontal"
             android:text="도착"
             android:textSize="16dp"
-            android:textAlignment="center"
-            android:fontFamily="@font/notosans_semibold"
-            android:letterSpacing="0.02" />
+            android:gravity="center"
+            android:fontFamily="@font/gothic_medium"
+            android:letterSpacing="0.02"
+            android:scaleX="0.98"/>
 
         <TextView
             android:id="@+id/page1_transfer"
@@ -46,9 +48,10 @@
             android:layout_gravity="center_horizontal"
             android:text="열차정보"
             android:textSize="16sp"
-            android:textAlignment="center"
-            android:fontFamily="@font/notosans"
-            android:letterSpacing="0.02" />
+            android:gravity="center"
+            android:fontFamily="@font/gothic_medium"
+            android:letterSpacing="0.02"
+            android:scaleX="0.98"/>
 
     </LinearLayout>
 

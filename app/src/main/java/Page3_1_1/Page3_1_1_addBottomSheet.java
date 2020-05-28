@@ -15,9 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -27,6 +24,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
     Page3_1_1_Main page3_1_1_main;
@@ -150,6 +150,9 @@ public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
                  dismiss();
             }
         });
+
+
+
         return rootview;
     }
 

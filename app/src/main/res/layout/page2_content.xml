@@ -10,7 +10,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
         <TextView
             android:id="@+id/spot_error_txt2"
@@ -20,18 +22,16 @@
             android:gravity="center"
             android:textSize="16sp"
             android:textColor="#666666"
-            android:background="@drawable/box_round"
+            android:background="@drawable/box_white_rad8"
             android:visibility="invisible"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/page2_recyclerview"
-            android:paddingTop="10dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"/>
+            android:background="@drawable/box_white_rad8"/>
 
     </RelativeLayout>
 

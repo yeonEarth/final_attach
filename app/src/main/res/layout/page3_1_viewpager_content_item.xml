@@ -38,9 +38,10 @@
         android:layout_marginLeft="13dp"
         android:text="용       산"
         android:textColor="#000000"
-        android:textSize="18sp"
-        android:fontFamily="@font/notosans_medium"
-        android:layout_marginTop="5dp"/>
+        android:textSize="20sp"
+        android:fontFamily="@font/gothic_bold"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp" />
 
 
     //선+소요시간
@@ -98,13 +99,14 @@
             <TextView
                 android:id="@+id/recyclerview_time"
                 android:layout_width="wrap_content"
-                android:layout_height="15dp"
+                android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/circle2"
                 android:layout_marginLeft="12dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_medium"
-                android:textSize="11sp"
-                android:text="약 3시간 11분"/>
+                android:fontFamily="@font/gothic_medium"
+                android:textSize="14sp"
+                android:text="약 3시간 11분"
+                android:scaleX="0.98"/>
         </RelativeLayout>
 
         <View

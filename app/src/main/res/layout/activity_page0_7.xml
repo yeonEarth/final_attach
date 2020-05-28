@@ -10,7 +10,7 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/page0_7_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="bg06.json"
         app:lottie_loop="true"/>
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/page0_7_back"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="34dp"
             android:gravity="center_vertical">
             // Step6
             <TextView
@@ -114,7 +114,7 @@
             android:id="@+id/page0_7_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/page0_7_step_layout">
             // Q6
             <TextView
@@ -122,7 +122,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="평소에는 경험하기 힘든 짜릿한 액티비티! 좋아하시나요?"
-                android:fontFamily="@font/notosans_semibold"
+                android:fontFamily="@font/gothic_regular"
+                android:lineSpacingExtra="10dp"
                 android:textColor="#000000"
                 android:textSize="24dp"
                 android:gravity="left"/>
@@ -147,7 +148,7 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_regular"
+                android:fontFamily="@font/gothic_light"
                 android:elevation="3dp"
                 android:clickable="true"/>
 
@@ -161,7 +162,7 @@
                 android:gravity="center"
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:fontFamily="@font/notosans_regular"
+                android:fontFamily="@font/gothic_light"
                 android:layout_below="@+id/page0_7_a1"
                 android:layout_marginTop="8dp"
                 android:elevation="3dp"
@@ -177,7 +178,7 @@
             android:text="나중에 다시 하기"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:fontFamily="@font/notosans_semibold"
+            android:fontFamily="@font/gothic_thin"
             android:textColor="#CC000000"
             android:clickable="true"/>
 

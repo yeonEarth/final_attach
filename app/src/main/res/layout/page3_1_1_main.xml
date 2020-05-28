@@ -79,7 +79,9 @@
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:letterSpacing="-0.03"
-                android:fontFamily="@font/notosans_bold"/>
+                android:fontFamily="@font/gothic_bold"
+                android:gravity="center_vertical"
+                android:scaleX="0.98"/>
 
             //도시 순서를... 섭타이틀 텍스트
             <TextView
@@ -92,7 +94,8 @@
                 android:text="도시 순서를 수정하거나 경로 재탐색이 가능합니다."
                 android:textSize="16dp"
                 android:textColor="#000000"
-                android:letterSpacing="-0.03" />
+                android:letterSpacing="-0.03"
+                android:scaleX="0.98"/>
 
             <RelativeLayout
                 android:id="@+id/recyclerView_layout"
@@ -124,20 +127,28 @@
 
             </RelativeLayout>
 
-            //수정완료 버튼
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page3_1_1_reviseDone_btn"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/recyclerView_layout"
                 android:layout_marginTop="24dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:text="수정완료"
-                android:textSize="16dp"
-                android:textColor="#ffffff"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/box_round3"
-                android:elevation="4dp" />
+                android:elevation="4dp">
+
+                //수정완료 버튼
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page3_1_1_reviseDone_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="수정완료"
+                    android:textSize="16dp"
+                    android:textColor="#ffffff"
+                    android:background="@drawable/box_round3"
+                    android:fontFamily="@font/gothic_bold"/>
+            </FrameLayout>
 
         </RelativeLayout>
 

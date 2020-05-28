@@ -27,7 +27,7 @@
         android:text="관광지 추가하기"
         android:textColor="#000000"
         android:textSize="18sp"
-        android:fontFamily="@font/notosans_medium" />
+        android:fontFamily="@font/gothic_medium" />
 
     //버튼 터치 영역 확장
     <androidx.appcompat.widget.AppCompatButton
@@ -35,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
-        android:background="#00000000"/>
+        android:background="#00000000"
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
 </RelativeLayout>

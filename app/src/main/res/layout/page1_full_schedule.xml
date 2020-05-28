@@ -79,7 +79,8 @@
             android:text="전체 여행 스케쥴"
             android:textSize="16sp"
             android:textColor="#000000"
-            android:fontFamily="@font/notosans_semibold" />
+            android:fontFamily="@font/gothic_medium"
+            android:scaleX="0.98"/>
 
         //날짜 텍스트
         <TextView
@@ -92,7 +93,8 @@
             android:text="2020년 1월 13일 ~ 1월 20일"
             android:textSize="24sp"
             android:textColor="#000000"
-            android:fontFamily="@font/notosans_semibold" />
+            android:fontFamily="@font/gothic_bold"
+            android:scaleX="0.98"/>
 
         //리사이클러뷰
         <androidx.recyclerview.widget.RecyclerView

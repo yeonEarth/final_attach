@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="찜한 여행지"
-        android:fontFamily="@font/notosans"
+        android:fontFamily="@font/gothic_bold"
         android:textStyle="bold"
         android:textSize="24dp"
         android:textColor="#000000"
@@ -48,13 +48,16 @@
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"/>
+        android:layout_marginRight="8dp"
+        android:textScaleX="0.98"/>
 
     // 찜한 여행지 박스
     <RelativeLayout
         android:id="@+id/page1_1_info_layout"
-        android:layout_width="332dp"
-        android:layout_height="189dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="200dp"
         android:background="@drawable/page1_1_white_box"
         android:layout_centerInParent="true"
         android:padding="22dp">
@@ -62,35 +65,37 @@
         // 텍스트
         <TextView
             android:id="@+id/page1_1_info_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="아직 찜한 여행지가 없네요!"
-            android:textStyle="bold"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/gothic_medium"
             android:textColor="#000000"
             android:textSize="18dp"
             android:gravity="center"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="18dp"
+            android:layout_centerHorizontal="true"
+            android:textScaleX="0.98"/>
         <TextView
             android:id="@+id/page1_1_info_text2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="여행지를 먼저 둘러보시겠어요?"
-            android:textStyle="bold"
-            android:fontFamily="@font/notosans_extralight"
+            android:fontFamily="@font/gothic_medium"
             android:textColor="#000000"
             android:textSize="18dp"
             android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/page1_1_info_text"
-            android:layout_marginTop="4dp"/>
+            android:textScaleX="0.98"/>
 
         // 버튼 레이아웃
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="6dp"
+            android:gravity="center">
 
             // 도시 탐색 버튼
             <androidx.appcompat.widget.AppCompatButton
@@ -102,9 +107,9 @@
                 android:text="도시 탐색"
                 android:textSize="16dp"
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/notosans"
+                android:fontFamily="@font/gothic_medium"
                 android:textStyle="bold"
-                android:layout_marginRight="8dp"/>
+                android:layout_marginRight="8dp" />
 
             // 도시 탐색 버튼
             <androidx.appcompat.widget.AppCompatButton
@@ -112,11 +117,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/box_round3"
+                android:background="@drawable/box_round_rad5"
                 android:text="추천 코스"
                 android:textSize="16dp"
                 android:textColor="#FFFFFF"
-                android:fontFamily="@font/notosans"
+                android:fontFamily="@font/gothic_medium"
                 android:textStyle="bold"
                 android:layout_marginLeft="8dp"/>
         </LinearLayout>

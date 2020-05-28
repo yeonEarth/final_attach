@@ -5,14 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 public class Page3_1_1_addConformDialog extends BottomSheetDialogFragment {
@@ -20,11 +21,13 @@ public class Page3_1_1_addConformDialog extends BottomSheetDialogFragment {
     Page3_1_1_Main page3_1_1_main;
     GoAlgorithPage goAlgorithPage;   //인터페이스
     String name, date, dayPass;
+    Button cancel;
 
 
     //Page3_1_1_Main과 연결
     public static Page3_1_1_addConformDialog getInstance(String name, String date, String dayPass){
         Page3_1_1_addConformDialog dialog = new Page3_1_1_addConformDialog();
+        dialog.setCancelable(false);
         Bundle args = new Bundle();
         args.putString("name", name);
         args.putString("date", date);
@@ -53,6 +56,8 @@ public class Page3_1_1_addConformDialog extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.page3_1_1_addconfirm, container, false);
 
+        cancel = (Button) rootview.findViewById(R.id.cancel_btn);
+
         //액티비티에서 값을 전달 받음
         Bundle extra = getArguments();
         name = extra.getString("name");
@@ -68,6 +73,14 @@ public class Page3_1_1_addConformDialog extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 goAlgorithPage.go_algorithm_page();
+            }
+        });
+
+        // X 버튼 눌렀을 때
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
             }
         });
 

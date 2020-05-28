@@ -12,6 +12,13 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp">
+        
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/ic_delete3"
+            android:layout_alignParentRight="true"/>
 
         //추가되는 역 이름
         <TextView
@@ -19,9 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="대전역"
-            android:textSize="16sp"
+            android:textSize="18dp"
             android:textColor="#ffffff"
-            android:fontFamily="@font/notosans"/>
+            android:fontFamily="@font/gothic_medium"/>
 
         //"이 추가되었습니다." 텍스트
         <TextView
@@ -29,9 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/page3_1_1_addStation"
             android:text="이 추가되었습니다."
-            android:textSize="16sp"
+            android:textSize="18dp"
             android:textColor="#ffffff"
-            android:fontFamily="@font/notosans_extralight"/>
+            android:fontFamily="@font/gothic_medium"/>
 
 
         //"최단 경로를 새로 탐색해보세요" 텍스트
@@ -39,12 +46,24 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="8dp"
             android:layout_below="@+id/page3_1_1_addStation"
             android:text="최단 경로를 새로 탐색해보세요."
-            android:textSize="18sp"
+            android:textSize="18dp"
             android:textColor="#ffffff"
-            android:fontFamily="@font/notosans"/>
+            android:fontFamily="@font/gothic_medium"/>
+
+        //"창을 닫으면 어쩌구 텍스트-----------------------여기추가----
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/text"
+            android:text="창을 닫으면 지정한 순서대로 저장됩니다."
+            android:textSize="18dp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/gothic_medium"/>
 
 
         //새로운 경로 추천 확인 버튼
@@ -52,8 +71,8 @@
             android:id="@+id/page3_1_1_newroute_btn"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_below="@id/text"
-            android:layout_marginTop="34dp"
+            android:layout_below="@id/text2"
+            android:layout_marginTop="37dp"
             android:background="@drawable/box_onclick_white"
             android:clickable="true">
 
@@ -77,9 +96,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="11dp"
                     android:text="새로운 추천 경로 확인하기"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textColor="#000000"
-                    android:fontFamily="@font/notosans"/>
+                    android:fontFamily="@font/gothic_medium"
+                    android:scaleX="0.98"/>
 
             </LinearLayout>
 

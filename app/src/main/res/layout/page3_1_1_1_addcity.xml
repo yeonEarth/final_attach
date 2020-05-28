@@ -35,7 +35,9 @@
         android:textColor="#000000"
         android:textStyle="bold"
         android:letterSpacing="-0.03"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
     //선
     <View

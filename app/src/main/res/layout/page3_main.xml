@@ -78,7 +78,9 @@
             android:textStyle="bold"
             android:textColor="#000000"
             android:letterSpacing="-0.03"
-            android:fontFamily="@font/notosans_bold"/>
+            android:fontFamily="@font/gothic_bold"
+            android:gravity="center_vertical"
+            android:scaleX="0.98"/>
 
         //서브타이틀 텍스트
         <TextView
@@ -92,7 +94,9 @@
             android:text="당신을 위한 최적의 경로를 추천해드립니다."
             android:textSize="16dp"
             android:textColor="#000000"
-            android:letterSpacing="-0.03" />
+            android:letterSpacing="-0.03"
+            android:fontFamily="@font/gothic_medium"
+            android:scaleX="0.98"/>
 
         //출발 날짜 텍스트
         <TextView
@@ -108,64 +112,73 @@
             android:textStyle="bold"
             android:textColor="#000000"
             android:letterSpacing="-0.03"
-            android:fontFamily="@font/notosans_bold" />
+            android:scaleX="0.98"
+            android:fontFamily="@font/gothic_bold" />
 
-        //출발 날짜 입력받는 흰 박스
-        <LinearLayout
-            android:id="@+id/page3_date"
+        <FrameLayout
+            android:id="@+id/ticket_layout"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_below="@id/page3_text"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_centerHorizontal="true"
-            android:clickable="true"
-            android:background="@drawable/datebox"
-            android:elevation="4dp"
-            android:orientation="horizontal">
+            android:background="@drawable/box_white_rad8"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            android:elevation="6dp">
 
-            <TextView
-                android:id="@+id/page3_setYear"
+            //출발 날짜 입력받는 흰 박스
+            <LinearLayout
+                android:id="@+id/page3_date"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="1995년"
-                android:textColor="#000000"
-                android:textSize="18dp"
-                android:fontFamily="@font/notosans_semibold">
-            </TextView>
+                android:layout_height="48dp"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:background="@drawable/datebox"
+                android:elevation="4dp"
+                android:orientation="horizontal"
+                android:padding="6dp">
 
-            <TextView
-                android:id="@+id/page3_setMonth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="04월"
-                android:textColor="#000000"
-                android:textSize="18dp"
-                android:fontFamily="@font/notosans_semibold">
-            </TextView>
+                <TextView
+                    android:id="@+id/page3_setYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="1995년"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/gothic_medium">
+                </TextView>
 
-            <TextView
-                android:id="@+id/page3_setDay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="05일"
-                android:textColor="#000000"
-                android:textSize="18dp"
-                android:fontFamily="@font/notosans_semibold">
-            </TextView>
+                <TextView
+                    android:id="@+id/page3_setMonth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="04월"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/gothic_medium">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/page3_setDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="05일"
+                    android:textColor="#000000"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/gothic_medium">
+                </TextView>
 
 
-        </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
 
 
         //이용권 텍스트
@@ -173,7 +186,7 @@
             android:id="@+id/page3_day"
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:layout_below="@+id/page3_date"
+            android:layout_below="@+id/ticket_layout"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -182,59 +195,88 @@
             android:textSize="18dp"
             android:textColor="#000000"
             android:letterSpacing="-0.03"
-            android:fontFamily="@font/notosans_bold" />
+            android:fontFamily="@font/gothic_bold" />
 
         <LinearLayout
             android:id="@+id/dayPass_layout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="58dp"
             android:layout_below="@id/page3_day"
-            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-        //이용권 - 3일권
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dayPass_3"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="16dp"
-            android:text="3일권"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:background="@drawable/btn_ticket"
-            android:fontFamily="@font/notosans_semibold"
-            android:elevation="3dp" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_ticket"
+                android:elevation="4dp"
+                android:layout_marginLeft="6dp">
 
-        //이용권 - 5일권
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dayPass_5"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
-            android:text="5일권"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/notosans_semibold"
-            android:background="@drawable/btn_ticket"
-            android:elevation="3dp" />
+                //이용권 - 3일권
 
-        //이용권 - 7일권
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dayPass_7"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:text="7일권"
-            android:textSize="16dp"
-            android:textColor="#000000"
-            android:fontFamily="@font/notosans_semibold"
-            android:background="@drawable/btn_ticket"
-            android:elevation="3dp" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dayPass_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/btn_ticket"
+                    android:fontFamily="@font/gothic_medium"
+                    android:text="3일권"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_ticket"
+                android:elevation="4dp">
+
+                //이용권 - 5일권
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dayPass_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/btn_ticket"
+                    android:fontFamily="@font/gothic_medium"
+                    android:text="5일권"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_ticket"
+                android:elevation="6dp"
+                android:layout_marginRight="4dp">
+
+                //이용권 - 7일권
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/dayPass_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_ticket"
+                    android:fontFamily="@font/gothic_medium"
+                    android:text="7일권"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -252,7 +294,7 @@
             android:textSize="18dp"
             android:textColor="#000000"
             android:letterSpacing="-0.03"
-            android:fontFamily="@font/notosans_bold" />
+            android:fontFamily="@font/gothic_bold" />
 
 
 
@@ -262,20 +304,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/page3_edittext"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="16dp" />
 
+        <FrameLayout
+            android:id="@+id/searchStation_page3_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/search_stn_page3"
+            android:layout_below="@+id/content_main"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:elevation="10dp">
 
             <AutoCompleteTextView
                 android:id="@+id/searchStation_page3"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/content_main"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
                 android:clickable="true"
                 android:completionThreshold="1"
                 android:dropDownHeight="140dp"
@@ -285,8 +333,9 @@
                 android:paddingLeft="25dp"
                 android:drawablePadding="17.6dp"
                 android:hint="추가할 도시를 입력해 주세요"
-                android:fontFamily="@font/notosans_semibold"
+                android:fontFamily="@font/gothic_medium"
                 android:textSize="18dp"/>
+        </FrameLayout>
 
 
         <RelativeLayout
@@ -295,7 +344,7 @@
             android:layout_height="404.61dp"
             android:elevation="4dp"
             android:padding="5dp"
-            android:layout_below="@+id/searchStation_page3"
+            android:layout_below="@+id/searchStation_page3_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
@@ -311,23 +360,29 @@
                 android:background="#9ad1d9" />
         </RelativeLayout>
 
-        //최단 경로 조회하기 버튼
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/page3_search_btn"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="최단 경로 조회하기"
-            android:textSize="16dp"
-            android:textColor="#ffffff"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/notosans_semibold"
             android:layout_below="@+id/page3_svg_bg"
             android:layout_marginTop="24dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/box_round3"
-            android:elevation="4dp" />
+            android:elevation="4dp">
+
+            //최단 경로 조회하기 버튼
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/page3_search_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="최단 경로 조회하기"
+                android:textSize="16dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/gothic_semibold"
+                android:background="@drawable/box_round3" />
+        </FrameLayout>
 
     </RelativeLayout>
 

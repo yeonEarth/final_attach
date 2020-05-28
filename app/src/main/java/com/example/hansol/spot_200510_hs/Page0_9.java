@@ -8,13 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 
 import DB.Like_DbOpenHelper;
 import Page1.Page1;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -58,12 +57,12 @@ public class Page0_9 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "프로필 편집 버튼 눌림", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(getApplicationContext(), Page0_9_PopUp.class);
-//
-//                intent.putExtra("서브이름", sub);
-//                intent.putExtra("닉네임", result_name.getText().toString());
-//                intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                startActivityForResult(intent, 1);
+                Intent intent = new Intent(getApplicationContext(), Page0_9_PopUp.class);
+
+                intent.putExtra("서브이름", sub);
+                intent.putExtra("닉네임", result_name.getText().toString());
+                intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivityForResult(intent, 1);
             }
         });
 

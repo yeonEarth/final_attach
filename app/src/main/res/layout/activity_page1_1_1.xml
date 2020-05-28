@@ -74,8 +74,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">
-
+        android:padding="16dp">
 
     // 타이틀
     <TextView
@@ -83,15 +82,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="찜한 여행지"
-        android:fontFamily="@font/notosans"
+        android:fontFamily="@font/gothic_bold"
         android:textStyle="bold"
         android:textSize="24dp"
         android:textColor="#000000"
         android:letterSpacing="-0.03"
-        android:layout_below="@+id/page1_1_1_logo_layout"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"/>
+        android:scaleX="0.98"/>
 
     // 관광지 들어갈 레이아웃
 
@@ -101,9 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/page1_1_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"/>
+        android:layout_marginTop="14dp"/>
     </RelativeLayout>
 </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

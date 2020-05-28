@@ -10,41 +10,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Build;
-
-import DB.DbOpenHelper;
-import DB.Heart_page;
-import DB.Like_DbOpenHelper;
-import DB.Menu_DbOpenHelper;
-import DB.Page3_DbOpenHelper;
-import Page1_schedule.LocationUpdatesService;
-import Page1_schedule.Location_Utils;
-import Page2_X.Page2_X;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -55,20 +31,33 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.example.hansol.spot_200510_hs.Page0;
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.Serializable;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
-import Page2_X.Page2_X_Main;
+import DB.DbOpenHelper;
+import DB.Like_DbOpenHelper;
+import DB.Menu_DbOpenHelper;
+import DB.Page3_DbOpenHelper;
+import Page1_schedule.LocationUpdatesService;
+import Page1_schedule.Location_Utils;
 import Page2.Page2;
+import Page2_X.Page2_X;
+import Page2_X.Page2_X_Main;
 import Page3.Page3_Main;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
@@ -681,6 +670,7 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
             // 백그라운드 사진 가져오기
             city.setCityPic(real_cityPicture.get(i));
             cityName.setBackgroundResource(city.getCityPic());
+            cityName.setShadowLayer(0,3,3,Color.DKGRAY);
 
             Typeface typeface = getResources().getFont(R.font.notosans_bold);
             cityName.setTypeface(typeface);
@@ -689,7 +679,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
             cityName.setPadding(city_padding,city_padding,city_padding,city_padding);
             cityName.setTextColor(Color.WHITE);
             cityName.setTypeface(cityName.getTypeface(), Typeface.BOLD);
-            cityName.setShadowLayer(5, 0, 0, Color.DKGRAY);
 
 //            cityName.setBackgroundResource(R.drawable.round_white);
             cityName.setGravity(Gravity.CENTER | Gravity.BOTTOM);

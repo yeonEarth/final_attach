@@ -45,7 +45,8 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:text="경복궁" />
+                android:text="경복궁"
+                android:fontFamily="@font/gothic_bold"/>
 
 
             //관광지 타입
@@ -59,7 +60,8 @@
                 android:text="역사/관광명소"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                android:fontFamily="@font/gothic_medium"/>
 
 
             //하트

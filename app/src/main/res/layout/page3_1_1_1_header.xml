@@ -20,7 +20,8 @@
         android:text="ddd"
         android:textSize="17sp"
         android:textColor="#563B12"
-        android:fontFamily="@font/notosans_regular"/>
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
     // 위아래로 이동할 수 있는 버튼
     <RelativeLayout

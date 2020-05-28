@@ -50,8 +50,10 @@
                     android:layout_toRightOf="@+id/page2_x_back_btn"
                     android:layout_marginLeft="18dp"
                     android:text="#서울"
-                    android:textSize="24sp"
-                    android:textColor="#4B4B4B" />
+                    android:textSize="26sp"
+                    android:textColor="#4B4B4B"
+                    android:fontFamily="@font/gothic_bold"
+                    android:scaleX="0.98"/>
 
                 <View
                     android:layout_width="14dp"
@@ -70,8 +72,9 @@
                     android:clickable="true"
                     android:layout_marginTop="35dp"
                     android:layout_marginRight="16dp"
-                    android:textSize="11sp"
-                    android:textColor="#000000"/>
+                    android:textSize="11dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/gothic_medium"/>
 
 
 
@@ -82,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="8dp"
-                    android:paddingBottom="30dp"
+                    android:padding="16dp"
                     android:layout_marginTop="16dp">
 
                     <RelativeLayout
@@ -135,13 +138,14 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="22dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/map"
                     android:layout_marginLeft="16dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textColor="#000000"
-                    android:layout_marginTop="16dp"
-                    android:text="이런 관광지가 있어요"/>
+                    android:text="이런 관광지가 있어요"
+                    android:fontFamily="@font/gothic_medium"
+                    android:scaleX="0.98"/>
 
             </RelativeLayout>
 

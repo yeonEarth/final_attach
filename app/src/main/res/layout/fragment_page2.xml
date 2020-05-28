@@ -25,7 +25,9 @@
         android:text="'서울'의 다른 관광지 더 보기"
         android:textSize="16dp"
         android:textColor="#AD73DC"
-        android:background="@drawable/box_pupleline" />
+        android:background="@drawable/box_pupleline"
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
 
 </LinearLayout>

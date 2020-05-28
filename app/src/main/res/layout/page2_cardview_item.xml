@@ -58,7 +58,8 @@
                 android:maxWidth="85dp"
                 android:text="경복궁"
                 android:ellipsize="marquee"
-                android:textAppearance="@style/cardview_titleText"/>
+                android:textAppearance="@style/cardview_titleText"
+                android:scaleX="0.98"/>
         </LinearLayout>
 
 

@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 
 import Page1.Page1;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Page0_3 extends AppCompatActivity implements View.OnClickListener {
     TextView a1_city;
@@ -21,7 +19,7 @@ public class Page0_3 extends AppCompatActivity implements View.OnClickListener {
     TextView a5_all;
 
     TextView page3_later;
-    Button page3_back;
+    TextView page3_back;
 
     int[] score = new int[8];
 
@@ -42,7 +40,7 @@ public class Page0_3 extends AppCompatActivity implements View.OnClickListener {
         a5_all = (TextView)findViewById(R.id.page0_3_a5);
 
         page3_later = (TextView)findViewById(R.id.page0_3_later);
-        page3_back = (Button) findViewById(R.id.page0_3_back);
+        page3_back = (TextView) findViewById(R.id.page0_3_back);
 
         // 버튼 선택 되었을 때
         a1_city.setOnClickListener(this);

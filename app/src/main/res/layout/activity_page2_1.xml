@@ -8,8 +8,7 @@
     tools:context="Page1.Page2_1"
     android:background="@drawable/ic_bg_photospot"
     android:paddingTop="8dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    android:paddingRight="10dp"
     android:paddingBottom="16dp">
 
     //뒤로가기 버튼
@@ -18,13 +17,15 @@
         android:layout_width="9dp"
         android:layout_height="16dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/ic_back_btn"/>
+        android:background="@drawable/ic_back_btn"
+        android:layout_marginLeft="16dp"/>
 
     //뒤로가기버튼 버튼 영역을 넓게 주기 위해서 빈 이미지 생성
     <ImageView
         android:id="@+id/all_cat_back_btn"
         android:layout_width="70dp"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"/>
 
     // 타이틀
     <TextView
@@ -33,11 +34,14 @@
         android:layout_height="wrap_content"
         android:text="카테고리를\n선택해주세요"
         android:textColor="#000000"
-        android:fontFamily="@font/notosans"
+        android:fontFamily="@font/gothic_bold"
+        android:lineSpacingExtra="10dp"
         android:textSize="24dp"
         android:textStyle="bold"
         android:layout_below="@+id/empty_btn"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:scaleX="0.98"
+        android:layout_marginLeft="16dp"/>
 
     // 카테고리 레이아웃
     <LinearLayout
@@ -45,146 +49,191 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/page2_1_title"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp">
 
         // 가로 두 개씩 묶기
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="4dp"
-            android:clipToPadding="false"
-            android:layout_marginBottom="5dp">
+            android:padding="6dp"
+            android:clipToPadding="false">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_subject_1"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="#자연"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:elevation="5dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_subject_2"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page2_1_subject_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="#자연"
+                    android:background="@drawable/box_white_rad10"
+                    android:textAppearance="@style/cat_text"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="#역사"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:elevation="5dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page2_1_subject_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="#역사"
+                    android:background="@drawable/box_white_rad10"
+                    android:textAppearance="@style/cat_text"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+            </FrameLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="4dp"
+            android:padding="6dp"
             android:clipToPadding="false"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="2dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/box_white_rad10"
+                android:layout_marginRight="5dp"
+                android:elevation="5dp">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/page2_1_subject_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="#휴양"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginRight="5dp" />
+                android:textAppearance="@style/cat_text"
+                android:gravity="center_vertical"
+                android:padding="8dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/box_white_rad10"
+                android:layout_marginLeft="5dp"
+                android:elevation="5dp">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/page2_1_subject_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="#체험"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginLeft="5dp"/>
+                android:textAppearance="@style/cat_text"
+                android:gravity="center_vertical"
+                android:padding="8dp" />
+            </FrameLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="4dp"
-            android:clipToPadding="false"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:padding="6dp"
+            android:clipToPadding="false">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_subject_5"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="#산업"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:elevation="5dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_subject_6"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page2_1_subject_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="#산업"
+                    android:background="@drawable/box_white_rad10"
+                    android:textAppearance="@style/cat_text"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="#건축/조형"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:elevation="5dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page2_1_subject_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="#건축/조형"
+                    android:background="@drawable/box_white_rad10"
+                    android:textAppearance="@style/cat_text"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+            </FrameLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="4dp"
-            android:clipToPadding="false"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp">
+            android:padding="6dp"
+            android:clipToPadding="false">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_subject_7"
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="#문화"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:elevation="5dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/page2_1_subject_8"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page2_1_subject_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="#문화"
+                    android:background="@drawable/box_white_rad10"
+                    android:textAppearance="@style/cat_text"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="#레포츠"
                 android:background="@drawable/box_white_rad10"
-                android:textAppearance="@style/subtitle_text"
-                android:gravity="left|top"
-                android:paddingTop="2dp"
-                android:paddingLeft="8dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:elevation="5dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/page2_1_subject_8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="#레포츠"
+                    android:background="@drawable/box_white_rad10"
+                    android:textAppearance="@style/cat_text"
+                    android:gravity="center_vertical"
+                    android:padding="8dp" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

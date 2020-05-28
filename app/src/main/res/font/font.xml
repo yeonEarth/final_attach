@@ -19,37 +19,37 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_black"/>
+        android:font="@font/gothic_black"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_bold"/>
+        android:font="@font/gothic_bold"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_extrabold"/>
+        android:font="@font/gothic_extrabold"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_extralight"/>
+        android:font="@font/gothic_extralight"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_light"/>
+        android:font="@font/gothic_light"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_medium"/>
+        android:font="@font/gothic_medium"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_regular"/>
+        android:font="@font/gothic_regular"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_semibold"/>
+        android:font="@font/gothic_semibold"/>
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/gothica1_thin"/>
+        android:font="@font/gothic_thin"/>
 </font-family>

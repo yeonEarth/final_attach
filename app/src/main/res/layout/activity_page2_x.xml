@@ -29,7 +29,8 @@
         android:paddingLeft="25dp"
         android:drawablePadding="17.6dp"
         android:hint="검색할 도시를 입력해 주세요"
-        android:fontFamily="@font/notosans_semibold"
+        android:fontFamily="@font/gothic_regular"
+        android:letterSpacing="-0.04"
         android:textSize="18dp"/>
 
     <TextView

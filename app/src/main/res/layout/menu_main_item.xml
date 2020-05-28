@@ -29,7 +29,11 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/menu_header_img"
             android:text="MY 메뉴"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:fontFamily="@font/gothic_medium"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:scaleX="0.98"/>
 
         //펼치는 버튼
         <Button

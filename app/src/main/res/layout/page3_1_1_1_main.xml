@@ -78,7 +78,10 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
-                android:letterSpacing="-0.03" />
+                android:letterSpacing="-0.03"
+                android:fontFamily="@font/gothic_bold"
+                android:gravity="center"
+                android:scaleX="0.98"/>
 
             // 세부 내용 텍스트
             <TextView
@@ -92,7 +95,9 @@
                 android:text="기차 시간과 여행 일정을 쉽고 편리하게 관리하세요!"
                 android:textSize="16sp"
                 android:textColor="#000000"
-                android:letterSpacing="-0.03"/>
+                android:letterSpacing="-0.03"
+                android:fontFamily="@font/gothic_medium"
+                android:scaleX="0.98"/>
 
             //흰 박스
             <RelativeLayout
@@ -125,31 +130,29 @@
 
             </RelativeLayout>
 
+             <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:background="@drawable/box_round3"
+                 android:layout_below="@+id/add_layout"
+                 android:layout_marginTop="24dp"
+                 android:layout_marginLeft="16dp"
+                 android:layout_marginRight="16dp"
+                 android:layout_marginBottom="16dp"
+                 android:elevation="4dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/add_layout"
-                android:layout_marginTop="24dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal">
-
-                //저장하기 버튼
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/page3_save_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_weight="1"
-                    android:text="완료하기"
-                    android:textSize="16dp"
-                    android:textColor="#ffffff"
-                    android:fontFamily="@font/notosans_semibold"
-                    android:background="@drawable/box_round3"
-                    android:elevation="8dp" />
-
-            </LinearLayout>
+                 //저장하기 버튼
+                 <androidx.appcompat.widget.AppCompatButton
+                     android:id="@+id/page3_save_btn"
+                     android:layout_width="match_parent"
+                     android:layout_height="56dp"
+                     android:layout_weight="1"
+                     android:text="완료하기"
+                     android:textSize="16dp"
+                     android:textColor="#ffffff"
+                     android:background="@drawable/box_round3"
+                     android:fontFamily="@font/gothic_medium" />
+             </FrameLayout>
 
         </RelativeLayout>
 

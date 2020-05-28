@@ -81,7 +81,8 @@
             android:textSize="16sp"
             android:textColor="#000000"
             android:letterSpacing="-0.04"
-            android:fontFamily="@font/notosans_semibold" />
+            android:fontFamily="@font/gothic_medium"
+            android:scaleX="0.98"/>
 
         //page1 - 슈니는 여행중 텍스트
         <TextView
@@ -95,7 +96,8 @@
             android:textSize="32sp"
             android:textColor="#000000"
             android:letterSpacing="-0.04"
-            android:fontFamily="@font/notosans_semibold" />
+            android:fontFamily="@font/gothic_bold"
+            android:scaleX="0.98"/>
 
         // page1 역 페이져
         <androidx.viewpager.widget.ViewPager
@@ -142,7 +144,8 @@
             android:textSize="24sp"
             android:textColor="#000000"
             android:letterSpacing="-0.04"
-            android:fontFamily="@font/notosans_semibold" />
+            android:fontFamily="@font/gothic_bold"
+            android:scaleX="0.98"/>
 
 
         // 열차시간표 흰 박스
@@ -184,9 +187,10 @@
                     android:layout_centerVertical="true"
                     android:gravity="center"
                     android:text="여수엑스포"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textColor="#000000"
-                    android:fontFamily="@font/notosans_semibold" />
+                    android:fontFamily="@font/gothic_medium"
+                    android:scaleX="0.98"/>
 
                 //기차시간표-화살
                 <RelativeLayout
@@ -215,9 +219,10 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:text="도착"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textColor="#000000"
-                    android:fontFamily="@font/notosans_semibold"
+                    android:fontFamily="@font/gothic_medium"
+                    android:scaleX="0.98"
                     android:layout_centerVertical="true" />
 
                 //기차시간표-환승정보
@@ -230,9 +235,10 @@
                     android:layout_toRightOf="@+id/page1_endTxt"
                     android:gravity="center"
                     android:text="열차정보"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textColor="#000000"
-                    android:fontFamily="@font/notosans_semibold" />
+                    android:fontFamily="@font/gothic_medium"
+                    android:scaleX="0.98"/>
 
             </LinearLayout>
 
@@ -258,8 +264,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/table_line"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
                 android:text="@string/train_err_internet"/>
 
         </RelativeLayout>
@@ -280,7 +286,8 @@
             android:textSize="24sp"
             android:textColor="#000000"
             android:letterSpacing="-0.04"
-            android:fontFamily="@font/notosans_semibold" />
+            android:fontFamily="@font/gothic_bold"
+            android:scaleX="0.98"/>
 
         //전체스케줄 버튼
         <Button
@@ -294,8 +301,9 @@
             android:text="전체 스케쥴"
             android:textSize="11sp"
             android:textColor="#FFFFFF"
-            android:fontFamily="@font/notosans_semibold"
-            android:background="@drawable/rectangle_purple"/>
+            android:fontFamily="@font/gothic_medium"
+            android:background="@drawable/rectangle_purple"
+            android:scaleX="0.98"/>
 
         //전체스케줄
         <LinearLayout

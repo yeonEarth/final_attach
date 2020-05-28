@@ -14,7 +14,9 @@
         android:paddingLeft="5dp"
         android:gravity="left|center_vertical"
         android:textColor="#000000"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
     <View
         android:layout_width="match_parent"

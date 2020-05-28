@@ -25,13 +25,15 @@
         android:text="도시 추가하기"
         android:textSize="18sp"
         android:textColor="#000000"
-        android:fontFamily="@font/notosans" />
+        android:fontFamily="@font/gothic_medium" />
 
     //버튼 영역을 넓히기 위한 빈 버튼(실제론 얘가 눌림)
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/page3_1_1_listAdd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00FFFFFF"/>
+        android:background="#00FFFFFF"
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
 </RelativeLayout>

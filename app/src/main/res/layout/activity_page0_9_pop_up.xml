@@ -24,9 +24,10 @@
             android:layout_gravity="bottom|right">
             <Button
                 android:id="@+id/page0_9_close_btn"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-               android:text="X"/>
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+               android:background="@drawable/ic_delete2"
+                android:layout_marginBottom="10dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -40,7 +41,7 @@
                 android:id="@+id/page0_9_profile"
                 android:layout_width="76dp"
                 android:layout_height="76dp"
-                android:background="@drawable/round_gray"
+                android:background="@drawable/ic_otter_line"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="16dp"/>
 
@@ -55,7 +56,7 @@
                     android:id="@+id/page0_9_subname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="자연속에서 힐링하기 좋아하는"
+                    android:text="자연 속에서 힐링하기 좋아하는"
                     android:textSize="16dp"
                     android:fontFamily="@font/notosans_extralight"
                     android:textColor="#000000"/>
@@ -82,7 +83,7 @@
                 android:id="@+id/page0_9_check_btn"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@drawable/round_gray" />
+                android:background="@drawable/ic_icon_edit" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

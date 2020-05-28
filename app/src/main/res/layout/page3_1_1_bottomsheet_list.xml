@@ -33,7 +33,9 @@
         android:textColor="#000000"
         android:textStyle="bold"
         android:letterSpacing="-0.03"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily="@font/gothic_medium"
+        android:scaleX="0.98"/>
 
 
     //선
@@ -56,7 +58,7 @@
             android:id="@+id/page3_1_1_searchwindow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_enter_city"/>
+            android:background="@drawable/ic_enter_city" />
 
         <ImageView
             android:layout_width="19dp"
@@ -72,7 +74,9 @@
             android:layout_marginLeft="43dp"
             android:layout_centerVertical="true"
             android:background="@null"
-            android:hint="추가할 도시를 입력해주세요"/>
+            android:hint="추가할 도시를 입력해주세요"
+            android:fontFamily="@font/gothic_medium"
+            android:scaleX="0.98"/>
 
     </RelativeLayout>
 
