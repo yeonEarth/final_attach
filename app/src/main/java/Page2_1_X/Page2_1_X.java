@@ -1,10 +1,5 @@
 package Page2_1_X;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -43,6 +38,10 @@ import DB.Heart_page;
 import Page1.Page1_1_1;
 import Page2_1_1.OnItemClick;
 import Page2_X.Page2_X_CategoryBottom;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 public class Page2_1_X extends AppCompatActivity implements OnItemClick {
 
@@ -146,6 +145,9 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         add_btn = (Button) findViewById(R.id.page2_1_1_like);
 
         click = mCallBack.isClick(contentID);
+        if (click == null) {
+            click = "";
+        }
         if (click.equals(contentID)) {
             buttonState = true;
             add_btn.setBackgroundResource(R.drawable.ic_icon_add_float_2);

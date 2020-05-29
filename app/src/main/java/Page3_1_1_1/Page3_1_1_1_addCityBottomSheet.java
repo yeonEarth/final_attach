@@ -11,11 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -23,6 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DB.DbOpenHelper;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Page3_1_1_1_addCityBottomSheet extends BottomSheetDialogFragment implements Page3_1_1_1_SecondAdapter.OnDismiss {
     Page3_1_1_1_Main page3_1_1_1_main;
@@ -52,6 +51,11 @@ public class Page3_1_1_1_addCityBottomSheet extends BottomSheetDialogFragment im
         return new Page3_1_1_1_addCityBottomSheet();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme);
+    }
 
     @Override
     public void onAttach(Context context) {

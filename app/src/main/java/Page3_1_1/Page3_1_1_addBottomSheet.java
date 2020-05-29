@@ -66,6 +66,11 @@ public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme);
+    }
 
     @Nullable
     @Override

@@ -19,20 +19,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import Page2_1_1.OnItemClick;
-
 public class Page2_X_CategoryBottom extends BottomSheetDialogFragment {
 
     private Page2_X_Main page2_x_main;
     ListView listView;
     ArrayList<Category_item> list;
     Page2_X_CategoryBottom_Adapter adapter;
-    OnItemClick xInterface;
+    Page2_X_Interface xInterface;
     boolean Selected = false;
 
 
     public static Page2_X_CategoryBottom  getInstance(){
         return new Page2_X_CategoryBottom();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme);
     }
 
 
@@ -43,7 +47,7 @@ public class Page2_X_CategoryBottom extends BottomSheetDialogFragment {
         page2_x_main = (Page2_X_Main) getActivity();
 
         if(context instanceof Page2_X_Interface){
-            xInterface = (OnItemClick) context;
+            xInterface = (Page2_X_Interface) context;
         } else {
             throw new RuntimeException(context.toString() + "오류");
         }
@@ -54,6 +58,8 @@ public class Page2_X_CategoryBottom extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme);
+
         final ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.page2_x_category_bottomsheet, container, false);
 
         listView = rootview.findViewById(R.id.listview);

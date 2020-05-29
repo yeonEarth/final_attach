@@ -16,10 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.hansol.spot_200510_hs.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -34,13 +30,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements TrainItemTouchHelper.ItemTouchHelperAdapter{
@@ -276,7 +272,7 @@ public class Page3_1_1_1_trainAdapter extends RecyclerView.Adapter<RecyclerView.
                     String date = items.get(pos).date;
 
                     //바텀시트 생성
-                    final BottomSheetDialog dialog = new BottomSheetDialog(context);
+                    final BottomSheetDialog dialog = new BottomSheetDialog(context, R.style.AppBottomSheetDialogTheme);
                     LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     View view = inflater.inflate(R.layout.page3_1_1_1_apisheet, null);
                     dialog.setContentView(view);
